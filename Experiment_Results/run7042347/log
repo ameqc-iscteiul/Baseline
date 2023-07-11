@@ -1,0 +1,24 @@
+[2023-07-04 23:47:50,114]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-07-04 23:47:50,114]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-07-04 23:47:50,114]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-07-04 23:47:50,116]|[INFO]|[evolution] Grid size: (16, 16)
+[2023-07-04 23:47:50,116]|[INFO]|[evolution]    bounds: [(0, 100), [0, 0.6]]
+[2023-07-04 23:47:50,116]|[INFO]|[evolution]      bins: [6.25, 0.0375]
+[2023-07-04 23:47:50,116]|[INFO]|[my_map_elite] Generated run id: 7042347
+[2023-07-04 23:47:50,117]|[INFO]|[my_map_elite] Run folder: Experiment_Results\run7042347
+[2023-07-04 23:47:50,117]|[INFO]|[my_map_elite] Parallel: 1
+[2023-07-04 23:47:50,117]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': './Experiment_Results',
+ 'batch_size': 20,
+ 'budget': 1000,
+ 'id': 7042347,
+ 'initial_mutations': 3,
+ 'overwrite': False,
+ 'run_folder': 'Experiment_Results\\run7042347',
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 1,
+ 'tournament': 3,
+ 'verbosity': 1}
+[2023-07-04 23:47:50,120]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\Experiment_Results\run7042347\config.json
+[2023-07-04 23:47:50,121]|[INFO]|[evolution] Starting illumination!

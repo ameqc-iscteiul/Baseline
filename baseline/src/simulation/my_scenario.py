@@ -1,0 +1,289 @@
+import json
+import math
+from typing import Optional, List, Dict
+
+import cv2
+import numpy as np
+from pyrr import Vector3
+from revolve2.core.modular_robot import Body, Brick, ActiveHinge, ModularRobot, Module
+from simulation.config import Config
+from robot.control import ANNControl, SensorControlData
+from robot.genome import RVGenome, VisionData
+from simulation.my_runner import Runner, RunnerOptions
+from simulation.re_runner import ReRunner
+# ==============================================================================
+# Robot
+# ==============================================================================
+
+Runner.actorController_t = SensorControlData
+ReRunner.actorController_t = SensorControlData
+
+
+def build_robot(brain_dna: RVGenome, vision_w, vision_h):
+    
+    body = Body()
+    body.core.left = ActiveHinge(math.pi / 2.0)
+    body.core.left.attachment = ActiveHinge(math.pi / 2.0)
+    body.core.left.attachment.attachment = Brick(0.0)
+    body.core.right = ActiveHinge(math.pi / 2.0)
+    body.core.right.attachment = ActiveHinge(math.pi / 2.0)
+    body.core.right.attachment.attachment = Brick(0.0)
+    body.finalize()
+
+    brain_dna.vision.w, brain_dna.vision.h = vision_w,vision_h
+
+    return ModularRobot(body, ANNControl.Brain(brain_dna))
+
+# ==============================================================================
+# Scenario
+# ==============================================================================
+
+class Scenario:
+
+    target_pos=""
+    target_size=0.0
+
+    def __init__(self, run_id: Optional[int] = None):
+        #self.runner = runner
+        self.id = run_id
+        
+    @classmethod
+    def insert_target(cls,target_pos,target_size):
+        cls.target_pos=' '.join([str(x) for x in target_pos])
+        cls.target_size=target_size
+
+    
+
+    # ==========================================================================
+
+    @staticmethod
+    def initial_position():
+        return [-2, 0, 0]
+
+    # ==========================================================================
+
+    @staticmethod
+    def amend(xml, options: RunnerOptions):
+        robots = [r for r in xml.worldbody.body]
+
+        xml.visual.map.znear = ".001"
+
+        # Reference to the ground
+        ground = next(item for item in xml.worldbody.geom if item.name == "ground")
+        g_size = Config.ground_size
+        gh_size = .5 * g_size
+
+        # Remove default ground
+        ground.remove()
+
+        # Add texture and material for the ground
+        xml.asset.add('texture', name="grid", type="2d", builtin="checker",
+                      width="512", height="512",
+                      rgb1="0.05 0.1 0.15", rgb2="0.1 0.15 0.2")
+
+        xml.asset.add('material', name="grid", texture="grid",
+                      texrepeat="1 1", texuniform="true", reflectance="0")
+        xml.worldbody.add('geom', name="floor",
+                          size=[gh_size, gh_size, .05],
+                          type="plane", material="grid", condim=3)        
+        #Borders
+        gh_width = .025
+        for i, x, y in [(0, 0, 1), (1, 1, 0), (2, 0, -1), (3, -1, 0)]:
+            b_height = g_size / 100
+            xml.worldbody.add('geom', name=f"border#{i}",
+                              pos=[x * (gh_size + gh_width),
+                                   y * (gh_size + gh_width), b_height],
+                              rgba=[0.01, 0.01, 0.01, 0.001],
+                              euler=[0, 0, i * math.pi / 2],
+                              type="box", size=[gh_size, gh_width, b_height])
+        #Target
+        xml.worldbody.add(
+            "geom",
+            type="box",
+            pos=Scenario.target_pos,
+            size=f"{str(Scenario.target_size)} {str(Scenario.target_size)} .5",
+            rgba="255 255 255 1"
+        )
+
+        
+
+
+            
+
+        def create_grid_positions(center_position, num_lines, elements_per_line, distance):
+            positions = []
+
+            line_offset = (elements_per_line - 1) / 2
+            element_offset = (num_lines - 1) / 2
+
+            for i in range(elements_per_line):
+                y = center_position[1] - line_offset + i
+                for j in range(num_lines):
+                    x = center_position[0] - element_offset + j
+                    position = [x * distance, y * distance, center_position[2]]
+                    positions.append(position)
+
+            return positions
+
+        def create_obstacle_grid(xml,center_position ,num_lines, elements_per_line, size_of_side, distance):
+            positions=create_grid_positions(center_position, num_lines, elements_per_line, distance)
+            for p in positions:
+                xml.worldbody.add(
+                    "geom",
+                    type="box",
+                    pos=f"{p[0]} {p[1]} 0",
+                    size=f"{size_of_side} {size_of_side} {size_of_side}",
+                    rgba="1 0 0 1"
+                )
+            return xml
+        
+        def create_Ramp(xml, center_position, num_lines, elements_per_line, size_of_side, distance, height_step):
+            positions = create_grid_positions(center_position, num_lines, elements_per_line, distance)
+    
+            max_distance_x = max(abs(center_position[0] - p[0]) for p in positions)
+            
+            for p in positions:
+                distance_x = abs(center_position[0] - p[0])
+                height = size_of_side + (max_distance_x - distance_x) * height_step
+                
+                xml.worldbody.add(
+                    "geom",
+                    type="box",
+                    pos=f"{p[0]} {p[1]} 0",
+                    size=f"{size_of_side} {size_of_side} {height}",
+                    rgba="1 0 0 1"
+                )
+            
+            return xml
+        
+        def default_obstacle_set(xml):
+            #Obstacle 
+            xml.worldbody.add(
+                    "geom",
+                    type="box",
+                    pos="0.4 0.3 0",
+                    size=".1 .1 .06",
+                    rgba="1 0 0 1"
+                )
+            
+            #Obstacle 
+            xml.worldbody.add(
+                    "geom",
+                    type="box",
+                    pos="0.4 -0.3 0",
+                    size=".1 .1 .06",
+                    rgba="1 0 0 1"
+                )
+            
+            #Obstacle 
+            xml.worldbody.add(
+                    "geom",
+                    type="box",
+                    pos="0.4 0.5 0",
+                    size=".1 .1 .06",
+                    rgba="1 0 0 1"
+                )
+            
+            #Obstacle 
+            xml.worldbody.add(
+                    "geom",
+                    type="box",
+                    pos="0.4 -0.5 0",
+                    size=".1 .1 .06",
+                    rgba="1 0 0 1"
+                )
+            
+            #Obstacle 
+            xml.worldbody.add(
+                    "geom",
+                    type="box",
+                    pos="0.1 -0.3 0",
+                    size=".1 .1 .06",
+                    rgba="1 0 0 1"
+                )
+            #Obstacle 
+            xml.worldbody.add(
+                    "geom",
+                    type="box",
+                    pos="0.1 0.3 0",
+                    size=".1 .1 .06",
+                    rgba="1 0 0 1"
+                )
+            
+            #Obstacle 
+            xml.worldbody.add(
+                    "geom",
+                    type="box",
+                    pos="0.1 -0.5 0",
+                    size=".1 .1 .06",
+                    rgba="1 0 0 1"
+                )
+            #Obstacle 
+            xml.worldbody.add(
+                    "geom",
+                    type="box",
+                    pos="0.1 0.5 0",
+                    size=".1 .1 .06",
+                    rgba="1 0 0 1"
+                )
+            return xml
+
+        def generate_mountain_coordinates(center, height, step_height):
+            coordinates = []
+            for i in range(height):
+                start_x = center[0] - i
+                start_y = center[1] - i
+                end_x = center[0] + i
+                end_y = center[1] + i
+
+                for dx in [float(x) for x in range(int(start_x), int(end_x) + 1)]:
+                    for dy in [float(y) for y in range(int(start_y), int(end_y) + 1)]:
+                        coordinates.append(f"{dx} {dy} {i * step_height}")
+
+                coordinates.append(f"{center[0]} {center[1]} {(i + 1) * step_height}")
+
+            return coordinates
+        
+        if options.level==1:
+            xml = default_obstacle_set(xml)
+        elif options.level==2:
+            xml = create_obstacle_grid(xml, [0,0,0], 4, 4, 0.05, 0.4)
+        elif options.level==3:
+            xml = create_obstacle_grid(xml, [0,0,0], 20, 20, 0.05, 0.4)
+        elif options.level==4:            
+            xml = create_Ramp(xml, [0,0,0], 30, 30, 0.04, 0.05, 0.3)
+        else:
+            pass
+
+
+
+        for robot in robots:
+            xml.worldbody.add('site',
+                                name=robot.full_identifier[:-1] + "_start",
+                                pos=robot.pos * [1, 1, 0], rgba=[0, 0, 1, 1],
+                                type="ellipsoid", size=[0.05, 0.05, 0.0001])
+
+        for r in robots:
+            for g in r.find_all('geom'):
+                if math.isclose(g.size[0], g.size[1]):
+                    g.rgba = ".3 0 .3 1"
+                else:
+                    g.rgba = "0 .3 0 1"
+
+        for hinge in filter(lambda j: j.tag == 'joint', xml.find_all('joint')):
+            xml.sensor.add('jointpos', name=f"{hinge.full_identifier}_sensor".replace('/', '_'),
+                           joint=hinge.full_identifier)
+            
+    '''def process_video_frame(self, frame: np.ndarray):
+        if (v := self.runner.controller.actor_controller.vision) is not None:
+            ratio = .25
+            w, h, _ = frame.shape
+            raw_vision = v.img
+            vision_ratio = raw_vision.shape[0] / raw_vision.shape[1]
+            iw, ih = int(ratio * w), int(ratio * h * vision_ratio)
+            scaled_vision = cv2.resize(
+                cv2.cvtColor(np.flipud(raw_vision), cv2.COLOR_RGBA2BGR),
+                (ih,iw),
+                interpolation=cv2.INTER_NEAREST
+            )
+            frame[w-iw:w, h-ih:h] = scaled_vision'''

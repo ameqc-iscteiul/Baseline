@@ -1,0 +1,171 @@
+[2023-07-06 11:55:27,173]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-07-06 11:55:27,173]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-07-06 11:55:27,174]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-07-06 11:55:27,176]|[INFO]|[evolution] Grid size: (16, 16)
+[2023-07-06 11:55:27,176]|[INFO]|[evolution]    bounds: [(0, 4.8), (0, 1)]
+[2023-07-06 11:55:27,177]|[INFO]|[evolution]      bins: [0.3, 0.0625]
+[2023-07-06 11:55:27,177]|[INFO]|[my_map_elite] Generated run id: 7061155
+[2023-07-06 11:55:27,177]|[INFO]|[my_map_elite] Run folder: Experiment_Results\run7061155
+[2023-07-06 11:55:27,178]|[INFO]|[my_map_elite] Parallel: 1
+[2023-07-06 11:55:27,178]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': './Experiment_Results',
+ 'batch_size': 20,
+ 'budget': 1000,
+ 'id': 7061155,
+ 'initial_mutations': 3,
+ 'overwrite': False,
+ 'run_folder': 'Experiment_Results\\run7061155',
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 1,
+ 'tournament': 3,
+ 'verbosity': 1}
+[2023-07-06 11:55:27,183]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\Experiment_Results\run7061155\config.json
+[2023-07-06 11:55:27,184]|[INFO]|[evolution] Starting illumination!
+alg_name  iteration cont_size evals     nb_updated     avg       std       min       max       ft_min              ft_max              qd_score  elapsed
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+7061155   0         4/256     20        7              [0.4264]  [3.6335]  [-3.5201] [6.3631]  [0.0185,0.4027]     [0.2546,0.9481]     1.79      51.44  
+7061155   1         7/256     20        4              [-0.9523] [3.3074]  [-4.7066] [6.3631]  [0.0187,0.4027]     [0.2546,0.9481]     3.07      49.48  
+7061155   2         7/256     20        3              [-0.6122] [3.0941]  [-4.3675] [6.3631]  [0.0187,0.4027]     [0.2546,0.9481]     3.09      49.89  
+7061155   3         7/256     20        1              [0.1585]  [2.7109]  [-2.3365] [6.3631]  [0.0187,0.4027]     [0.2546,0.9481]     3.12      50.55  
+7061155   4         8/256     20        3              [1.0221]  [3.3993]  [-2.3365] [7.0224]  [0.0187,0.4027]     [0.2581,0.9481]     3.60      50.85  
+7061155   5         8/256     20        2              [1.0446]  [3.4349]  [-2.3365] [7.0224]  [0.0187,0.4027]     [0.2777,0.9395]     3.60      48.47  
+7061155   6         11/256    20        3              [0.8463]  [4.9845]  [-7.6848] [10.7101] [0.0187,0.4027]     [0.4444,0.9899]     4.94      49.42  
+7061155   7         13/256    20        3              [0.079]   [5.4359]  [-10.1341]     [10.7101] [0.0187,0.4027]     [0.6467,0.9899]     5.78      49.64  
+[2023-07-06 12:02:56,646]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([0.15532035147760298, 1.1311726410543284]) out of bounds ([(0, 4.8), (0, 1)]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+[2023-07-06 12:02:56,652]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([0.2730212839708894, 1.0137653704671687]) out of bounds ([(0, 4.8), (0, 1)]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7061155   8         13/256    20        2              [0.3258]  [5.5077]  [-10.1341]     [10.7101] [0.0187,0.4027]     [0.6467,0.9899]     5.80      49.70  
+7061155   9         14/256    20        5              [0.117]   [6.0968]  [-10.1341]     [10.7101] [0.0187,0.4027]     [0.6467,0.9899]     6.23      49.53  
+7061155   10        15/256    20        2              [-0.4652] [6.3777]  [-10.1341]     [10.7101] [0.0187,0.4027]     [0.6467,0.9899]     6.63      50.00  
+7061155   11        15/256    20        0              [-0.4652] [6.3777]  [-10.1341]     [10.7101] [0.0187,0.4027]     [0.6467,0.9899]     6.63      49.95  
+7061155   12        16/256    20        1              [-0.9823] [6.4918]  [-10.1341]     [10.7101] [0.0187,0.4027]     [0.6467,0.9899]     7.02      50.16  
+7061155   13        16/256    20        0              [-0.9823] [6.4918]  [-10.1341]     [10.7101] [0.0187,0.4027]     [0.6467,0.9899]     7.02      50.08  
+7061155   14        16/256    20        4              [0.07]    [6.339]   [-10.1341]     [10.7101] [0.0013,0.4027]     [0.6467,0.9899]     7.12      50.20  
+7061155   15        17/256    20        2              [-0.8017] [7.2987]  [-16.5415]     [10.7101] [0.0013,0.4027]     [0.6467,0.9899]     7.48      50.78  
+7061155   16        17/256    20        1              [-0.7171] [7.3259]  [-16.5415]     [10.7101] [0.0013,0.4027]     [0.6467,0.9899]     7.49      50.62  
+7061155   17        18/256    20        1              [-0.7997] [7.1276]  [-16.5415]     [10.7101] [0.0013,0.4027]     [0.6467,0.9899]     7.92      49.83  
+7061155   18        19/256    20        2              [-1.3025] [7.2662]  [-16.5415]     [10.7101] [0.0126,0.4027]     [0.6467,0.9899]     8.31      49.93  
+7061155   19        19/256    20        1              [-1.2781] [7.2717]  [-16.5415]     [10.7101] [0.0249,0.4027]     [0.6467,0.9899]     8.31      50.32  
+[2023-07-06 12:12:58,131]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([0.23526589904644765, 1.0570976028574617]) out of bounds ([(0, 4.8), (0, 1)]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7061155   20        19/256    20        0              [-1.2781] [7.2717]  [-16.5415]     [10.7101] [0.0249,0.4027]     [0.6467,0.9899]     8.31      50.07  
+7061155   21        19/256    20        0              [-1.2781] [7.2717]  [-16.5415]     [10.7101] [0.0249,0.4027]     [0.6467,0.9899]     8.31      49.84  
+7061155   22        20/256    20        1              [-1.5627] [7.1953]  [-16.5415]     [10.7101] [0.0249,0.4027]     [0.6467,0.9899]     8.72      49.86  
+7061155   23        21/256    20        3              [-1.9566] [7.2661]  [-16.5415]     [10.7101] [0.0377,0.4027]     [0.6467,0.9899]     9.11      50.28  
+7061155   24        21/256    20        2              [-1.523]  [7.1177]  [-16.5415]     [10.7101] [0.0377,0.4027]     [0.6467,0.9899]     9.16      50.43  
+7061155   25        21/256    20        0              [-1.523]  [7.1177]  [-16.5415]     [10.7101] [0.0377,0.4027]     [0.6467,0.9899]     9.16      49.56  
+7061155   26        21/256    20        2              [-0.5458] [7.1755]  [-16.5415]     [10.7101] [0.0377,0.4027]     [0.6467,0.9899]     9.27      50.07  
+7061155   27        21/256    20        0              [-0.5458] [7.1755]  [-16.5415]     [10.7101] [0.0377,0.4027]     [0.6467,0.9899]     9.27      49.56  
+7061155   28        21/256    20        1              [-0.544]  [7.1773]  [-16.5415]     [10.7101] [0.0377,0.4027]     [0.6467,0.9899]     9.27      49.95  
+7061155   29        21/256    20        0              [-0.544]  [7.1773]  [-16.5415]     [10.7101] [0.0377,0.4027]     [0.6467,0.9899]     9.27      49.52  
+7061155   30        21/256    20        0              [-0.544]  [7.1773]  [-16.5415]     [10.7101] [0.0377,0.4027]     [0.6467,0.9899]     9.27      49.57  
+7061155   31        21/256    20        4              [0.0285]  [7.0008]  [-16.5415]     [10.7101] [0.0377,0.4027]     [0.6467,0.9899]     9.34      49.75  
+7061155   32        21/256    20        1              [0.1592]  [7.0252]  [-16.5415]     [10.7101] [0.0377,0.4027]     [0.6467,0.9899]     9.35      49.86  
+[2023-07-06 12:23:45,864]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([0.044083621029634555, 1.1993758820481781]) out of bounds ([(0, 4.8), (0, 1)]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7061155   33        21/256    20        1              [0.1987]  [7.0659]  [-16.5415]     [10.7101] [0.0377,0.4027]     [0.6467,0.9899]     9.36      49.45  
+[2023-07-06 12:24:35,451]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([0.11273031062094635, 1.0215909787541075]) out of bounds ([(0, 4.8), (0, 1)]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+[2023-07-06 12:24:35,452]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([0.04838713345390651, 1.158383222168877]) out of bounds ([(0, 4.8), (0, 1)]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7061155   34        21/256    20        1              [0.2265]  [7.0732]  [-16.5415]     [10.7101] [0.0377,0.4027]     [0.6467,0.9899]     9.36      49.58  
+[2023-07-06 12:25:24,830]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([0.21345857923225295, 1.0197815097066028]) out of bounds ([(0, 4.8), (0, 1)]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+[2023-07-06 12:25:24,835]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([0.22835273997320207, 1.1102485618696791]) out of bounds ([(0, 4.8), (0, 1)]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+[2023-07-06 12:25:24,838]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([0.03727020903605139, 1.0221991934005834]) out of bounds ([(0, 4.8), (0, 1)]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7061155   35        22/256    20        1              [-0.4478] [7.5699]  [-16.5415]     [10.7101] [0.0377,0.4027]     [0.6467,0.9899]     9.72      49.39  
+7061155   36        22/256    20        1              [-0.3391] [7.4469]  [-16.5415]     [10.7101] [0.0377,0.4027]     [0.6467,0.9899]     9.74      49.87  
+7061155   37        22/256    20        2              [-0.0834] [7.2553]  [-14.607] [10.7101] [0.0377,0.4027]     [0.6650,0.9899]     9.77      49.86  
+7061155   38        22/256    20        0              [-0.0834] [7.2553]  [-14.607] [10.7101] [0.0377,0.4027]     [0.6650,0.9899]     9.77      49.78  
+[2023-07-06 12:28:44,396]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([0.044083621029634555, 1.1993758820481781]) out of bounds ([(0, 4.8), (0, 1)]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+[2023-07-06 12:28:44,398]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([0.2763656359797661, 1.108172157738332]) out of bounds ([(0, 4.8), (0, 1)]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7061155   39        22/256    20        2              [0.5373]  [7.5456]  [-14.607] [10.7101] [0.0377,0.4027]     [0.6650,0.9899]     9.84      50.04  
+7061155   40        22/256    20        3              [0.9347]  [7.2977]  [-14.607] [10.7101] [0.0489,0.4027]     [0.6467,0.9899]     9.89      49.27  
+7061155   41        22/256    20        3              [1.148]   [7.3932]  [-14.607] [10.7101] [0.0489,0.4027]     [0.6467,0.9899]     9.92      49.38  
+[2023-07-06 12:31:12,674]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([0.2045555021214233, 1.0512852325762647]) out of bounds ([(0, 4.8), (0, 1)]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7061155   42        22/256    20        0              [1.148]   [7.3932]  [-14.607] [10.7101] [0.0489,0.4027]     [0.6467,0.9899]     9.92      49.60  
+7061155   43        23/256    20        1              [-0.082]  [9.2502]  [-27.1418]     [10.7101] [0.0489,0.4027]     [1.0617,0.9899]     10.21     49.77  
+7061155   44        23/256    20        0              [-0.082]  [9.2502]  [-27.1418]     [10.7101] [0.0489,0.4027]     [1.0617,0.9899]     10.21     49.19  
+7061155   45        23/256    20        1              [-0.0507] [9.2642]  [-27.1418]     [10.7101] [0.0489,0.4027]     [1.0617,0.9899]     10.22     49.55  
+7061155   46        24/256    20        1              [-0.8911] [9.9244]  [-27.1418]     [10.7101] [0.0489,0.4027]     [1.0617,0.9978]     10.55     49.29  
+7061155   47        24/256    20        0              [-0.8911] [9.9244]  [-27.1418]     [10.7101] [0.0489,0.4027]     [1.0617,0.9978]     10.55     49.54  
+7061155   48        24/256    20        0              [-0.8911] [9.9244]  [-27.1418]     [10.7101] [0.0489,0.4027]     [1.0617,0.9978]     10.55     3363.25
+7061155   49        25/256    20        2              [-0.4821] [9.8927]  [-27.1418]     [10.7101] [0.0489,0.4027]     [1.0617,0.9978]     11.04     65.01  
+Finished optimisation using algorithm '7061155'. Total elapsed: 5821.107743900036.
+[2023-07-06 13:32:28,303]|[INFO]|[evolution] Summary Algorithm:
+  batch_size: 20
+  budget: 1000
+  container:  Summary Grid:
+    activity_per_bin: [[0. 0. 0. 0. 0. 0. 8. 5. 8. 5. 7. 4. 5. 3. 2. 4.]  [0. 0. 0. 0. 0. 0. 0. 1. 3. 3. 3. 4. 2. 1. 2. 1.]  [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 3. 0. 1. 2. 0. 1.]  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0.]  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.  ...
+    best: {id=137, fitness=(10.710095946613094,), features={'distance': 0.44442121605413837, 'max_velocity': 0.9898699892764051}}
+    best_features: [0.44442121605413837, 0.9898699892764051]
+    best_fitness: (10.710095946613094,)
+    best_index: (1, 15)
+    capacity: 256
+    curiosity: [[  0.    0.    0.    0.    0.    0.  -17.  -15.5 -17.  -17.5 -17.  -17.   -16.5 -17.5 -17.  -17.5]  [  0.    0.    0.    0.    0.    0.    0.    0.  -16.5 -17.  -17.  -17.   -17.  -17.  -16.5 -16.5]  [  0.    0.    0.    0.    0.    0.    0.    ...
+    depot: None
+    discard_random_on_bin_overload: False
+    features: {(0, 0): [], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [Features([0.04890685244009737, 0.40274670923012496])], (0, 7): [Features([0.17754920275791639, 0.4778696337703938])], (0, 8): [Features([0.21164632028056096, 0.503 ...
+    features_domain: [(0, 4.8), (0, 1)]
+    features_extrema: ((0.04890685244009737, 1.061715296761988), (0.40274670923012496, 0.9977843287027396))
+    filled_bins: 25
+    fitness: {(0, 0): [], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [Fitness([0.972647725252898])], (0, 7): [Fitness([4.4779462909420715])], (0, 8): [Fitness([5.159326545523697])], (0, 9): [Fitness([6.472510542516119])], (0, 10): [F ...
+    fitness_domain: [(-80, 100)]
+    fitness_extrema: ((-27.14179399760377, 10.710095946613094),)
+    free: 231
+    history_recentness_per_bin: {(0, 0): [], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [1, 3, 7, 11, 39, 45, 47, 51], (0, 7): [9, 12, 14, 15, 71], (0, 8): [2, 13, 16, 17, 32, 38, 58, 75], (0, 9): [4, 5, 40, 59, 74], (0, 10): [22, 24, 27, 42, 43, 73, 7 ...
+    items: [{id=137, fitness=(10.710095946613094,), features={'distance': 0.44442121605413837, 'max_velocity': 0.9898699892764051}}, {id=148, fitness=(-10.134106187768523,), features={'distance': 0.6467308476377914, 'max_velocity': 0.7893349434876381}}, {i ...
+    max_items_per_bin: 1
+    name: Grid-2484476426656
+    nb_added: 80
+    nb_discarded: 55
+    nb_items_per_bin: [[0. 0. 0. 0. 0. 0. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]  [0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 1. 1. 1. 1. 1. 1.]  [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 1. 1. 0. 1.]  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0.]  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.  ...
+    nb_operations: 135
+    nb_rejected: 13
+    quality: {(0, 0): None, (0, 1): None, (0, 2): None, (0, 3): None, (0, 4): None, (0, 5): None, (0, 6): Fitness([0.972647725252898]), (0, 7): Fitness([4.4779462909420715]), (0, 8): Fitness([5.159326545523697]), (0, 9): Fitness([6.472510542516119]), (0, 10) ...
+    quality_array: [[[         nan]   [         nan]   [         nan]   [         nan]   [         nan]   [         nan]   [  0.97264773]   [  4.47794629]   [  5.15932655]   [  6.47251054]   [  4.43225023]   [  5.51616239]   [  7.37983335]   [  6.71105891]   [  7. ...
+    recentness: [22, 24, 29, 43, 49, 50, 52, 53, 54, 55, 61, 63, 64, 65, 67, 68, 69, 70, 73, 74, 75, 76, 77, 78, 79]
+    recentness_per_bin: {(0, 0): [], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [51], (0, 7): [71], (0, 8): [75], (0, 9): [74], (0, 10): [77], (0, 11): [66], (0, 12): [68], (0, 13): [30], (0, 14): [62], (0, 15): [56], (1, 0): [], (1, 1): [], (1 ...
+    shape: (16, 16)
+    size: 25
+    solutions: {(0, 0): [], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [{id=476, fitness=(0.972647725252898,), features={'distance': 0.04890685244009737, 'max_velocity': 0.40274670923012496}}], (0, 7): [{id=804, fitness=(4.477946290942 ...
+  current_iter: 50
+  deepcopy_on_selection: True
+  dimension: None
+  id_manager: <abrain.core.genome.GIDManager object at 0x0000024260AA3640>
+  labels: ['closeness', 'distance', 'max_velocity']
+  name: 7061155
+  nb_evaluations: 1000
+  nb_evaluations_in_iteration: 0
+  nb_max_iter: 50
+  nb_suggestions: 1000
+  nb_suggestions_in_iteration: 0
+  nb_updated: 80
+  nb_updated_in_iteration: 0
+  optimisation_task: maximisation
+  rng: <random.Random object at 0x0000024273CD3700>
+[2023-07-06 13:32:29,237]|[INFO]|[my_map_elite] Generated Experiment_Results\run7061155\plots\iteration-final_grid_fitness.png
+[2023-07-06 13:32:29,568]|[INFO]|[my_map_elite] Generated Experiment_Results\run7061155\plots\iteration-final_grid_activity.png
+[2023-07-06 13:32:29,883]|[INFO]|[my_map_elite] Generated Experiment_Results\run7061155\plots\iteration-final_grid_curiosity.png
+[2023-07-06 13:32:29,900]|[INFO]|[evolution] All results are available under Experiment_Results\run7061155
+[2023-07-06 13:32:29,900]|[INFO]|[evolution] Unified storage file is Experiment_Results\run7061155/iteration-final.p
+[2023-07-06 13:32:29,901]|[INFO]|[evolution] Completed evolution in 1 hour, 37 minutes and 2.73 seconds

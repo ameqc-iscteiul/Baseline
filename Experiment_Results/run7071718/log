@@ -1,0 +1,58 @@
+[2023-07-07 17:18:55,424]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-07-07 17:18:55,424]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-07-07 17:18:55,424]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-07-07 17:18:55,425]|[INFO]|[evolution] Grid size: (16, 16)
+[2023-07-07 17:18:55,426]|[INFO]|[evolution]    bounds: [(0, 4.8), [0, 1]]
+[2023-07-07 17:18:55,426]|[INFO]|[evolution]      bins: [0.3, 0.0625]
+[2023-07-07 17:18:55,426]|[INFO]|[my_map_elite] Generated run id: 7071718
+[2023-07-07 17:18:55,426]|[INFO]|[my_map_elite] Run folder: Experiment_Results\run7071718
+[2023-07-07 17:18:55,427]|[INFO]|[my_map_elite] Parallel: 1
+[2023-07-07 17:18:55,427]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': './Experiment_Results',
+ 'batch_size': 20,
+ 'budget': 1000,
+ 'id': 7071718,
+ 'initial_mutations': 3,
+ 'overwrite': False,
+ 'run_folder': 'Experiment_Results\\run7071718',
+ 'seed': 100,
+ 'snapshots': 10,
+ 'target_position': [2, 0, 0],
+ 'threads': 1,
+ 'tournament': 3,
+ 'verbosity': 1,
+ 'vision_h': 2,
+ 'vision_w': 2}
+[2023-07-07 17:18:55,430]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\Experiment_Results\run7071718\config.json
+[2023-07-07 17:18:55,431]|[INFO]|[evolution] Starting illumination!
+alg_name  iteration cont_size evals     nb_updated     avg       std       min       max       ft_min              ft_max              qd_score  elapsed
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+7071718   0         4/256     20        6              [17.1405] [3.515]   [12.7451] [21.6993] [0.0366,0.0000]     [0.7570,0.2500]     0.69      24.91  
+7071718   1         5/256     20        5              [19.3203] [2.1378]  [16.6013] [22.3529] [0.0366,0.0000]     [0.6816,0.2500]     0.97      22.44  
+7071718   2         8/256     20        7              [19.7467] [1.9664]  [16.6013] [22.3529] [0.0366,0.0000]     [1.4454,0.2500]     1.58      21.84  
+7071718   3         8/256     20        1              [20.4003] [1.9637]  [16.6013] [22.6797] [0.0366,0.0000]     [1.4454,0.2500]     1.63      22.80  
+7071718   4         8/256     20        1              [21.1846] [1.4842]  [18.9216] [22.8758] [0.0366,0.0000]     [1.4454,0.2500]     1.69      27.80  
+7071718   5         8/256     20        2              [21.7974] [2.6169]  [18.9216] [27.7451] [0.0366,0.0000]     [1.4454,0.2500]     1.74      25.41  
+7071718   6         8/256     20        2              [22.1487] [2.4204]  [18.9216] [27.7451] [0.0086,0.0000]     [1.4454,0.2500]     1.77      24.66  
+7071718   7         9/256     20        1              [21.3435] [3.224]   [14.902]  [27.7451] [0.0086,0.0000]     [1.5645,0.2500]     1.92      24.44  
+7071718   8         11/256    20        2              [20.7784] [3.4585]  [14.902]  [27.7451] [0.0086,0.0000]     [2.7358,0.2500]     2.29      22.91  
+7071718   9         14/256    20        3              [20.7143] [3.1594]  [14.902]  [27.7451] [0.0086,0.0000]     [3.5569,0.2500]     2.90      23.20  
+[2023-07-07 17:23:21,397]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([5.264000244039748, 0.25]) out of bounds ([(0, 4.8), [0, 1]]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7071718   10        17/256    20        5              [22.9431] [7.0467]  [14.902]  [46.7647] [0.0086,0.0000]     [3.5569,0.2500]     3.90      25.53  
+Robot reached Target!
+7071718   11        21/256    20        5              [31.287]  [23.3584] [14.902]  [100.]    [0.0086,0.0000]     [4.4363,1.0000]     6.57      23.28  
+7071718   12        25/256    20        8              [37.6235] [27.0769] [14.902]  [100.]    [0.0086,0.0000]     [4.4363,1.0000]     9.41      24.71  
+Robot reached Target!
+7071718   13        28/256    20        4              [42.1382] [28.7786] [14.902]  [100.]    [0.0086,0.0000]     [4.4363,1.0000]     11.80     24.25  
+Robot reached Target!
+Robot reached Target!
+Robot reached Target!
+Robot reached Target!
+7071718   14        33/256    20        7              [46.5954] [32.1294] [14.902]  [100.]    [0.0086,0.0000]     [4.4363,1.0000]     15.38     23.10  
+Robot reached Target!
+Robot reached Target!
+Robot reached Target!
+7071718   15        34/256    20        3              [48.4458] [32.9209] [14.902]  [100.]    [0.0086,0.0000]     [4.4363,1.0000]     16.47     23.14  
+Robot reached Target!

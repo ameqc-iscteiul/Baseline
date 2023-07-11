@@ -1,0 +1,34 @@
+[2023-07-05 21:33:51,703]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-07-05 21:33:51,703]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-07-05 21:33:51,703]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-07-05 21:33:51,706]|[INFO]|[evolution] Grid size: (16, 16)
+[2023-07-05 21:33:51,706]|[INFO]|[evolution]    bounds: [(0, 4.8), [0, 1.2]]
+[2023-07-05 21:33:51,706]|[INFO]|[evolution]      bins: [0.3, 0.075]
+[2023-07-05 21:33:51,707]|[INFO]|[my_map_elite] Generated run id: 7052133
+[2023-07-05 21:33:51,707]|[INFO]|[my_map_elite] Run folder: Experiment_Results\run7052133
+[2023-07-05 21:33:51,707]|[INFO]|[my_map_elite] Parallel: 1
+[2023-07-05 21:33:51,708]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': './Experiment_Results',
+ 'batch_size': 20,
+ 'budget': 100,
+ 'id': 7052133,
+ 'initial_mutations': 3,
+ 'overwrite': False,
+ 'run_folder': 'Experiment_Results\\run7052133',
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 1,
+ 'tournament': 3,
+ 'verbosity': 1}
+[2023-07-05 21:33:51,712]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\Experiment_Results\run7052133\config.json
+[2023-07-05 21:33:51,715]|[INFO]|[evolution] Starting illumination!
+Exception during evaluation: 'EvaluationResult' object has no attribute 'stats'
+Exception during evaluation: 'EvaluationResult' object has no attribute 'stats'
+Exception during evaluation: 'EvaluationResult' object has no attribute 'stats'
+Exception during evaluation: 'EvaluationResult' object has no attribute 'stats'
+Exception during evaluation: 'EvaluationResult' object has no attribute 'stats'
+Exception during evaluation: 'EvaluationResult' object has no attribute 'stats'
+Exception during evaluation: 'EvaluationResult' object has no attribute 'stats'
+Exception during evaluation: 'EvaluationResult' object has no attribute 'stats'
+Exception during evaluation: 'EvaluationResult' object has no attribute 'stats'
+Exception during evaluation: 'EvaluationResult' object has no attribute 'stats'

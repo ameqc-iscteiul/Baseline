@@ -1,0 +1,140 @@
+[2023-07-06 16:56:44,529]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-07-06 16:56:44,529]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-07-06 16:56:44,529]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-07-06 16:56:44,537]|[INFO]|[evolution] Grid size: (16, 16)
+[2023-07-06 16:56:44,537]|[INFO]|[evolution]    bounds: [(0, 4.8), (0, 2)]
+[2023-07-06 16:56:44,537]|[INFO]|[evolution]      bins: [0.3, 0.125]
+[2023-07-06 16:56:44,537]|[INFO]|[my_map_elite] Generated run id: 7061656
+[2023-07-06 16:56:44,537]|[INFO]|[my_map_elite] Run folder: Experiment_Results\run7061656
+[2023-07-06 16:56:44,537]|[INFO]|[my_map_elite] Parallel: 1
+[2023-07-06 16:56:44,537]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': './Experiment_Results',
+ 'batch_size': 10,
+ 'budget': 100,
+ 'id': 7061656,
+ 'initial_mutations': 3,
+ 'overwrite': False,
+ 'run_folder': 'Experiment_Results\\run7061656',
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 1,
+ 'tournament': 3,
+ 'verbosity': 1}
+[2023-07-06 16:56:44,543]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\Experiment_Results\run7061656\config.json
+[2023-07-06 16:56:44,543]|[INFO]|[evolution] Starting illumination!
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+[2023-07-06 16:56:44,585]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\algorithms\base.py:610: UserWarning: Individual evaluation raised the following exception: eval_mujoco() got an unexpected keyword argument 'options' !
+  warnings.warn(f"Individual evaluation raised the following exception: {ind_exc} !")
+
+alg_name  iteration cont_size evals     nb_updated     avg       std       min       max       ft_min    ft_max    qd_score  elapsed
+------------------------------------------------------------------------------------------------------------------------------------
+7061656   0         0/256     0         0              nan       nan       nan       nan       [NaN,NaN] [NaN,NaN] 0.00      0.04   
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+7061656   1         0/256     0         0              nan       nan       nan       nan       [NaN,NaN] [NaN,NaN] 0.00      0.04   
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+7061656   2         0/256     0         0              nan       nan       nan       nan       [NaN,NaN] [NaN,NaN] 0.00      0.04   
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+7061656   3         0/256     0         0              nan       nan       nan       nan       [NaN,NaN] [NaN,NaN] 0.00      0.04   
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+7061656   4         0/256     0         0              nan       nan       nan       nan       [NaN,NaN] [NaN,NaN] 0.00      0.05   
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+7061656   5         0/256     0         0              nan       nan       nan       nan       [NaN,NaN] [NaN,NaN] 0.00      0.07   
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+7061656   6         0/256     0         0              nan       nan       nan       nan       [NaN,NaN] [NaN,NaN] 0.00      0.04   
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+7061656   7         0/256     0         0              nan       nan       nan       nan       [NaN,NaN] [NaN,NaN] 0.00      0.04   
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+7061656   8         0/256     0         0              nan       nan       nan       nan       [NaN,NaN] [NaN,NaN] 0.00      0.04   
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+Exception during evaluation: eval_mujoco() got an unexpected keyword argument 'options'
+7061656   9         0/256     0         0              nan       nan       nan       nan       [NaN,NaN] [NaN,NaN] 0.00      0.04   
+Finished optimisation using algorithm '7061656'. Total elapsed: 0.4927389998920262.

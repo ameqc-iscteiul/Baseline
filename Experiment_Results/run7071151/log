@@ -1,0 +1,425 @@
+[2023-07-07 11:51:34,737]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-07-07 11:51:34,737]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-07-07 11:51:34,737]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-07-07 11:51:34,737]|[INFO]|[evolution] Grid size: (16, 16)
+[2023-07-07 11:51:34,737]|[INFO]|[evolution]    bounds: [(0, 4.8), [0, 1]]
+[2023-07-07 11:51:34,737]|[INFO]|[evolution]      bins: [0.3, 0.0625]
+[2023-07-07 11:51:34,737]|[INFO]|[my_map_elite] Generated run id: 7071151
+[2023-07-07 11:51:34,737]|[INFO]|[my_map_elite] Run folder: Experiment_Results\run7071151
+[2023-07-07 11:51:34,737]|[INFO]|[my_map_elite] Parallel: 1
+[2023-07-07 11:51:34,737]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': './Experiment_Results',
+ 'batch_size': 20,
+ 'budget': 1000,
+ 'id': 7071151,
+ 'initial_mutations': 3,
+ 'overwrite': False,
+ 'run_folder': 'Experiment_Results\\run7071151',
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 1,
+ 'tournament': 3,
+ 'verbosity': 1}
+[2023-07-07 11:51:34,745]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\Experiment_Results\run7071151\config.json
+[2023-07-07 11:51:34,749]|[INFO]|[evolution] Starting illumination!
+alg_name  iteration cont_size evals     nb_updated     avg       std       min       max       ft_min              ft_max              qd_score  elapsed
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+7071151   0         4/256     20        6              [17.1405] [3.515]   [12.7451] [21.6993] [0.0366,0.0000]     [0.7570,0.2500]     0.69      27.56  
+7071151   1         5/256     20        5              [19.3203] [2.1378]  [16.6013] [22.3529] [0.0366,0.0000]     [0.6816,0.2500]     0.97      26.79  
+7071151   2         8/256     20        7              [19.7467] [1.9664]  [16.6013] [22.3529] [0.0366,0.0000]     [1.4454,0.2500]     1.58      25.91  
+7071151   3         8/256     20        1              [20.4003] [1.9637]  [16.6013] [22.6797] [0.0366,0.0000]     [1.4454,0.2500]     1.63      27.85  
+7071151   4         8/256     20        1              [21.1846] [1.4842]  [18.9216] [22.8758] [0.0366,0.0000]     [1.4454,0.2500]     1.69      25.43  
+7071151   5         8/256     20        2              [21.7974] [2.6169]  [18.9216] [27.7451] [0.0366,0.0000]     [1.4454,0.2500]     1.74      23.83  
+7071151   6         8/256     20        2              [22.1487] [2.4204]  [18.9216] [27.7451] [0.0086,0.0000]     [1.4454,0.2500]     1.77      23.49  
+7071151   7         9/256     20        1              [21.3435] [3.224]   [14.902]  [27.7451] [0.0086,0.0000]     [1.5645,0.2500]     1.92      23.33  
+7071151   8         11/256    20        2              [20.7784] [3.4585]  [14.902]  [27.7451] [0.0086,0.0000]     [2.7358,0.2500]     2.29      23.26  
+7071151   9         14/256    20        3              [20.7143] [3.1594]  [14.902]  [27.7451] [0.0086,0.0000]     [3.5569,0.2500]     2.90      23.54  
+[2023-07-07 11:56:07,502]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([5.264000244039748, 0.25]) out of bounds ([(0, 4.8), [0, 1]]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7071151   10        17/256    20        5              [22.9431] [7.0467]  [14.902]  [46.7647] [0.0086,0.0000]     [3.5569,0.2500]     3.90      21.72  
+Robot reached Target! [ 1.43503016 -0.48515199  0.06710232]
+BONUS:  2.3319999999989136
+Robot reached Target! [ 1.45109092 -0.56442344  0.04791827]
+BONUS:  2.6519999999987363
+7071151   11        20/256    20        5              [31.1029] [22.1633] [14.902]  [100.]    [0.0086,0.0000]     [4.4363,1.0000]     6.22      21.21  
+Robot reached Target! [ 1.43507793 -0.30275799  0.07998653]
+BONUS:  5.7159999999985605
+Robot reached Target! [1.43543007 0.17857955 0.06926216]
+BONUS:  3.6259999999981964
+Robot reached Target! [1.43505351 0.30339766 0.05291358]
+BONUS:  4.311999999998092
+7071151   12        27/256    20        10             [37.9496] [28.1301] [14.902]  [100.]    [0.0086,0.0000]     [4.5836,1.0000]     10.25     22.15  
+Robot reached Target! [1.43505351 0.30339766 0.05291358]
+BONUS:  4.311999999998092
+Robot reached Target! [1.43545471 0.36609806 0.04988044]
+BONUS:  3.9379999999980235
+Robot reached Target! [1.43629692 0.25289441 0.04281037]
+BONUS:  3.9199999999980335
+Robot reached Target! [1.43505351 0.30339766 0.05291358]
+BONUS:  4.311999999998092
+7071151   13        28/256    20        3              [38.3964] [27.7185] [14.902]  [100.]    [0.0086,0.0000]     [4.5836,1.0000]     10.75     22.02  
+Robot reached Target! [ 1.45109092 -0.56442344  0.04791827]
+BONUS:  2.6519999999987363
+Robot reached Target! [ 1.45109092 -0.56442344  0.04791827]
+BONUS:  2.6519999999987363
+Robot reached Target! [ 1.85077203 -0.56468222  0.06274254]
+BONUS:  1.5279999999993592
+7071151   14        30/256    20        4              [41.9837] [31.2104] [14.902]  [100.]    [0.0086,0.0000]     [4.5836,1.0000]     12.60     22.82  
+Robot reached Target! [ 1.85077203 -0.56468222  0.06274254]
+BONUS:  1.5279999999993592
+Robot reached Target! [ 1.85077203 -0.56468222  0.06274254]
+BONUS:  1.5279999999993592
+Robot reached Target! [ 1.45109092 -0.56442344  0.04791827]
+BONUS:  2.6519999999987363
+7071151   15        31/256    20        3              [41.6308] [30.7576] [14.902]  [100.]    [0.0086,0.0000]     [4.7867,1.0000]     12.91     22.73  
+Robot reached Target! [ 1.43581487 -0.45203422  0.04374164]
+BONUS:  2.2619999999989524
+7071151   16        33/256    20        5              [43.0006] [29.7178] [18.3007] [100.]    [0.0086,0.0000]     [4.7867,1.0000]     14.19     24.46  
+Robot reached Target! [ 1.43507793 -0.30275799  0.07998653]
+BONUS:  5.7159999999985605
+Robot reached Target! [ 1.85077203 -0.56468222  0.06274254]
+BONUS:  1.5279999999993592
+Robot reached Target! [ 1.45109092 -0.56442344  0.04791827]
+BONUS:  2.6519999999987363
+Robot reached Target! [ 1.85077203 -0.56468222  0.06274254]
+BONUS:  1.5279999999993592
+7071151   17        33/256    20        1              [43.0343] [29.6925] [18.3007] [100.]    [0.0086,0.0000]     [4.7867,1.0000]     14.20     24.44  
+Robot reached Target! [1.43562952 0.41775009 0.06546275]
+BONUS:  1.4879999999993814
+Robot reached Target! [ 1.43507793 -0.30275799  0.07998653]
+BONUS:  5.7159999999985605
+Robot reached Target! [1.43505351 0.30339766 0.05291358]
+BONUS:  4.311999999998092
+7071151   18        34/256    20        2              [44.7549] [30.7628] [18.3007] [100.]    [0.0086,0.0000]     [4.7867,1.0000]     15.22     24.56  
+7071151   19        35/256    20        4              [46.4986] [30.0015] [18.3007] [100.]    [0.0086,0.0000]     [4.7867,1.0000]     16.27     24.09  
+Robot reached Target! [ 1.45109092 -0.56442344  0.04791827]
+BONUS:  2.6519999999987363
+Robot reached Target! [1.43505351 0.30339766 0.05291358]
+BONUS:  4.311999999998092
+7071151   20        36/256    20        2              [47.0806] [29.3842] [18.3007] [100.]    [0.0086,0.0000]     [4.7867,1.0000]     16.95     23.42  
+7071151   21        36/256    20        1              [47.9766] [29.3953] [18.3007] [100.]    [0.0086,0.0000]     [4.7867,1.0000]     17.27     21.73  
+Robot reached Target! [ 1.85077203 -0.56468222  0.06274254]
+BONUS:  1.5279999999993592
+Robot reached Target! [1.81379402 0.56469754 0.04379996]
+BONUS:  1.3979999999994313
+Robot reached Target! [1.43505351 0.30339766 0.05291358]
+BONUS:  4.311999999998092
+7071151   22        37/256    20        5              [49.8755] [29.943]  [18.9216] [100.]    [0.0086,0.0000]     [4.7867,1.0000]     18.45     22.55  
+Robot reached Target! [1.43556779 0.08802949 0.04587952]
+BONUS:  4.377999999998114
+Robot reached Target! [1.43509365 0.18965986 0.10010736]
+BONUS:  1.4739999999993891
+Robot reached Target! [1.43561379 0.42785268 0.06203075]
+BONUS:  3.90799999999804
+Robot reached Target! [1.43541619 0.38047829 0.06048518]
+BONUS:  3.9199999999980335
+Robot reached Target! [1.43510806 0.06493253 0.05574484]
+BONUS:  4.441999999998135
+Robot reached Target! [ 1.43535985 -0.24440841  0.07917063]
+BONUS:  5.093999999998353
+7071151   23        38/256    20        4              [51.8868] [30.2068] [18.9216] [100.]    [0.0086,0.0000]     [4.7867,1.0000]     19.72     20.31  
+Robot reached Target! [ 1.85077203 -0.56468222  0.06274254]
+BONUS:  1.5279999999993592
+Robot reached Target! [ 1.43507793 -0.30275799  0.07998653]
+BONUS:  5.7159999999985605
+Robot reached Target! [ 1.82617461 -0.56466186  0.06462395]
+BONUS:  2.8859999999986066
+Robot reached Target! [1.43505351 0.30339766 0.05291358]
+BONUS:  4.311999999998092
+Robot reached Target! [1.81379402 0.56469754 0.04379996]
+BONUS:  1.3979999999994313
+[2023-07-07 12:01:25,261]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([4.807764258907475, 0]) out of bounds ([(0, 4.8), [0, 1]]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7071151   24        39/256    20        4              [53.242]  [30.6696] [18.9216] [100.]    [0.0086,0.0000]     [4.7867,1.0000]     20.76     21.24  
+Robot reached Target! [1.43505351 0.30339766 0.05291358]
+BONUS:  4.311999999998092
+Robot reached Target! [1.43569801 0.24277502 0.03904176]
+BONUS:  2.617999999998755
+Robot reached Target! [ 1.85077203 -0.56468222  0.06274254]
+BONUS:  1.5279999999993592
+7071151   25        39/256    20        1              [53.3325] [30.6399] [18.9216] [100.]    [0.0086,0.0000]     [4.7867,1.0000]     20.80     21.77  
+Robot reached Target! [1.43543007 0.17857955 0.06926216]
+BONUS:  3.6259999999981964
+Robot reached Target! [1.43505351 0.30339766 0.05291358]
+BONUS:  4.311999999998092
+Robot reached Target! [1.43505351 0.30339766 0.05291358]
+BONUS:  4.311999999998092
+Robot reached Target! [1.43532769 0.14271984 0.06184547]
+BONUS:  3.9399999999980224
+Robot reached Target! [1.43505351 0.30339766 0.05291358]
+BONUS:  4.311999999998092
+7071151   26        39/256    20        2              [53.7624] [30.5258] [18.9216] [100.]    [0.0086,0.0000]     [4.7867,1.0000]     20.97     21.59  
+Robot reached Target! [1.43539311 0.35039215 0.06507945]
+BONUS:  3.6839999999981643
+Robot reached Target! [1.435155   0.35852848 0.0594505 ]
+BONUS:  1.3679999999994479
+[2023-07-07 12:02:32,199]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([5.093351922945221, 0.25]) out of bounds ([(0, 4.8), [0, 1]]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7071151   27        39/256    20        2              [53.9048] [30.3758] [20.1961] [100.]    [0.0086,0.0000]     [4.7867,1.0000]     21.02     23.57  
+Robot reached Target! [1.81379402 0.56469754 0.04379996]
+BONUS:  1.3979999999994313
+Robot reached Target! [1.43505351 0.30339766 0.05291358]
+BONUS:  4.311999999998092
+7071151   28        39/256    20        1              [53.9392] [30.3391] [20.1961] [100.]    [0.0086,0.0000]     [4.6672,1.0000]     21.04     22.66  
+Robot reached Target! [1.81379402 0.56469754 0.04379996]
+BONUS:  1.3979999999994313
+Robot reached Target! [1.43505351 0.30339766 0.05291358]
+BONUS:  4.311999999998092
+Robot reached Target! [1.43569801 0.24277502 0.03904176]
+BONUS:  2.617999999998755
+7071151   29        39/256    20        1              [54.0297] [30.2838] [20.1961] [100.]    [0.0086,0.0000]     [4.6672,1.0000]     21.07     21.13  
+Robot reached Target! [ 1.45109092 -0.56442344  0.04791827]
+BONUS:  2.6519999999987363
+Robot reached Target! [ 1.43504326 -0.10454585  0.0565406 ]
+BONUS:  6.035999999998667
+Robot reached Target! [1.43569054 0.5507818  0.06454376]
+BONUS:  3.9919999999979936
+[2023-07-07 12:03:36,838]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([4.879772269280243, 0.25]) out of bounds ([(0, 4.8), [0, 1]]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7071151   30        39/256    20        2              [54.2861] [30.0877] [20.1961] [100.]    [0.0086,0.0000]     [4.6672,1.0000]     21.17     20.85  
+Robot reached Target! [1.81379402 0.56469754 0.04379996]
+BONUS:  1.3979999999994313
+Robot reached Target! [1.43501256 0.44435624 0.04859922]
+BONUS:  3.8139999999980922
+Robot reached Target! [1.43520577 0.3607816  0.06373281]
+BONUS:  3.4199999999983106
+[2023-07-07 12:03:59,967]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([4.99865323555589, 0.25]) out of bounds ([(0, 4.8), [0, 1]]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7071151   31        40/256    20        1              [54.3358] [29.7108] [20.1961] [100.]    [0.0086,0.0000]     [4.6672,1.0000]     21.73     23.12  
+Robot reached Target! [ 1.85077203 -0.56468222  0.06274254]
+BONUS:  1.5279999999993592
+Robot reached Target! [ 1.55373156 -0.56493849  0.06640519]
+BONUS:  0.7399999999997959
+Robot reached Target! [1.43607296 0.25446343 0.04413017]
+BONUS:  3.869999999998061
+Robot reached Target! [ 1.43507793 -0.30275799  0.07998653]
+BONUS:  5.7159999999985605
+7071151   32        41/256    20        1              [54.3807] [29.3476] [20.1961] [100.]    [0.0086,0.0000]     [4.6672,1.0000]     22.30     24.15  
+Robot reached Target! [ 1.43507793 -0.30275799  0.07998653]
+BONUS:  5.7159999999985605
+Robot reached Target! [ 1.43527173 -0.0426125   0.10782951]
+BONUS:  1.123999999999583
+[2023-07-07 12:04:45,839]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([5.021577930989062, 0.25]) out of bounds ([(0, 4.8), [0, 1]]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7071151   33        42/256    20        2              [53.6936] [29.3268] [20.1961] [100.]    [0.0086,0.0000]     [4.6636,1.0000]     22.55     21.72  
+Robot reached Target! [1.43543007 0.17857955 0.06926216]
+BONUS:  3.6259999999981964
+Robot reached Target! [1.43554045 0.4671729  0.05435812]
+BONUS:  3.94399999999802
+Robot reached Target! [ 1.85077203 -0.56468222  0.06274254]
+BONUS:  1.5279999999993592
+Robot reached Target! [ 1.57406622 -0.56464935  0.10258007]
+BONUS:  1.9899999999991032
+Robot reached Target! [ 1.43537505 -0.17273034  0.0655133 ]
+BONUS:  0.2940000000000431
+Robot reached Target! [ 1.43523584 -0.1726412   0.04473314]
+BONUS:  4.285999999998083
+Robot reached Target! [ 1.61772226 -0.564742    0.04875918]
+BONUS:  0.3020000000000387
+7071151   34        42/256    20        0              [53.6936] [29.3268] [20.1961] [100.]    [0.0086,0.0000]     [4.6636,1.0000]     22.55     23.59  
+Robot reached Target! [1.43591608 0.15028095 0.04572188]
+BONUS:  4.409999999998124
+Robot reached Target! [1.43543007 0.17857955 0.06926216]
+BONUS:  3.6259999999981964
+Robot reached Target! [ 1.43507793 -0.30275799  0.07998653]
+BONUS:  5.7159999999985605
+Robot reached Target! [1.43511132 0.49333016 0.05000017]
+BONUS:  3.761999999998121
+Robot reached Target! [1.43543007 0.17857955 0.06926216]
+BONUS:  3.6259999999981964
+7071151   35        42/256    20        0              [53.6936] [29.3268] [20.1961] [100.]    [0.0086,0.0000]     [4.6636,1.0000]     22.55     24.72  
+Robot reached Target! [1.43554871 0.28479854 0.06414994]
+BONUS:  1.5099999999993692
+Robot reached Target! [ 1.65438086 -0.56478384  0.11355993]
+BONUS:  2.3719999999988914
+7071151   36        42/256    20        1              [53.7014] [29.3187] [20.1961] [100.]    [0.0086,0.0000]     [4.6636,1.0000]     22.55     25.08  
+Robot reached Target! [ 1.43515998 -0.13579897  0.06616422]
+BONUS:  3.3299999999983605
+7071151   37        42/256    20        2              [54.821]  [29.8285] [20.1961] [100.]    [0.0086,0.0000]     [4.6636,1.0000]     23.02     25.69  
+Robot reached Target! [1.81379402 0.56469754 0.04379996]
+BONUS:  1.3979999999994313
+7071151   38        43/256    20        2              [54.6762] [29.4051] [20.1961] [100.]    [0.0086,0.0000]     [4.6636,1.0000]     23.51     26.07  
+Robot reached Target! [ 1.43507793 -0.30275799  0.07998653]
+BONUS:  5.7159999999985605
+Robot reached Target! [ 1.43562325 -0.31440316  0.06015749]
+BONUS:  0.44999999999995666
+Robot reached Target! [ 1.45109092 -0.56442344  0.04791827]
+BONUS:  2.6519999999987363
+Robot reached Target! [ 1.43536888 -0.50049699  0.06680046]
+BONUS:  1.1599999999995632
+7071151   39        43/256    20        0              [54.6762] [29.4051] [20.1961] [100.]    [0.0086,0.0000]     [4.6636,1.0000]     23.51     24.48  
+Robot reached Target! [1.81379402 0.56469754 0.04379996]
+BONUS:  1.3979999999994313
+Robot reached Target! [1.75652368 0.56486392 0.04220829]
+BONUS:  0.8019999999997616
+Robot reached Target! [1.81379402 0.56469754 0.04379996]
+BONUS:  1.3979999999994313
+[2023-07-07 12:07:40,438]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([5.089563798280521, 0]) out of bounds ([(0, 4.8), [0, 1]]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+[2023-07-07 12:07:40,442]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([4.82772521553654, 0]) out of bounds ([(0, 4.8), [0, 1]]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7071151   40        44/256    20        2              [54.2209] [29.6763] [18.9216] [100.]    [0.0086,0.0000]     [4.6636,1.0000]     23.86     24.96  
+Robot reached Target! [1.72175492 0.56487307 0.05583588]
+BONUS:  0.0040000000002038405
+Robot reached Target! [ 1.43507793 -0.30275799  0.07998653]
+BONUS:  5.7159999999985605
+Robot reached Target! [ 1.4352052  -0.300405    0.03926623]
+BONUS:  4.477999999998147
+Robot reached Target! [ 1.45109092 -0.56442344  0.04791827]
+BONUS:  2.6519999999987363
+Robot reached Target! [1.4352385  0.22576445 0.06898699]
+BONUS:  2.0179999999990876
+7071151   41        44/256    20        0              [54.2209] [29.6763] [18.9216] [100.]    [0.0086,0.0000]     [4.6636,1.0000]     23.86     24.06  
+Robot reached Target! [ 1.43507793 -0.30275799  0.07998653]
+BONUS:  5.7159999999985605
+Robot reached Target! [ 1.85077203 -0.56468222  0.06274254]
+BONUS:  1.5279999999993592
+Robot reached Target! [ 1.96923776 -0.56465655  0.10036811]
+BONUS:  1.1679999999995587
+7071151   42        46/256    20        2              [56.2113] [30.4885] [18.9216] [100.]    [0.0086,0.0000]     [4.6636,1.0000]     25.86     21.72  
+Robot reached Target! [1.43574796 0.54458965 0.04863156]
+BONUS:  3.1659999999984514
+Robot reached Target! [ 1.43507793 -0.30275799  0.07998653]
+BONUS:  5.7159999999985605
+Robot reached Target! [1.43573057 0.06881026 0.0577783 ]
+BONUS:  5.427999999998464
+[2023-07-07 12:08:47,496]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([5.07663078036093, 0.25]) out of bounds ([(0, 4.8), [0, 1]]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7071151   43        47/256    20        3              [55.8608] [30.2821] [18.9216] [100.]    [0.0086,0.0000]     [4.6255,1.0000]     26.25     21.27  
+Robot reached Target! [ 1.43547672 -0.51596141  0.0382328 ]
+BONUS:  3.9019999999980435
+Robot reached Target! [ 1.63131544 -0.56437375  0.0710597 ]
+BONUS:  2.047999999999071
+Robot reached Target! [ 1.43507793 -0.30275799  0.07998653]
+BONUS:  5.7159999999985605
+Robot reached Target! [1.43505351 0.30339766 0.05291358]
+BONUS:  4.311999999998092
+Robot reached Target! [1.43522238 0.25507024 0.0490153 ]
+BONUS:  4.357999999998107
+Robot reached Target! [ 1.85077203 -0.56468222  0.06274254]
+BONUS:  1.5279999999993592
+7071151   44        47/256    20        2              [57.4538] [30.5911] [18.9216] [100.]    [0.0086,0.0000]     [4.6255,1.0000]     27.00     20.65  
+Robot reached Target! [1.43520735 0.49166141 0.04889274]
+BONUS:  4.353999999998106
+Robot reached Target! [1.43543007 0.17857955 0.06926216]
+BONUS:  3.6259999999981964
+Robot reached Target! [ 1.43507639 -0.1316528   0.05493705]
+BONUS:  0.8359999999997427
+Robot reached Target! [ 1.96923776 -0.56465655  0.10036811]
+BONUS:  1.1679999999995587
+Robot reached Target! [ 1.565742   -0.56499679  0.07210251]
+BONUS:  3.2419999999984093
+Robot reached Target! [ 1.43508373 -0.17937706  0.06106336]
+BONUS:  6.057999999998675
+Robot reached Target! [ 1.63131544 -0.56437375  0.0710597 ]
+BONUS:  2.047999999999071
+7071151   45        47/256    20        2              [57.7354] [30.7853] [18.9216] [100.]    [0.0086,0.0000]     [4.6255,1.0000]     27.14     23.18  
+Robot reached Target! [ 1.43516202 -0.14286469  0.06421149]
+BONUS:  4.123999999998029
+Robot reached Target! [1.81379402 0.56469754 0.04379996]
+BONUS:  1.3979999999994313
+Robot reached Target! [2.05344911 0.56464603 0.04932667]
+BONUS:  0.13600000000013068
+7071151   46        47/256    20        0              [57.7354] [30.7853] [18.9216] [100.]    [0.0086,0.0000]     [4.6255,1.0000]     27.14     21.19  
+Robot reached Target! [1.43515166 0.1249138  0.05763119]
+BONUS:  1.217999999999531
+Robot reached Target! [ 1.43566591 -0.08877334  0.0650833 ]
+BONUS:  4.147999999998037
+Robot reached Target! [ 1.96923776 -0.56465655  0.10036811]
+BONUS:  1.1679999999995587
+[2023-07-07 12:10:13,373]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([4.849327991535439, 0.25]) out of bounds ([(0, 4.8), [0, 1]]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7071151   47        47/256    20        0              [57.7354] [30.7853] [18.9216] [100.]    [0.0086,0.0000]     [4.6255,1.0000]     27.14     20.85  
+Robot reached Target! [1.43505351 0.30339766 0.05291358]
+BONUS:  4.311999999998092
+Robot reached Target! [ 1.43507793 -0.30275799  0.07998653]
+BONUS:  5.7159999999985605
+Robot reached Target! [ 1.96923776 -0.56465655  0.10036811]
+BONUS:  1.1679999999995587
+Robot reached Target! [ 1.45109092 -0.56442344  0.04791827]
+BONUS:  2.6519999999987363
+[2023-07-07 12:10:34,465]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([5.278746329803103, 0]) out of bounds ([(0, 4.8), [0, 1]]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+[2023-07-07 12:10:34,467]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\containers.py:467: UserWarning: Adding individual failed (attribute out of bounds): features ([5.011477075428725, 0.25]) out of bounds ([(0, 4.8), [0, 1]]).
+  warnings.warn(f"Adding individual failed (attribute out of bounds): {str(e)}")
+
+7071151   48        47/256    20        0              [57.7354] [30.7853] [18.9216] [100.]    [0.0086,0.0000]     [4.6255,1.0000]     27.14     21.09  
+Robot reached Target! [ 1.43520865 -0.56414808  0.06242172]
+BONUS:  5.267999999998411
+Robot reached Target! [ 1.62709053 -0.56478627  0.04774375]
+BONUS:  2.1719999999990023
+Robot reached Target! [ 1.43508373 -0.17937706  0.06106336]
+BONUS:  6.057999999998675
+Robot reached Target! [ 1.96923776 -0.56465655  0.10036811]
+BONUS:  1.1679999999995587
+7071151   49        47/256    20        2              [59.2164] [30.9314] [18.9216] [100.]    [0.0086,0.0000]     [4.6255,1.0000]     27.83     21.11  
+Finished optimisation using algorithm '7071151'. Total elapsed: 1160.8334615000058.
+[2023-07-07 12:10:55,604]|[INFO]|[evolution] Summary Algorithm:
+  batch_size: 20
+  budget: 1000
+  container:  Summary Grid:
+    activity_per_bin: [[8. 0. 0. 0. 2. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [6. 0. 0. 0. 3. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [3. 0. 0. 0. 4. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [3. 0. 0. 0. 4. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [4. 0. 0. 0. 2. 0. 0. 0. 0. 0. 0. 0. 0.  ...
+    best: {id=236, fitness=(100.0,), features={'distance': 3.4969418579965312, 'white_gazing': 1}}
+    best_features: [3.4969418579965312, 1]
+    best_fitness: (100.0,)
+    best_index: (11, 15)
+    capacity: 256
+    curiosity: [[-7.5  0.   0.   0.  -7.5  0.   0.   0.   0.   0.   0.   0.   0.   0.    0.   0. ]  [-7.5  0.   0.   0.  -7.5  0.   0.   0.   0.   0.   0.   0.   0.   0.    0.   0. ]  [-7.5  0.   0.   0.  -7.5  0.   0.   0.   0.   0.   0.   0.   0.   0.    0.  ...
+    depot: None
+    discard_random_on_bin_overload: False
+    features: {(0, 0): [Features([0.24747286725868292, 0])], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [Features([0.00860691033516383, 0.25])], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], ( ...
+    features_domain: [(0, 4.8), [0, 1]]
+    features_extrema: ((0.00860691033516383, 4.625544808141035), (0.0, 1.0))
+    filled_bins: 47
+    fitness: {(0, 0): [Fitness([23.366013071895424])], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [Fitness([21.209150326797385])], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], ( ...
+    fitness_domain: [(0, 100)]
+    fitness_extrema: ((18.92156862745098, 100.0),)
+    free: 209
+    history_recentness_per_bin: {(0, 0): [1, 2, 4, 8, 11, 21, 24, 68], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [6, 23], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], (0, 15): [], (1, 0): [5, 9,  ...
+    items: [{id=54, fitness=(20.19607843137255,), features={'distance': 0.5828566510022948, 'white_gazing': 0.25}}, {id=134, fitness=(21.209150326797385,), features={'distance': 0.00860691033516383, 'white_gazing': 0.25}}, {id=236, fitness=(100.0,), featur ...
+    max_items_per_bin: 1
+    name: Grid-2374814513808
+    nb_added: 119
+    nb_discarded: 72
+    nb_items_per_bin: [[1. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0.  ...
+    nb_operations: 191
+    nb_rejected: 12
+    quality: {(0, 0): Fitness([23.366013071895424]), (0, 1): None, (0, 2): None, (0, 3): None, (0, 4): Fitness([21.209150326797385]), (0, 5): None, (0, 6): None, (0, 7): None, (0, 8): None, (0, 9): None, (0, 10): None, (0, 11): None, (0, 12): None, (0, 13):  ...
+    quality_array: [[[ 23.36601307]   [         nan]   [         nan]   [         nan]   [ 21.20915033]   [         nan]   [         nan]   [         nan]   [         nan]   [         nan]   [         nan]   [         nan]   [         nan]   [         nan]   [     ...
+    recentness: [17, 22, 39, 43, 46, 49, 52, 54, 56, 61, 63, 66, 67, 69, 71, 73, 74, 77, 78, 79, 83, 84, 86, 87, 89, 92, 94, 97, 98, 99, 101, 102, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118]
+    recentness_per_bin: {(0, 0): [68], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [23], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], (0, 15): [], (1, 0): [102], (1, 1): [], (1, 2): [], (1, ...
+    shape: (16, 16)
+    size: 47
+    solutions: {(0, 0): [{id=375, fitness=(23.366013071895424,), features={'distance': 0.24747286725868292, 'white_gazing': 0}}], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [{id=134, fitness=(21.209150326797385,), features={'distance': 0.00860691033516383, 'w ...
+  current_iter: 50
+  deepcopy_on_selection: True
+  dimension: None
+  id_manager: <abrain.core.genome.GIDManager object at 0x00000228D8443670>
+  labels: ['brightness', 'distance', 'white_gazing']
+  name: 7071151
+  nb_evaluations: 1000
+  nb_evaluations_in_iteration: 0
+  nb_max_iter: 50
+  nb_suggestions: 1000
+  nb_suggestions_in_iteration: 0
+  nb_updated: 119
+  nb_updated_in_iteration: 0
+  optimisation_task: maximisation
+  rng: <random.Random object at 0x00000228DAA3A560>
+[2023-07-07 12:10:56,184]|[INFO]|[my_map_elite] Generated Experiment_Results\run7071151\plots\iteration-final_grid_fitness.png
+[2023-07-07 12:10:56,466]|[INFO]|[my_map_elite] Generated Experiment_Results\run7071151\plots\iteration-final_grid_activity.png
+[2023-07-07 12:10:56,738]|[INFO]|[my_map_elite] Generated Experiment_Results\run7071151\plots\iteration-final_grid_curiosity.png
+[2023-07-07 12:10:56,801]|[INFO]|[evolution] All results are available under Experiment_Results\run7071151
+[2023-07-07 12:10:56,801]|[INFO]|[evolution] Unified storage file is Experiment_Results\run7071151/iteration-final.p
+[2023-07-07 12:10:56,802]|[INFO]|[evolution] Completed evolution in 19 minutes and 22.06 seconds

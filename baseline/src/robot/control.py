@@ -4,12 +4,13 @@ import numpy as np
 from mujoco import MjModel, MjData
 from revolve2.serialization import StaticData, Serializable
 import abrain
-from abrain import Point
+import utils
+from abrain import Point, plotly_render
 from revolve2.actor_controller import ActorController
 from revolve2.core.modular_robot import Brain, Body, ActiveHinge
 from .vision import OpenGLVision
 from robot.genome import RVGenome
-from simulation.my_runner import DefaultActorControl
+from simulation.runner import DefaultActorControl
 
 
 # ==============================================================================
@@ -36,6 +37,9 @@ class ANNControl:
             self.vision: Optional[OpenGLVision] = None
             self._step = 0
             self.lum_input_list=[]
+
+        def get_ANN(self):
+            return self.brain
 
         def get_dof_targets(self) -> List[float]:
             return [self.o_buffer[i] for i in range(len(self.o_buffer))]
@@ -100,31 +104,20 @@ class ANNControl:
         def make_controller(self, body: Body, dof_ids: List[int]) -> ActorController:
             
             inputs, outputs = [], []
-            #4 output, refering to each hinge
             active_hinges_unsorted = body.find_active_hinges()
             active_hinge_map = {
                 active_hinge.id: active_hinge for active_hinge in active_hinges_unsorted
             }
             active_hinges = [active_hinge_map[id] for id in dof_ids]
             w, h = self.brain_dna.vision
-
-            def distribute_points(y, num_points, neg_limit):
-                points = []
-                step = 2 / (num_points - 1)
-                for i in range(num_points):
-                    x = round(neg_limit + i * step, 2)
-                    z = round(neg_limit + i * step, 2)
-                    #Maybe need to round the floats
-                    point = Point(x, y, z)
-                    points.append(point)
-                return points
-            #y=-1 for INPUT and y=1 for OUTPUT
-            inputs=distribute_points(y=-1, num_points=w*h, neg_limit=-1)
-            inputs.append(Point(0,-0.9,0))
-            hinge_input=distribute_points(y=-0.8, num_points=len(active_hinges), neg_limit=-1)
+               
+            inputs=utils.distribute_points(-1,w,h)
+            inputs.append(Point(0,-0.8,0))
+            hinge_input=utils.distribute_points(-0.9,len(active_hinges),1)
             inputs.extend(hinge_input)
-            outputs=distribute_points(y=1, num_points=len(active_hinges), neg_limit=-1)
-            
+
+            outputs=utils.distribute_points(1,len(active_hinges),1)
+
             return ANNControl.Controller(self.brain_dna.brain, inputs, outputs)
 
             

@@ -2,40 +2,36 @@ import math
 import numpy as np
 from simulation.config import Config
 from simulation.my_scenario import Scenario, build_robot
-from simulation.my_runner import Runner,RunnerOptions, CallbackType
-from simulation.re_runner import ReRunner
+from simulation.runner import Runner, RunnerOptions, CallbackType
 from robot.vision import OpenGLVision
 from robot.genome import RVGenome
 from robot.control import ANNControl
 from utils import target_area_distance
 from evo_alg.my_map_elite import EvaluationResult
 from functools import lru_cache
-from typing import Dict, List
+from typing import Dict, List, Tuple
 from revolve2.core.physics.running import EnvironmentResults
 import logging
 import math
 from functools import lru_cache
-
+import abrain
 logger = logging.getLogger(__name__)
-
-
-
 
 class Evaluator:
     options : RunnerOptions()
-    #Hyperparameters
+    
     #Fitness Name
     fitness_function : str
     #Descriptor Names
-    feature_names : List = ["distance", "white_gazing"]
-
-    #Scenario Options
-    target_position=[2,0,0]
-    target_size=0.5
+    features = []
     #Robot Vision
     vision_w: int
     vision_h: int
 
+
+    eval_numb=0
+    eval_budget : int 
+    
     #To Store Results
     actor_states = []  
     vision_results = []
@@ -46,12 +42,21 @@ class Evaluator:
         cls.options = options
 
     @classmethod
-    def set_target_options(cls, w,h):
+    def set_view_dims(cls, w,h):
         cls.vision_w, cls.vision_h=w,h
     
     @classmethod
     def set_descriptors(cls, descriptor_names : List):
-        cls.feature_names = descriptor_names
+        cls.features = descriptor_names
+
+    @staticmethod
+    def _clip(values: Dict[str, float], bounds: List[Tuple[float]], name: str):
+        for i, b in zip(values.items(), bounds):
+            k, v, lower, upper = *i, *b
+            if not lower <= v <= upper:
+                values[k] = max(lower, min(v, upper))
+                logger.warning(f"Out-of-bounds value {name},{k}: {v} not in [{lower},{upper}]")
+        return values
 
     @classmethod
     def get_result(cls, env_res: EnvironmentResults):
@@ -59,27 +64,28 @@ class Evaluator:
         cls.actor_states = []
         for i in range(len(env_res.environment_states)):
             cls.actor_states.append(env_res.environment_states[i].actor_states)
-        result.fitnesses, result.descriptors = cls.fitness(), cls.descriptors()
-        return result
-
-    @classmethod
-    def _evaluate(cls, genome: RVGenome, options: RunnerOptions, rerun: bool) -> EvaluationResult:
-        #Define robot vision dimentions
-        robot = build_robot(genome, cls.vision_w, cls.vision_h)
-        scenario = Scenario(genome.id())
-        scenario.insert_target(cls.target_position, cls.target_size)
-
-        #!!! Create only one runner. either headless or no. No rerun.py e que se escolhe video, view, none
-        #Runner, Recebe o scenario, que ja tem o robot e tudo o resto pronto
-        if rerun:
-            runner = ReRunner(robot, options, scenario.amend, robot_position=Scenario.initial_position(), target_position=cls.target_position, target_size=cls.target_size)
-        else:
-            runner = Runner(robot, options, Scenario.amend, robot_position=Scenario.initial_position(), target_position=cls.target_position, target_size=cls.target_size)
+        result.fitnesses = cls.fitness() 
+        result.descriptors = cls._clip(cls.descriptors(), cls.descriptor_bounds(),"features")
         
+        return result
+    
+    
+    @classmethod
+    def _evaluate(cls, genome: RVGenome, options: RunnerOptions) -> EvaluationResult:
+        cls.eval_numb+=1
+        #Define robot vision dimensions
+        robot = build_robot(genome, cls.vision_w, cls.vision_h)
+
+        scenario = Scenario()
+        scenario.insert_target(options.target_position, options.target_size)
+
+        runner = Runner(robot, options, scenario.amend)
+        scenario.assign_runner(runner)
         if cls.options.record is not None:
             runner.callbacks[CallbackType.VIDEO_FRAME_CAPTURED] = scenario.process_video_frame
         
         brain_controller : ANNControl = runner.controller.actor_controller
+        
         brain_controller.vision = \
                 OpenGLVision(runner.model, genome.vision, runner.headless)
         
@@ -90,25 +96,19 @@ class Evaluator:
 
         #Collect viewing behavior
         cls.vision_results = brain_controller.get_robot_vision()
-
-        return cls.get_result(simulation_result)
+        if options.return_ann is True:
+            ann = brain_controller.get_ANN()
+            return cls.get_result(simulation_result), ann
+        else:
+            return cls.get_result(simulation_result)
         
     @classmethod
     def evaluate_evo(cls, genome: RVGenome) -> EvaluationResult:
-        return cls._evaluate(genome, cls.options, False)
+        return cls._evaluate(genome, cls.options)
 
     @classmethod
     def evaluate_rerun(cls, genome: RVGenome) -> EvaluationResult:
-        return cls._evaluate(genome, cls.options, True)
-    
-    @staticmethod
-    def fitness2() -> Dict[str, float]:
-        #Final distance to the square area 
-        di = target_area_distance(Evaluator.actor_states[0].position, Evaluator.target_position, Evaluator.target_size)
-        df = target_area_distance(Evaluator.actor_states[-1].position, Evaluator.target_position, Evaluator.target_size)
-        closeness_score = 100 - (df * 100) / di
-        score = closeness_score + Evaluator.bonus
-        return {"closeness": score}
+        return cls._evaluate(genome, cls.options)
     
     def fitness()-> Dict[str, float]:
         score=0
@@ -116,13 +116,14 @@ class Evaluator:
         for view in Evaluator.vision_results:
             x.append(sum(view))
         brightest=max(x)
-        score = brightest/(Evaluator.vision_w*Evaluator.vision_h)
-        return{"brightness": 100*score}
+        score = (brightest*100/(Evaluator.vision_w*Evaluator.vision_h)+ Evaluator.bonus)
+        if score > 110 : score = 110
+        return{"brightness": score }
     
     @classmethod
     @lru_cache(maxsize=1)
     def fitness_bounds(cls):
-        min_max = [0, 100]
+        min_max = [0, 110]
         return [tuple(min_max)]
 
     @staticmethod
@@ -137,58 +138,62 @@ class Evaluator:
     @staticmethod
     def descriptors() -> Dict[str, float]:
         descriptors = {}
-        if "distance" in Evaluator.feature_names:
-            descriptors["distance"] = Evaluator.calculate_distance()
-        if "white_gazing" in Evaluator.feature_names:
-            descriptors["white_gazing"] = Evaluator.calculate_white_gazing()
-        if "avg_speed" in Evaluator.feature_names:
-            max_velocity, avg_speed = Evaluator.calculate_velocities()
-            descriptors["avg_speed"] = avg_speed
+        for i in range(2) :
+            if Evaluator.features[i] == "distance":
+                descriptors["distance"] = Evaluator.calculate_distance()
+            elif Evaluator.features[i] =="white_gazing":
+                descriptors["white_gazing"] = Evaluator.calculate_white_gazing()
+            elif Evaluator.features[i] =="avg_speed":
+                max_velocity, avg_speed = Evaluator.calculate_velocities()
+                descriptors["avg_speed"] = avg_speed
+            elif Evaluator.features[i] =="trajectory":
+                descriptors["trajectory"] = Evaluator.trajectory_description()
+
         #dir_changes = Evaluator.calculate_direction_changes()
         #covered_dist = Evaluator.calculate_covered_distance()
         return descriptors
     
     @classmethod
-    @lru_cache(maxsize=1)
     def descriptor_bounds(cls):
         bounds=[]
-        if "distance" in Evaluator.feature_names:
-            distance_bounds = (0, 5.5)
-            bounds.append(distance_bounds)
-        if "white_gazing" in Evaluator.feature_names:
-            white_gazing_bounds = [0, 1]
-            bounds.append(white_gazing_bounds)
-        if "avg_speed" in Evaluator.feature_names:
-            avg_speed_bounds = [0, 4]
-            bounds.append(avg_speed_bounds)
-        
+        for i in range(2) :
+            if cls.features[i] == "distance":
+                distance_bounds = (0, 5.5)
+                bounds.append(distance_bounds)
+            elif cls.features[i] =="white_gazing":
+                white_gazing_bounds = [0, 1]
+                bounds.append(white_gazing_bounds)
+            elif cls.features[i] =="avg_speed":
+                avg_speed_bounds = [0.05, 0.6]
+                bounds.append(avg_speed_bounds)
+            elif cls.features[i] == "trajectory":
+                trajectory_bounds = [-2,2]
+                bounds.append(trajectory_bounds)
+
         max_velocity_bounds = (0, 2)
         dir_changes_bounds = (0, 100)
         covered_dist_bounds = (0, 6)
+
         return bounds
 
+    def descriptor_menu(feature_names):
+        features = [{'name': 'avg_speed', 'bounds': (0, 1), 'value': 0},
+                    {'name': 'distance', 'bounds': (0, 5.5), 'value': 0},
+                    {'name': 'white_gazing', 'bounds': (0, 1), 'value': 0}]
+        
+        #bounds = df.loc[df['name_x'] == name, 'bounds'].values[0]
+        return features
+    
     @staticmethod
     def descriptor_names():
-        return Evaluator.feature_names
+        return Evaluator.features
     
     @staticmethod
     def calculate_distance():
         return float(((Evaluator.actor_states[-1].position[0] - Evaluator.actor_states[0].position[0]) ** 2 +
                       (Evaluator.actor_states[-1].position[1] - Evaluator.actor_states[0].position[1]) ** 2) ** 0.5)
 
-    @staticmethod
-    def calculate_covered_distance():
-        positions = [state.position for state in Evaluator.actor_states]
-        total_distance = 0.0
-        for i in range(len(positions) - 1):
-            current_pos = positions[i][:2]  # Ignore the z-coordinate
-            next_pos = positions[i + 1][:2]
-            
-            distance = math.sqrt((next_pos[0] - current_pos[0]) ** 2 + (next_pos[1] - current_pos[1]) ** 2)
-            total_distance += distance
-        
-        return total_distance
-        
+    
     @staticmethod
     def calculate_velocities():
         positions = [state.position for state in Evaluator.actor_states]
@@ -205,32 +210,25 @@ class Evaluator:
         average_velocity = sum(velocities) / len(velocities)
         max_velocity = max(velocities)
         return max_velocity, average_velocity
-        
+    
     @staticmethod
     def calculate_white_gazing():
-        w,h = Evaluator.vision_w, Evaluator.vision_h
+        total_area = Evaluator.vision_w * Evaluator.vision_h
+        total_score = 0
+        total_sum = 0
         for view in Evaluator.vision_results:
-            if   (w*h)*.75<=sum(view)<=(w*h):
-                score=1
-            elif (w*h)*.5<=sum(view)<=(w*h)*.75:
-                score=0.75
-            elif (w*h)*.25<=sum(view)<=(w*h)*.5:
-                score=0.5
-            elif (w*h)*0.125<=sum(view)<=(w*h)*.25:
-                score=0.25
-            else:
-                score=0
-        return score
-
-
-        '''Summing all pixels values, and divide by total number of pixels
-        flat_vision = [item for sublist in Evaluator.vision_results for item in sublist]
-        #print(flat_vision)
-        print("score",sum(flat_vision)/len(flat_vision))
-
-        PROBLEM, It varies between 0 amd 1, but values above 0.5 would be rare,
-        since the robot can't keep being looking, he has to move.  
-        '''
+            view_sum = sum(view)
+            view_area_ratio = view_sum / total_area
+            score = view_area_ratio
+            
+            total_score += score * view_sum
+            total_sum += view_sum
+        if total_sum > 0:
+            final_score = total_score / total_sum
+        else:
+            final_score = 0
+        #print ('score',round(final_score,3))
+        return final_score
 
     @staticmethod
     def trajectory_description():
@@ -240,7 +238,7 @@ class Evaluator:
         # Find the maximum and minimum y values
         max_y = np.max(y_coordinates)
         min_y = np.min(y_coordinates)
-        print("min_y:",abs(min_y)," | max_y:",max_y)
+        #print("min_y:",abs(min_y)," | max_y:",max_y)
         if max_y>abs(min_y):
             return max_y
         else:
@@ -295,6 +293,27 @@ class Evaluator:
             
         direction_change_percentage = (direction_changes / (len(positions) - 1)) * 100
         return direction_change_percentage
+    
+    @staticmethod
+    def calculate_covered_distance():
+        positions = [state.position for state in Evaluator.actor_states]
+        total_distance = 0.0
+        for i in range(len(positions) - 1):
+            current_pos = positions[i][:2] # Ignore the z-coordinate
+            next_pos = positions[i + 1][:2]
+            distance = math.sqrt((next_pos[0] - current_pos[0]) ** 2 + (next_pos[1] - current_pos[1]) ** 2)
+            total_distance += distance
+        
+        return total_distance
+    
+    @staticmethod
+    def fitness2() -> Dict[str, float]:
+        #Final distance to the square area 
+        di = target_area_distance(Evaluator.actor_states[0].position, Evaluator.target_position, Evaluator.target_size)
+        df = target_area_distance(Evaluator.actor_states[-1].position, Evaluator.target_position, Evaluator.target_size)
+        closeness_score = 100 - (df * 100) / di
+        score = closeness_score + Evaluator.bonus
+        return {"closeness": score}
     
 
 

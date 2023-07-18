@@ -10,28 +10,34 @@ from pathlib import Path
 import humanize
 from abrain.core.genome import logger as genome_logger
 import pandas as pd
-
+from utils import create_genealogical_tree
 from evo_alg.my_map_elite import Tee,QDIndividual,Algorithm, Grid, EvaluationResult, Logger
 from robot.genome import RVGenome
 from simulation.config import Config
 from simulation.evaluator import Evaluator
-from simulation.my_runner import RunnerOptions
+from simulation.runner import RunnerOptions
 
 class Options:
     def __init__(self):
         self.id: Optional[int] = None
-        self.base_folder: str = "baseline/tmp/qdpy/toy-revolve"
+        self.base_folder: str 
         self.run_folder: str = None  # Automatically filled in
         self.snapshots: int = 10
         self.overwrite: bool = False
         self.verbosity: int = 1
 
+
+        #Algorithm parameters
         self.seed: int = 100
+        self.threads: int = 1
+
         self.batch_size: int = 20
         self.budget: int = 100
+
         self.tournament: int = 3
-        self.threads: int = 1
-        # number of initial mutations for abrain's genome
+        #-Grid options
+        self.grid_size : int = 8
+        #-number of initial mutations for abrain's genome
         self.initial_mutations: int = 3
 
         #-----------------
@@ -39,15 +45,13 @@ class Options:
         #-----------------
         #Scenario:
         self.scenario_level : int =0 
-        #-Target
-        self.target_position=[2,0,0]
         #-Robot Vision
         self.vision_w: int = 2
         self.vision_h: int = 2
         #fitness name
         self.fitness_name: str
         #descriptor names
-        self.descriptor_names: List
+        self.descriptor_names = []
 
         
 def eval_mujoco(ind:QDIndividual, evaluator : Optional[Evaluator]):
@@ -56,7 +60,8 @@ def eval_mujoco(ind:QDIndividual, evaluator : Optional[Evaluator]):
     assert ind.id() is not None, "ID-less individual"
     r: EvaluationResult = evaluator.evaluate_evo(ind.genome)
     ind.update(r)
-    # print(ind, r)
+
+    #print("ind",ind)
     return ind
 
 
@@ -82,14 +87,16 @@ def evolution (args : Options()):
     logging.captureWarnings(True)
 
     ########################################################################################
-    evaluator =  Evaluator()
-    evaluator.set_target_options(args.vision_w, args.vision_h)
+    
     r = RunnerOptions()
     r.level = args.scenario_level
+
+    evaluator = Evaluator()
+    evaluator.set_view_dims(args.vision_w, args.vision_h)
     evaluator.set_runner_options(r)
     evaluator.set_descriptors(args.descriptor_names)
 
-    grid = Grid(shape=(16, 16),
+    grid = Grid(shape=(args.grid_size, args.grid_size),
                 max_items_per_bin=1,
                 fitness_domain=evaluator.fitness_bounds(),
                 features_domain=evaluator.descriptor_bounds())
@@ -128,37 +135,48 @@ def evolution (args : Options()):
     new_eval =  partial(eval_mujoco, evaluator=evaluator)
     best = algo.optimise(evaluate=new_eval, batch_mode=True)
 
-
-
-    #Collect Best
-    i=0
-    for _, element in enumerate(grid):
-        if element.fitness[0]>80: 
-            i+=1
-            with open(Path(args.run_folder).joinpath(f"best{i}.json"), 'w') as f:
-                data = {
-                    "id": element.id(), "parents": element.genome.parents(),
-                    "fitnesses": element.fitnesses,
-                    "descriptors": element.descriptors,
-                    #"stats": best.stats,
-                    "genome": element.genome.to_json()
-                }
-                logging.info(f"best:\n{pprint.pformat(data)}")
-                json.dump(data, f)
-
+    
     #Store all Map Elites final Solutions
     grid_pop = []
     for _, element in enumerate(grid):
+        #print("element.fitness",element.fitness[0])
         ind = { "id": element.id(), "parents": element.genome.parents(),
-                "fitnesses": element.fitnesses,
+                "fitnesses": element.fitness[0],
                 "descriptors": element.descriptors,
                 "genome": element.genome.to_json()}
         
         grid_pop.append(ind)
     df = pd.DataFrame(grid_pop)
+    df = df.sort_values(by="fitnesses", ascending=False)
     df.to_csv(Path(args.run_folder).joinpath("final_grid.csv"), index=False)
-    
-        
+
+    history = pd.DataFrame(algo.history)
+    history.to_csv(Path(args.run_folder).joinpath("history.csv"), index=False)
+
+    # Save the genealogical tree dictionary as a JSON file
+    with open(Path(args.run_folder).joinpath("genealogical_tree.json"), "w") as file:
+        g=create_genealogical_tree(algo.genealogical_info)
+        json.dump(g, file)
+    ''' 
+    n=10
+    n_best_individuals = sorted(grid, key=lambda x: x.fitness[0], reverse=True)[:n]
+    #print("best_individuals:", best_individuals)
+    #Collect Best
+    i=0
+    for element in n_best_individuals:
+        i+=1
+        with open(Path(args.run_folder).joinpath(f"best{i}.json"), 'w') as f:
+            data = {
+                "id": element.id(), "parents": element.genome.parents(),
+                "fitnesses": element.fitnesses,
+                "descriptors": element.descriptors,
+                #"stats": best.stats,
+                "genome": element.genome.to_json()
+            }
+            logging.info(f"best:\n{pprint.pformat(data)}")
+            json.dump(data, f)
+    '''
+      
     # Print results info
     logging.info(algo.summary())
 
@@ -170,6 +188,3 @@ def evolution (args : Options()):
 
     duration = humanize.precisedelta(timedelta(seconds=time.perf_counter() - start))
     logging.info(f"Completed evolution in {duration}")
-
-
-

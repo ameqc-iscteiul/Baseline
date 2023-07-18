@@ -7,8 +7,8 @@ from abrain.core.genome import GIDManager
 
 @dataclass
 class VisionData:
-    w: int = 2
-    h: int = 2
+    w: int = 0
+    h: int = 0
     def __iter__(self):
         return iter(astuple(self))
 
@@ -68,7 +68,7 @@ class RVGenome:
             return self.brain.to_json()
         else:
             return dict(brain=self.brain.to_json(), vision=self.vision.__dict__)
-
+    
     @staticmethod
     def from_json(data) -> 'RVGenome':
         """Recreate a RVGenome from string json representation
@@ -84,3 +84,5 @@ class RVGenome:
     def from_dot(path: str, rng: Random):
         """Does not make sense for embedded abrain genome"""
         raise RuntimeError
+    
+    

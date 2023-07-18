@@ -1,0 +1,32 @@
+[2023-07-17 18:30:41,433]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-07-17 18:30:41,433]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-07-17 18:30:41,434]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-07-17 18:30:41,436]|[INFO]|[evolution] Grid size: (8, 8)
+[2023-07-17 18:30:41,436]|[INFO]|[evolution]    bounds: [[0, 1], (0, 5.5)]
+[2023-07-17 18:30:41,436]|[INFO]|[evolution]      bins: [0.125, 0.6875]
+[2023-07-17 18:30:41,437]|[INFO]|[my_map_elite] Generated run id: 7171830
+[2023-07-17 18:30:41,437]|[INFO]|[my_map_elite] Run folder: new_Experiment_2_2Results_3X3\run7171830
+[2023-07-17 18:30:41,438]|[INFO]|[my_map_elite] Parallel: 1
+[2023-07-17 18:30:41,438]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': './new_Experiment_2_2Results_3X3',
+ 'batch_size': 20,
+ 'budget': 80,
+ 'descriptor_names': ['white_gazing', 'distance'],
+ 'grid_size': 8,
+ 'id': 7171830,
+ 'initial_mutations': 3,
+ 'overwrite': False,
+ 'run_folder': 'new_Experiment_2_2Results_3X3\\run7171830',
+ 'scenario_level': 0,
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 1,
+ 'tournament': 3,
+ 'verbosity': 1,
+ 'vision_h': 3,
+ 'vision_w': 3}
+[2023-07-17 18:30:41,444]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\new_Experiment_2_2Results_3X3\run7171830\config.json
+[2023-07-17 18:30:41,445]|[INFO]|[evolution] Starting illumination!
+alg_name  iteration cont_size evals     nb_updated     avg       std       min       max       ft_min              ft_max              qd_score  elapsed
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+7171830   0         2/64      20        6              [23.0574] [1.2564]  [21.801]  [24.3137] [0.1227,0.0416]     [0.1483,0.1612]     0.42      27.21  

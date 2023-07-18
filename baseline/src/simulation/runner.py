@@ -7,7 +7,7 @@ from typing import Callable, Dict, Optional, Union
 from configparser import ConfigParser
 from ast import literal_eval
 from collections import namedtuple
-from enum import Enum, auto
+from enum import Enum, auto, Flag
 import cv2
 import glfw
 import mujoco
@@ -15,7 +15,7 @@ import numpy as np
 from mujoco import MjModel, MjData
 from mujoco_viewer import mujoco_viewer
 from pyrr import Vector3, Quaternion
-
+from robot.vision import OpenGLVision
 from revolve2.core.modular_robot import ModularRobot
 from revolve2.core.physics.environment_actor_controller import EnvironmentActorController
 from revolve2.runners.mujoco import LocalRunner
@@ -29,9 +29,7 @@ from revolve2.core.physics.running import (
     PosedActor
 )
 
-from robot.vision import OpenGLVision
 from simulation.config import Config
-
 
 class CallbackType(Enum):
     VIDEO_FRAME_CAPTURED = auto()
@@ -42,17 +40,34 @@ RunnerCallbacks = Dict[CallbackType, Union[RunnerCallback, MovieCallback]]
 
 @dataclass
 class RunnerOptions:
-    
-    robot_position: Vector3 = Vector3([-2, 0, 0])
-    target_position: Vector3 = Vector3([2, 0, 0])
-    target_size: float = 0.5
+    #Scenario options
+    robot_position = [-2, 0, 0]
+    target_position = [2, 0, 0]
+    target_size : float = 0.5
 
     level:int=0
+    return_ann=False
+    
+    @dataclass
+    class View:
+        start_paused: bool = False
+        speed: float = 1.0
+        auto_quit: bool = True
+        cam_id: Optional[int] = 0
+        settings_restore: bool = True
+        settings_save: bool = True
+        mark_start: bool = True
+    view: Optional[View] = None
+
+    @dataclass
+    class Record:
+        video_file_path: Path
+        width: int = 640
+        height: int = 480
+        fps: int = 24
+    record: Optional[Record] = None
 
     save_folder: Optional[Path] = None
-    view : bool = None
-    record : bool = None
-
 
 class DefaultActorControl(ActorControl):
     def __init__(self, mj_model: MjModel, mj_data: MjData):
@@ -74,8 +89,16 @@ class Runner(LocalRunner):
         LocalRunner.__init__(self)
 
         self.options = options
-
         self.bonus = 0
+
+        self.target_position=options.target_position
+        self.target_size=options.target_size
+        target_area_side = self.target_size + .07
+        # Calculate the minimum and maximum boundaries of the target area
+        self.target_area_intervals = [round(self.target_position[0] - target_area_side,3),
+                                    round(self.target_position[0] + target_area_side,3),
+                                    round(self.target_position[1] - target_area_side,3),
+                                    round(self.target_position[1] + target_area_side,3)]
 
         self.callbacks = {}
         if callbacks is not None:
@@ -85,9 +108,11 @@ class Runner(LocalRunner):
         bounding_box = actor.calc_aabb()
         env = Environment(self.environmentActorController_t(controller))
 
+        
+        robot_position = Vector3(options.robot_position)
         robot_position = Vector3([
-            self.options.robot_position.x, self.options.robot_position.y,
-            self.options.robot_position.z + bounding_box.size.z / 2.0 - bounding_box.offset.z
+            robot_position.x, robot_position.y,
+            robot_position.z + bounding_box.size.z / 2.0 - bounding_box.offset.z
         ])
         env.actors.append(
             PosedActor(
@@ -97,12 +122,6 @@ class Runner(LocalRunner):
                 [0.0 for _ in controller.get_dof_targets()],
             )
         )
-        target_area_side = self.options.target_size + .042
-        # Calculate the minimum and maximum boundaries of the target area
-        self.target_area_intervals = [round(self.options.target_position[0] - target_area_side,2),
-                                    round(self.options.target_position[0] + target_area_side,2),
-                                    round(self.options.target_position[1] - target_area_side,2),
-                                    round(self.options.target_position[1] + target_area_side,2)]
         self.controller = env.controller
 
         self.model = mujoco.MjModel.from_xml_string(
@@ -117,89 +136,51 @@ class Runner(LocalRunner):
             for dof_state in posed_actor.dof_states
         ]
         LocalRunner._set_dof_targets(self.data, initial_targets)
-        if self.options.view is False and self.options.record is False:
-            self.viewer: Optional[mujoco_viewer.MujocoViewer] = None
-            self._headless = True
-        
-        elif self.options.view:
-            self._headless = False
-            glfw_window_hint = {
-                Config.OpenGLLib.OSMESA.name: glfw.OSMESA_CONTEXT_API,
-                Config.OpenGLLib.EGL.name: glfw.EGL_CONTEXT_API
-            }
-            if (ogl := Config.opengl_lib.upper()) in glfw_window_hint:
-                glfw.window_hint(glfw.CONTEXT_CREATION_API, glfw_window_hint[ogl])
-                print("Requested:", ogl)
-            viewer = mujoco_viewer.MujocoViewer(
-                    self.model,
-                    self.data,
-                )
-            viewer._render_every_frame = False  # Private but functionality is not exposed and for now it breaks nothing.
-            viewer._paused = False
-            self.viewer = viewer
-            self.viewer.cam.lookat = self.get_actor_state(0).position
+        self.video = None
+        if (self.options.view is None and self.options.record is None):
+            self.headless = True
+        else: 
+            self.headless = False
+            if self.options.record is not None:
+                self.prepare_video(self.options)
+            elif self.options.view is not None:
+                glfw_window_hint = {
+                    Config.OpenGLLib.OSMESA.name: glfw.OSMESA_CONTEXT_API,
+                    Config.OpenGLLib.EGL.name: glfw.EGL_CONTEXT_API
+                }
+                if (ogl := Config.opengl_lib.upper()) in glfw_window_hint:
+                    glfw.window_hint(glfw.CONTEXT_CREATION_API, glfw_window_hint[ogl])
+                    print("Requested:", ogl)
 
-        elif self.options.record:
-            width = height = None
-            viewer = mujoco_viewer.MujocoViewer(
-                self.model,
-                self.data,
-                'window',
-                width=width, height=height,
-            )
-            self.prepare_video(self.options)        
-    
+                viewer = mujoco_viewer.MujocoViewer(
+                        self.model,
+                        self.data,
+                    )
+                viewer._render_every_frame = False  # Private but functionality is not exposed and for now it breaks nothing.
+                viewer._paused = False
+                self.viewer = viewer
+                self.viewer.cam.lookat = self.get_actor_state(0).position
+
     def prepare_video(self, options):
         self.video = namedtuple('Video', ['step', 'writer', 'last'])
         self.video.step = 1 / options.record.fps
         fourcc = cv2.VideoWriter_fourcc(*"mp4v")
         size = (options.record.width, options.record.height)
         self.video.writer = cv2.VideoWriter(
-            str(options.save_folder.joinpath(options.record.video_file_path)),
+            str(options.record.video_file_path),
             fourcc=fourcc,
             fps=options.record.fps,
             frameSize=size
         )
         self.video.last = 0.0
         self.viewer = OpenGLVision(model=self.model, shape=size)
+        self.viewer.cam.fixedcamid = 0
+        self.viewer.cam.type = mujoco.mjtCamera.mjCAMERA_FIXED        
 
     @staticmethod
     def _config_file():
         return os.path.join(os.path.expanduser('~'),
                             '.config/revolve/viewer.ini')
-
-    def restore_settings(self):
-        config = ConfigParser()
-        config.read(self._config_file())
-        if 'values' in config:
-            values = config['values']
-            glfw.restore_window(self.viewer.window)
-            if 'size' in values:
-                glfw.set_window_size(self.viewer.window,
-                                     *literal_eval(values['size']))
-            if 'pos' in values:
-                glfw.set_window_pos(self.viewer.window,
-                                    *literal_eval(values['pos']))
-            if 'menu' in values:
-                self.viewer._hide_menus = (values['menu'] == "False")
-            if 'speed' in values:
-                self.viewer._run_speed = float(values['speed'])
-
-    def save_settings(self):
-        config = ConfigParser()
-        config['values'] = {}
-        values = config['values']
-        values['pos'] = str(glfw.get_window_pos(self.viewer.window))
-        values['size'] = str(glfw.get_window_size(self.viewer.window))
-        values['menu'] = str(not self.viewer._hide_menus)
-        values['speed'] = str(self.viewer._run_speed)
-        path = Path(self._config_file())
-        if not path.exists():
-            path.parent.mkdir(parents=True, exist_ok=True)
-        with open(path, 'w') as f:
-            config.write(f) 
-
-
     def update_view(self, time):
         if self.video is None:
             self.viewer.render()
@@ -220,21 +201,21 @@ class Runner(LocalRunner):
 
     def close_view(self):
         if self.options.view is not None and self.options.view.auto_quit:
-            self.save_settings()
             self.viewer.close()
-
         if self.options.record is not None:
             self.video.writer.release()
-    
 
     def run(self):
+
         last_sample_time = 0.0
         last_control_time = 0.0
         control_step = 1 / Config.control_frequency
+        
         results = EnvironmentResults([])
-
         # sample initial state
-        results.environment_states.append(EnvironmentState(0.0, self.get_actor_state(0)))
+        results.environment_states.append(
+            EnvironmentState(0.0, self.get_actor_state(0))
+        )
         
         #RUN LOOP
         target_reached=False
@@ -270,12 +251,13 @@ class Runner(LocalRunner):
             if self.target_area_intervals[0] <= round(current_position[0],2) <= self.target_area_intervals[1] and  self.target_area_intervals[2] <= round(current_position[1],2) <= self.target_area_intervals[3]: 
                 #print("Robot reached Target!")
                 target_reached=True
-                self.bonus = time/Config.simulation_time           
-                        
-            if not self._headless:
+                self.bonus = Config.simulation_time - time           
+                #print("time",time, "saved time:", Config.simulation_time -time )
+                #print(time/Config.simulation_time)
+                #print((time*5)/(Config.simulation_time/2))
+            if not self.headless:
                 self.update_view(time)
-
-        if not self._headless:
+        if not self.headless:
             self.close_view()
 
         # sample one final time

@@ -2,28 +2,25 @@
 from evolution import evolution, Options
 
 
-def run_experiment(result_folder_name, batch_size, budget_size, w, h, l):
+def run_experiment(result_folder_name, batch_size, budget_size, features, w, h, l):
    o=Options()
    o.base_folder=result_folder_name
    o.batch_size=batch_size
    o.budget=budget_size
    o.tournament = 3
    o.initial_mutations = 3
-
    o.vision_w=w
    o.vision_h=h
-   
-   o.scenario_level=0
-   o.descriptor_names=["distance", "avg_speed"]
-
+   o.scenario_level=l
+   o.descriptor_names=features
    evolution(o)
 
 def main():
    print("Start")
-   evals=400
-   w=2
-   h=2
-   run_experiment(f"./Experiment_Results_2X2", 20, evals,w,h,l=0)
+   evals=80
+   w=3
+   h=3
+   run_experiment(f"./new_Experiment_2_2Results_3X3", 20, evals, ["white_gazing", "distance"], w,h,l)
 
    
 

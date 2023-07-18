@@ -160,6 +160,9 @@ class Algorithm(Evolution):
 
         self.id_manager = GIDManager()
 
+        self.history=[]
+        self.genealogical_info=[]
+
         def select(grid):
             #return self.rng.choice(grid)
             k = min(len(grid), options.tournament)
@@ -181,6 +184,11 @@ class Algorithm(Evolution):
 
         def vary(parent):
             child = QDIndividual(parent.genome.mutated(self.rng, self.id_manager))
+            self.genealogical_info.append([child.id(), parent.id()])
+            #Save every child 
+            if parent not in self.history:
+                self.history.append(parent)
+            self.history.append(child)
             self._curiosity_lut[child.id()] = self.container.index_grid(parent.features)
             return child
 

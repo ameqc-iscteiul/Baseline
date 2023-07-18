@@ -1,4 +1,3 @@
-import json
 import math
 from typing import Optional, List, Dict
 
@@ -9,14 +8,12 @@ from revolve2.core.modular_robot import Body, Brick, ActiveHinge, ModularRobot, 
 from simulation.config import Config
 from robot.control import ANNControl, SensorControlData
 from robot.genome import RVGenome, VisionData
-from simulation.my_runner import Runner, RunnerOptions
-from simulation.re_runner import ReRunner
+from simulation.runner import Runner,RunnerOptions
 # ==============================================================================
 # Robot
 # ==============================================================================
 
 Runner.actorController_t = SensorControlData
-ReRunner.actorController_t = SensorControlData
 
 
 def build_robot(brain_dna: RVGenome, vision_w, vision_h):
@@ -51,7 +48,9 @@ class Scenario:
     def insert_target(cls,target_pos,target_size):
         cls.target_pos=' '.join([str(x) for x in target_pos])
         cls.target_size=target_size
-
+        
+    def assign_runner(self, runner:Runner):
+        self.runner = runner
     
 
     # ==========================================================================
@@ -101,14 +100,10 @@ class Scenario:
             "geom",
             type="box",
             pos=Scenario.target_pos,
-            size=f"{str(Scenario.target_size)} {str(Scenario.target_size)} .5",
+            size=f"{str(Scenario.target_size)} {str(Scenario.target_size)} 0.75",
             rgba="255 255 255 1"
         )
 
-        
-
-
-            
 
         def create_grid_positions(center_position, num_lines, elements_per_line, distance):
             positions = []
@@ -245,15 +240,26 @@ class Scenario:
             return coordinates
         
         if options.level==1:
+            xml = create_obstacle_grid(xml, [0.5,0,0], 2, 2, 0.04, 0.8)
+            '''elif options.level==2:
+            xml = create_obstacle_grid(xml, [0.5,0,0], 4, 4, 0.04, 0.6)
+            '''
+        elif options.level==2:
+            xml = create_obstacle_grid(xml, [0.5,0,0], 5, 5, 0.04, 0.4)
+        else:
+            pass
+        
+        '''
+        if options.level==1:
             xml = default_obstacle_set(xml)
         elif options.level==2:
-            xml = create_obstacle_grid(xml, [0,0,0], 4, 4, 0.05, 0.4)
+            xml = create_obstacle_grid(xml, [0.6,0,0], 4, 4, 0.04, 0.6)
         elif options.level==3:
             xml = create_obstacle_grid(xml, [0,0,0], 20, 20, 0.05, 0.4)
         elif options.level==4:            
             xml = create_Ramp(xml, [0,0,0], 30, 30, 0.04, 0.05, 0.3)
         else:
-            pass
+            pass'''
 
 
 
@@ -274,16 +280,16 @@ class Scenario:
             xml.sensor.add('jointpos', name=f"{hinge.full_identifier}_sensor".replace('/', '_'),
                            joint=hinge.full_identifier)
             
-    '''def process_video_frame(self, frame: np.ndarray):
-        if (v := self.runner.controller.actor_controller.vision) is not None:
-            ratio = .25
-            w, h, _ = frame.shape
-            raw_vision = v.img
-            vision_ratio = raw_vision.shape[0] / raw_vision.shape[1]
-            iw, ih = int(ratio * w), int(ratio * h * vision_ratio)
-            scaled_vision = cv2.resize(
-                cv2.cvtColor(np.flipud(raw_vision), cv2.COLOR_RGBA2BGR),
-                (ih,iw),
-                interpolation=cv2.INTER_NEAREST
-            )
-            frame[w-iw:w, h-ih:h] = scaled_vision'''
+    def process_video_frame(self, frame: np.ndarray):
+        v = self.runner.controller.actor_controller.vision
+        ratio = .25
+        w, h, _ = frame.shape
+        raw_vision = v.img
+        vision_ratio = raw_vision.shape[0] / raw_vision.shape[1]
+        iw, ih = int(ratio * w), int(ratio * h * vision_ratio)
+        scaled_vision = cv2.resize(
+            cv2.cvtColor(np.flipud(raw_vision), cv2.COLOR_RGBA2BGR),
+            (ih,iw),
+            interpolation=cv2.INTER_NEAREST
+        )
+        frame[w-iw:w, h-ih:h] = scaled_vision

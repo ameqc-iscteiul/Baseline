@@ -11,7 +11,7 @@ def run_experiment(result_folder_name, batch_size, budget_size, features, w, h, 
    o.initial_mutations = 3
    o.vision_w=w
    o.vision_h=h
-   o.scenario_level=l
+   o.levels=l
    o.descriptor_names=features
    evolution(o)
 
@@ -20,6 +20,7 @@ def main():
    evals=80
    w=3
    h=3
+   l=0
    run_experiment(f"./new_Experiment_2_2Results_3X3", 20, evals, ["white_gazing", "distance"], w,h,l)
 
    

@@ -1,0 +1,120 @@
+[2023-07-18 21:03:54,617]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-07-18 21:03:54,617]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-07-18 21:03:54,618]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-07-18 21:03:54,619]|[INFO]|[evolution] Grid size: (8, 8)
+[2023-07-18 21:03:54,619]|[INFO]|[evolution]    bounds: [[0, 1], (0, 5.5)]
+[2023-07-18 21:03:54,619]|[INFO]|[evolution]      bins: [0.125, 0.6875]
+[2023-07-18 21:03:54,619]|[INFO]|[my_map_elite] Generated run id: 7182103
+[2023-07-18 21:03:54,620]|[INFO]|[my_map_elite] Run folder: new_Experiment_2_2Results_3X3\run7182103
+[2023-07-18 21:03:54,620]|[INFO]|[my_map_elite] Parallel: 1
+[2023-07-18 21:03:54,620]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': './new_Experiment_2_2Results_3X3',
+ 'batch_size': 20,
+ 'budget': 80,
+ 'descriptor_names': ['white_gazing', 'distance'],
+ 'grid_size': 8,
+ 'id': 7182103,
+ 'initial_mutations': 3,
+ 'levels': 0,
+ 'overwrite': False,
+ 'run_folder': 'new_Experiment_2_2Results_3X3\\run7182103',
+ 'scenario_level': 1,
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 1,
+ 'tournament': 3,
+ 'verbosity': 1,
+ 'vision_h': 3,
+ 'vision_w': 3}
+[2023-07-18 21:03:54,624]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\new_Experiment_2_2Results_3X3\run7182103\config.json
+[2023-07-18 21:03:54,625]|[INFO]|[evolution] Starting illumination!
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+[2023-07-18 21:03:54,733]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\qdpy\algorithms\base.py:610: UserWarning: Individual evaluation raised the following exception: division by zero !
+  warnings.warn(f"Individual evaluation raised the following exception: {ind_exc} !")
+
+alg_name  iteration cont_size evals     nb_updated     avg       std       min       max       ft_min    ft_max    qd_score  elapsed
+------------------------------------------------------------------------------------------------------------------------------------
+7182103   0         0/64      0         0              nan       nan       nan       nan       [NaN,NaN] [NaN,NaN] 0.00      0.11   
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+7182103   1         0/64      0         0              nan       nan       nan       nan       [NaN,NaN] [NaN,NaN] 0.00      0.13   
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+7182103   2         0/64      0         0              nan       nan       nan       nan       [NaN,NaN] [NaN,NaN] 0.00      0.19   
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+Exception during evaluation: division by zero
+7182103   3         0/64      0         0              nan       nan       nan       nan       [NaN,NaN] [NaN,NaN] 0.00      0.13   
+Finished optimisation using algorithm '7182103'. Total elapsed: 0.5558201000094414.

@@ -18,7 +18,7 @@ import abrain
 logger = logging.getLogger(__name__)
 
 class Evaluator:
-    options : RunnerOptions()
+    runner_options = RunnerOptions()
     
     #Fitness Name
     fitness_function : str
@@ -31,15 +31,26 @@ class Evaluator:
 
     eval_numb=0
     eval_budget : int 
-    
+    levels : int = 0
+
     #To Store Results
     actor_states = []  
     vision_results = []
     bonus=0
 
     @classmethod
+    def set_options(cls, descriptor_names, levels, vision_w,vision_h, eval_budget ):
+        cls.vision_w, cls.vision_h = vision_w, vision_h
+        cls.features = descriptor_names
+        cls.levels = levels
+        cls.eval_budget = eval_budget
+        #for now
+        cls.runner_options.level=levels
+
+
+    @classmethod
     def set_runner_options(cls, options: RunnerOptions):
-        cls.options = options
+        cls.runner_options = options
 
     @classmethod
     def set_view_dims(cls, w,h):
@@ -78,40 +89,40 @@ class Evaluator:
 
         scenario = Scenario()
         scenario.insert_target(options.target_position, options.target_size)
+        
+        '''if cls.eval_numb > cls.eval_budget/cls.levels:
+            #Mudar scenario
+            options.level=options.level'''
 
         runner = Runner(robot, options, scenario.amend)
-        scenario.assign_runner(runner)
-        if cls.options.record is not None:
+        if cls.runner_options.record is not None:
+            scenario.assign_runner(runner)
             runner.callbacks[CallbackType.VIDEO_FRAME_CAPTURED] = scenario.process_video_frame
         
         brain_controller : ANNControl = runner.controller.actor_controller
-        
         brain_controller.vision = \
                 OpenGLVision(runner.model, genome.vision, runner.headless)
         
         #Run Simulation
         simulation_result, cls.bonus = runner.run()
-        #if cls.bonus>0.0:
-            #print("BONUS: ", cls.bonus)
 
         #Collect viewing behavior
         cls.vision_results = brain_controller.get_robot_vision()
+
         if options.return_ann is True:
-            ann = brain_controller.get_ANN()
-            return cls.get_result(simulation_result), ann
+            return cls.get_result(simulation_result), brain_controller.get_ANN()
         else:
             return cls.get_result(simulation_result)
         
     @classmethod
     def evaluate_evo(cls, genome: RVGenome) -> EvaluationResult:
-        return cls._evaluate(genome, cls.options)
+        return cls._evaluate(genome, cls.runner_options)
 
     @classmethod
     def evaluate_rerun(cls, genome: RVGenome) -> EvaluationResult:
-        return cls._evaluate(genome, cls.options)
+        return cls._evaluate(genome, cls.runner_options)
     
     def fitness()-> Dict[str, float]:
-        score=0
         x=[]
         for view in Evaluator.vision_results:
             x.append(sum(view))
@@ -175,14 +186,6 @@ class Evaluator:
         covered_dist_bounds = (0, 6)
 
         return bounds
-
-    def descriptor_menu(feature_names):
-        features = [{'name': 'avg_speed', 'bounds': (0, 1), 'value': 0},
-                    {'name': 'distance', 'bounds': (0, 5.5), 'value': 0},
-                    {'name': 'white_gazing', 'bounds': (0, 1), 'value': 0}]
-        
-        #bounds = df.loc[df['name_x'] == name, 'bounds'].values[0]
-        return features
     
     @staticmethod
     def descriptor_names():

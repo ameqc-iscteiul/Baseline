@@ -1,0 +1,96 @@
+[2023-07-18 21:05:21,226]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-07-18 21:05:21,227]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-07-18 21:05:21,227]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-07-18 21:05:21,228]|[INFO]|[evolution] Grid size: (8, 8)
+[2023-07-18 21:05:21,229]|[INFO]|[evolution]    bounds: [[0, 1], (0, 5.5)]
+[2023-07-18 21:05:21,229]|[INFO]|[evolution]      bins: [0.125, 0.6875]
+[2023-07-18 21:05:21,229]|[INFO]|[my_map_elite] Generated run id: 7182105
+[2023-07-18 21:05:21,230]|[INFO]|[my_map_elite] Run folder: new_Experiment_2_2Results_3X3\run7182105
+[2023-07-18 21:05:21,230]|[INFO]|[my_map_elite] Parallel: 1
+[2023-07-18 21:05:21,230]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': './new_Experiment_2_2Results_3X3',
+ 'batch_size': 1,
+ 'budget': 4,
+ 'descriptor_names': ['white_gazing', 'distance'],
+ 'grid_size': 8,
+ 'id': 7182105,
+ 'initial_mutations': 3,
+ 'levels': 1,
+ 'overwrite': False,
+ 'run_folder': 'new_Experiment_2_2Results_3X3\\run7182105',
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 1,
+ 'tournament': 3,
+ 'verbosity': 1,
+ 'vision_h': 3,
+ 'vision_w': 3}
+[2023-07-18 21:05:21,238]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\new_Experiment_2_2Results_3X3\run7182105\config.json
+[2023-07-18 21:05:21,239]|[INFO]|[evolution] Starting illumination!
+alg_name  iteration cont_size evals     nb_updated     avg       std       min       max       ft_min              ft_max              qd_score  elapsed
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+7182105   0         1/64      1         1              [14.3936] [0.]      [14.3936] [14.3936] [0.1439,0.0003]     [0.1439,0.0003]     0.13      2.52   
+7182105   1         1/64      1         0              [14.3936] [0.]      [14.3936] [14.3936] [0.1439,0.0003]     [0.1439,0.0003]     0.13      1.82   
+7182105   2         1/64      1         0              [14.3936] [0.]      [14.3936] [14.3936] [0.1439,0.0003]     [0.1439,0.0003]     0.13      1.74   
+7182105   3         1/64      1         0              [14.3936] [0.]      [14.3936] [14.3936] [0.1439,0.0003]     [0.1439,0.0003]     0.13      23.12  
+Finished optimisation using algorithm '7182105'. Total elapsed: 29.20860359998187.
+[2023-07-18 21:05:50,463]|[INFO]|[evolution] Summary Algorithm:
+  batch_size: 1
+  budget: 4
+  container:  Summary Grid:
+    activity_per_bin: [[0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]]
+    best: {id=0, fitness=(14.39360929557008,), features={'white_gazing': 0.14393609295570045, 'distance': 0.00029994422773276696}}
+    best_features: [0.14393609295570045, 0.00029994422773276696]
+    best_fitness: (14.39360929557008,)
+    best_index: (1, 0)
+    capacity: 64
+    curiosity: [[ 0.   0.   0.   0.   0.   0.   0.   0. ]  [-1.5  0.   0.   0.   0.   0.   0.   0. ]  [ 0.   0.   0.   0.   0.   0.   0.   0. ]  [ 0.   0.   0.   0.   0.   0.   0.   0. ]  [ 0.   0.   0.   0.   0.   0.   0.   0. ]  [ 0.   0.   0.   0.   0.   0. ...
+    depot: None
+    discard_random_on_bin_overload: False
+    features: {(0, 0): [], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (1, 0): [Features([0.14393609295570045, 0.00029994422773276696])], (1, 1): [], (1, 2): [], (1, 3): [], (1, 4): [], (1, 5): [], (1, 6): [], (1, 7): [ ...
+    features_domain: [[0, 1], (0, 5.5)]
+    features_extrema: ((0.14393609295570045, 0.14393609295570045), (0.00029994422773276696, 0.00029994422773276696))
+    filled_bins: 1
+    fitness: {(0, 0): [], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (1, 0): [Fitness([14.39360929557008])], (1, 1): [], (1, 2): [], (1, 3): [], (1, 4): [], (1, 5): [], (1, 6): [], (1, 7): [], (2, 0): [], (2, 1): [],  ...
+    fitness_domain: [(0, 110)]
+    fitness_extrema: ((14.39360929557008, 14.39360929557008),)
+    free: 63
+    history_recentness_per_bin: {(0, 0): [], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (1, 0): [1], (1, 1): [], (1, 2): [], (1, 3): [], (1, 4): [], (1, 5): [], (1, 6): [], (1, 7): [], (2, 0): [], (2, 1): [], (2, 2): [], (2, 3): [], (2, ...
+    items: [{id=0, fitness=(14.39360929557008,), features={'white_gazing': 0.14393609295570045, 'distance': 0.00029994422773276696}}]
+    max_items_per_bin: 1
+    name: Grid-1673541593856
+    nb_added: 1
+    nb_discarded: 0
+    nb_items_per_bin: [[0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]]
+    nb_operations: 1
+    nb_rejected: 0
+    quality: {(0, 0): None, (0, 1): None, (0, 2): None, (0, 3): None, (0, 4): None, (0, 5): None, (0, 6): None, (0, 7): None, (1, 0): Fitness([14.39360929557008]), (1, 1): None, (1, 2): None, (1, 3): None, (1, 4): None, (1, 5): None, (1, 6): None, (1, 7): No ...
+    quality_array: [[[       nan]   [       nan]   [       nan]   [       nan]   [       nan]   [       nan]   [       nan]   [       nan]]   [[14.3936093]   [       nan]   [       nan]   [       nan]   [       nan]   [       nan]   [       nan]   [       nan]]    ...
+    recentness: [0]
+    recentness_per_bin: {(0, 0): [], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (1, 0): [1], (1, 1): [], (1, 2): [], (1, 3): [], (1, 4): [], (1, 5): [], (1, 6): [], (1, 7): [], (2, 0): [], (2, 1): [], (2, 2): [], (2, 3): [], (2, ...
+    shape: (8, 8)
+    size: 1
+    solutions: {(0, 0): [], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (1, 0): [{id=0, fitness=(14.39360929557008,), features={'white_gazing': 0.14393609295570045, 'distance': 0.00029994422773276696}}], (1, 1): [], (1,  ...
+  current_iter: 4
+  deepcopy_on_selection: True
+  dimension: None
+  genealogical_info: [[1, 0], [2, 0], [3, 0]]
+  history: [{id=0, fitness=(14.39360929557008,), features={'white_gazing': 0.14393609295570045, 'distance': 0.00029994422773276696}}, {id=1, fitness=(14.39360929557008,), features={'white_gazing': 0.14393609295570045, 'distance': 0.00029994422773276696}},  ...
+  id_manager: <abrain.core.genome.GIDManager object at 0x00000185912FE890>
+  labels: ['brightness', 'white_gazing', 'distance']
+  name: 7182105
+  nb_evaluations: 4
+  nb_evaluations_in_iteration: 0
+  nb_max_iter: 4
+  nb_suggestions: 4
+  nb_suggestions_in_iteration: 0
+  nb_updated: 1
+  nb_updated_in_iteration: 0
+  optimisation_task: maximisation
+  rng: <random.Random object at 0x0000018593A7D9B0>
+[2023-07-18 21:05:51,564]|[INFO]|[my_map_elite] Generated new_Experiment_2_2Results_3X3\run7182105\plots\iteration-final_grid_fitness.png
+[2023-07-18 21:05:51,941]|[INFO]|[my_map_elite] Generated new_Experiment_2_2Results_3X3\run7182105\plots\iteration-final_grid_activity.png
+[2023-07-18 21:05:52,267]|[INFO]|[my_map_elite] Generated new_Experiment_2_2Results_3X3\run7182105\plots\iteration-final_grid_curiosity.png
+[2023-07-18 21:05:52,276]|[INFO]|[evolution] All results are available under new_Experiment_2_2Results_3X3\run7182105
+[2023-07-18 21:05:52,277]|[INFO]|[evolution] Unified storage file is new_Experiment_2_2Results_3X3\run7182105/iteration-final.p
+[2023-07-18 21:05:52,278]|[INFO]|[evolution] Completed evolution in 31.05 seconds

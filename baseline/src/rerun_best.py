@@ -56,8 +56,8 @@ def run_random_genome(view=False):
 
 
 def main():
-    run_random_genome()
-    exit()
+    #run_random_genome()
+    #exit()
 
     run_path = "./new_Experiment_3Results_4X4/run7160115" 
     final_grid = pd.read_csv(f"{run_path}/final_grid.csv")
@@ -70,7 +70,8 @@ def main():
     #for i in range(len(final_grid['genome'])):
     g=final_grid.iloc[25]['genome']
     rerun(RVGenome.from_json(eval(g)), options, run_path)
- 
+    rerun(best_g, options, run_path, record=True)
+
     #ann = Brain.make_controller()
     #plotly_render(ann).write_html("./sample_ann.html")
 

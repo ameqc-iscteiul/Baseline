@@ -44,7 +44,7 @@ class Options:
         #Evaluator Options:
         #-----------------
         #Scenario:
-        self.scenario_level : int =0 
+        self.levels : int = 0 
         #-Robot Vision
         self.vision_w: int = 2
         self.vision_h: int = 2
@@ -88,13 +88,11 @@ def evolution (args : Options()):
 
     ########################################################################################
     
-    r = RunnerOptions()
-    r.level = args.scenario_level
-
     evaluator = Evaluator()
-    evaluator.set_view_dims(args.vision_w, args.vision_h)
-    evaluator.set_runner_options(r)
-    evaluator.set_descriptors(args.descriptor_names)
+    evaluator.set_options(args.descriptor_names, args.levels, args.vision_w, args.vision_h, args.budget)
+    #evaluator.set_view_dims(args.vision_w, args.vision_h)
+    #evaluator.set_runner_options(args.levels)
+    #evaluator.set_descriptors(args.descriptor_names)
 
     grid = Grid(shape=(args.grid_size, args.grid_size),
                 max_items_per_bin=1,
@@ -157,6 +155,9 @@ def evolution (args : Options()):
     with open(Path(args.run_folder).joinpath("genealogical_tree.json"), "w") as file:
         g=create_genealogical_tree(algo.genealogical_info)
         json.dump(g, file)
+    
+    
+    
     ''' 
     n=10
     n_best_individuals = sorted(grid, key=lambda x: x.fitness[0], reverse=True)[:n]

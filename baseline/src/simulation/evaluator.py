@@ -13,7 +13,6 @@ from typing import Dict, List, Tuple
 from revolve2.core.physics.running import EnvironmentResults
 import logging
 import math
-from functools import lru_cache
 import abrain
 logger = logging.getLogger(__name__)
 
@@ -29,23 +28,23 @@ class Evaluator:
     vision_h: int
 
 
-    eval_numb=0
-    eval_budget : int 
-    levels : int = 0
-
+    eval_budget : int
+    counter : int = 0
+    numb_levels : int = 0
+    evaluation : int = 0
+    
     #To Store Results
     actor_states = []  
     vision_results = []
     bonus=0
 
     @classmethod
-    def set_options(cls, descriptor_names, levels, vision_w,vision_h, eval_budget ):
+    def set_options(cls, descriptor_names, vision_w,vision_h, eval_budget, levels ,initial_level ):
         cls.vision_w, cls.vision_h = vision_w, vision_h
         cls.features = descriptor_names
-        cls.levels = levels
+        cls.numb_levels = levels
         cls.eval_budget = eval_budget
-        #for now
-        cls.runner_options.level=levels
+        cls.runner_options.level=initial_level
 
 
     @classmethod
@@ -83,7 +82,7 @@ class Evaluator:
     
     @classmethod
     def _evaluate(cls, genome: RVGenome, options: RunnerOptions) -> EvaluationResult:
-        cls.eval_numb+=1
+        #cls.eval_numb+=1
         #Define robot vision dimensions
         robot = build_robot(genome, cls.vision_w, cls.vision_h)
 
@@ -178,7 +177,7 @@ class Evaluator:
                 avg_speed_bounds = [0.05, 0.6]
                 bounds.append(avg_speed_bounds)
             elif cls.features[i] == "trajectory":
-                trajectory_bounds = [-2,2]
+                trajectory_bounds = [-2.5,2.5]
                 bounds.append(trajectory_bounds)
 
         max_velocity_bounds = (0, 2)

@@ -128,7 +128,7 @@ class Scenario:
                     type="box",
                     pos=f"{p[0]} {p[1]} 0",
                     size=f"{size_of_side} {size_of_side} {size_of_side}",
-                    rgba="1 0 0 1"
+                    rgba="0.5 0 0 1"
                 )
             return xml
         
@@ -240,12 +240,26 @@ class Scenario:
             return coordinates
         
         if options.level==1:
-            xml = create_obstacle_grid(xml, [0.5,0,0], 2, 2, 0.04, 0.8)
-            '''elif options.level==2:
-            xml = create_obstacle_grid(xml, [0.5,0,0], 4, 4, 0.04, 0.6)
-            '''
-        elif options.level==2:
-            xml = create_obstacle_grid(xml, [0.5,0,0], 5, 5, 0.04, 0.4)
+            #xml = create_obstacle_grid(xml, [0.1,0,0], 1, 1, 0.27, 1.5)
+            xml = create_obstacle_grid(xml, [0,0,0], 1, 3, 0.05, 0.8)
+
+        if options.level==2:
+            xml = create_obstacle_grid(xml, [-0.8,0,0], 1, 3, 0.05, 0.8)
+            xml = create_obstacle_grid(xml, [0.8,0,0], 1, 4, 0.05, 0.8)
+        if options.level==3:
+            xml = create_obstacle_grid(xml, [-1.6,0,0], 1, 2, 0.04, 0.8)
+            xml = create_obstacle_grid(xml, [-0.8,0,0], 1, 3, 0.05, 0.8)
+            xml = create_obstacle_grid(xml, [0,0,0], 1, 4, 0.06, 0.8)
+            xml = create_obstacle_grid(xml, [0.8,0,0], 1, 5, 0.07, 0.8)
+            xml = create_obstacle_grid(xml, [1.6,0,0], 1, 6, 0.08, 0.8)
+        if options.level==4:
+            #xml = create_Ramp(xml, [0,0,0], 35, 40, 0.02, 0.05, 0.3)
+            pass
+        if options.level==5:
+            xml = create_Ramp(xml, [0,0,0], 35, 40, 0.02, 0.05, 0.3)
+        if options.level==6:
+            #xml = create_obstacle_grid(xml, [0,0,0], 6, 6, 0.05, 0.9)
+            xml = create_Ramp(xml, [0,0,0], 50, 50, 0.02, 0.05, 0.4)
         else:
             pass
         

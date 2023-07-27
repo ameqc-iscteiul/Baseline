@@ -24,9 +24,9 @@ class OpenGLVision:
             ogl = Config.opengl_lib.upper()
             if ogl == OGL.GLFW.name: # Does not work in multithread
                 from mujoco.glfw import GLContext
-                '''elif ogl == OGL.EGL.name:
+            elif ogl == OGL.EGL.name:
                 from mujoco.egl import GLContext
-                os.environ['MUJOCO_GL'] = 'egl' '''
+                os.environ['MUJOCO_GL'] = 'egl'
             elif ogl == OGL.OSMESA.name:
                 from mujoco.osmesa import GLContext
                 os.environ['MUJOCO_GL'] = 'osmesa'

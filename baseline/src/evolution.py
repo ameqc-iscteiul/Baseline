@@ -1,6 +1,7 @@
 import json
 import logging
 from functools import partial
+import math
 import pprint
 import sys
 import time
@@ -36,7 +37,7 @@ class Options:
 
         self.tournament: int = 3
         #-Grid options
-        self.grid_size : int = 8
+        self.grid_size : int = 12
         #-number of initial mutations for abrain's genome
         self.initial_mutations: int = 3
 
@@ -44,7 +45,8 @@ class Options:
         #Evaluator Options:
         #-----------------
         #Scenario:
-        self.levels : int = 0 
+        self.initial_level : int = 0
+        self.numb_levels : int = 0 
         #-Robot Vision
         self.vision_w: int = 2
         self.vision_h: int = 2
@@ -54,15 +56,33 @@ class Options:
         self.descriptor_names = []
 
         
-def eval_mujoco(ind:QDIndividual, evaluator : Optional[Evaluator]):
+def eval_mujoco(ind:QDIndividual, evaluator : Optional[Evaluator], grid : Optional[Grid], revaluate : bool = False):
     assert isinstance(ind, QDIndividual)
     assert isinstance(ind.genome, RVGenome)
     assert ind.id() is not None, "ID-less individual"
+    # Check if it's time to change the level
+    change_scenario_at = (evaluator.eval_budget // evaluator.numb_levels)
+    if evaluator.counter == change_scenario_at and evaluator.evaluation != evaluator.eval_budget-1:
+        evaluator.counter = 0
+        print("!!!!!!!!!!!!!!!!!Next level!!!!!!!!!!!!!!!")
+        print("evaluator.evaluation", evaluator.evaluation)
+        # Calculate the next level
+        next_level = evaluator.runner_options.level + 1
+        evaluator.runner_options.level = min(next_level, 6)
+        # Reset the evaluation count for the next level
+        evaluator.runner_options.level +=1
+
+        for _, element in enumerate(grid):
+            eval_mujoco(element, evaluator, grid, revaluate=True)
+            
     r: EvaluationResult = evaluator.evaluate_evo(ind.genome)
     ind.update(r)
 
-    #print("ind",ind)
-    return ind
+    if revaluate == False:
+        evaluator.counter += 1
+        evaluator.evaluation +=1
+        #print("ind",ind)
+        return ind
 
 
 def evolution (args : Options()):
@@ -89,11 +109,11 @@ def evolution (args : Options()):
     ########################################################################################
     
     evaluator = Evaluator()
-    evaluator.set_options(args.descriptor_names, args.levels, args.vision_w, args.vision_h, args.budget)
-    #evaluator.set_view_dims(args.vision_w, args.vision_h)
-    #evaluator.set_runner_options(args.levels)
-    #evaluator.set_descriptors(args.descriptor_names)
-
+    '''r = RunnerOptions()
+    r.view=RunnerOptions.View()
+    evaluator.set_runner_options(r)'''
+    evaluator.set_options(args.descriptor_names, args.vision_w, args.vision_h, args.budget, args.numb_levels,args.initial_level)
+    
     grid = Grid(shape=(args.grid_size, args.grid_size),
                 max_items_per_bin=1,
                 fitness_domain=evaluator.fitness_bounds(),
@@ -125,12 +145,14 @@ def evolution (args : Options()):
                     log_base_path=args.run_folder)
     tee.set_log_path(run_folder.joinpath("log"))
 
-    '''with ParallelismManager(parallelism_type = "sequential", max_workers=20) as mgr:
-        #mgr.executor._mp_context = multiprocessing.get_context("fork")  # TODO: Very brittle
-        #executor = concurrent.futures.ThreadPoolExecutor(max_workers=20)'''
     
+    '''with ParallelismManager(parallelism_type = "none", max_workers=args.threads) as mgr:
+        #mgr.executor._mp_context = multiprocessing.get_context("fork")  # TODO: Very brittle
+        logging.info("Starting illumination!")
+        best = algo.optimise(evaluate=eval_mujoco, executor=mgr.executor, batch_mode=True)'''
+
     logging.info("Starting illumination!")
-    new_eval =  partial(eval_mujoco, evaluator=evaluator)
+    new_eval =  partial(eval_mujoco, evaluator=evaluator, grid=grid)
     best = algo.optimise(evaluate=new_eval, batch_mode=True)
 
     
@@ -148,13 +170,13 @@ def evolution (args : Options()):
     df = df.sort_values(by="fitnesses", ascending=False)
     df.to_csv(Path(args.run_folder).joinpath("final_grid.csv"), index=False)
 
-    history = pd.DataFrame(algo.history)
+    '''history = pd.DataFrame(algo.history)
     history.to_csv(Path(args.run_folder).joinpath("history.csv"), index=False)
 
     # Save the genealogical tree dictionary as a JSON file
     with open(Path(args.run_folder).joinpath("genealogical_tree.json"), "w") as file:
         g=create_genealogical_tree(algo.genealogical_info)
-        json.dump(g, file)
+        json.dump(g, file)'''
     
     
     

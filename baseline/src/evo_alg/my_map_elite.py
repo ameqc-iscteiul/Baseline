@@ -180,6 +180,7 @@ class Algorithm(Evolution):
             genome = RVGenome.random(self.rng, self.id_manager)
             for _ in range(options.initial_mutations):
                 genome.mutate(self.rng)
+            #print("initial indi", QDIndividual(genome))
             return QDIndividual(genome)
 
         def vary(parent):
@@ -212,6 +213,9 @@ class Algorithm(Evolution):
 
     def tell(self, individual: IndividualLike, *args, **kwargs) -> bool:
         grid: Grid = self.container
+        '''for _, element in enumerate(grid):
+            print(f" id={element.id()}, fitness={element.fitness[0]}")'''
+        #print("Current algo GRID: ",grid)
         added = super().tell(individual, *args, **kwargs)
         parent = self._curiosity_lut.pop(individual.id(), None)
         if parent is not None:
@@ -233,6 +237,12 @@ class Grid(containers.Grid):
             raise_if_not_added_to_depot: bool = False) -> Optional[int]:
         r = containers.Grid.add(self, individual, raise_if_not_added_to_depot)
         return r
+    
+    def fill(self, individual_list):
+        for indi in individual_list:
+            containers.Grid.add(self, indi)
+
+
     
         
 

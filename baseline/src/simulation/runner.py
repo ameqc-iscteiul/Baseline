@@ -31,6 +31,7 @@ from revolve2.core.physics.running import (
 
 from simulation.config import Config
 
+
 class CallbackType(Enum):
     VIDEO_FRAME_CAPTURED = auto()
 
@@ -89,16 +90,17 @@ class Runner(LocalRunner):
         LocalRunner.__init__(self)
 
         self.options = options
+        #print("Level:", options.level)
         self.bonus = 0
 
         self.target_position=options.target_position
         self.target_size=options.target_size
-        target_area_side = self.target_size + .07
+        #target_area_side = self.target_size + .07
         # Calculate the minimum and maximum boundaries of the target area
-        self.target_area_intervals = [round(self.target_position[0] - target_area_side,3),
+        '''self.target_area_intervals = [round(self.target_position[0] - target_area_side,3),
                                     round(self.target_position[0] + target_area_side,3),
                                     round(self.target_position[1] - target_area_side,3),
-                                    round(self.target_position[1] + target_area_side,3)]
+                                    round(self.target_position[1] + target_area_side,3)]'''
 
         self.callbacks = {}
         if callbacks is not None:
@@ -210,14 +212,16 @@ class Runner(LocalRunner):
         last_sample_time = 0.0
         last_control_time = 0.0
         control_step = 1 / Config.control_frequency
-        
+        sample_step = 1 / Config.sampling_frequency
         results = EnvironmentResults([])
+
         # sample initial state
         results.environment_states.append(
             EnvironmentState(0.0, self.get_actor_state(0))
         )
         
         #RUN LOOP
+        full_gaze=0
         target_reached=False
         while ((time := self.data.time) < Config.simulation_time ) and target_reached is False:
             # do control if it is time
@@ -242,28 +246,39 @@ class Runner(LocalRunner):
             mujoco.mj_step(self.model, self.data)
 
             # sample state if it is time
-            if time >= last_sample_time + Config.sampling_frequency:
-                last_sample_time = int(time / Config.sampling_frequency) * Config.sampling_frequency
+            if time >= last_sample_time + sample_step:
+                last_sample_time = int(time / sample_step) * sample_step
                 results.environment_states.append(EnvironmentState(time, self.get_actor_state(0)))
             
-            # Check if the robot's position is within the target area
-            current_position = self.get_actor_state(0).position
-            if self.target_area_intervals[0] <= round(current_position[0],2) <= self.target_area_intervals[1] and  self.target_area_intervals[2] <= round(current_position[1],2) <= self.target_area_intervals[3]: 
-                #print("Robot reached Target!")
-                target_reached=True
-                self.bonus = Config.simulation_time - time           
-                #print("time",time, "saved time:", Config.simulation_time -time )
-                #print(time/Config.simulation_time)
-                #print((time*5)/(Config.simulation_time/2))
+            n=3
+            vision = self.controller.actor_controller.get_robot_vision()
+            #if the current gaze was full, check if the last n gazes were also full
+            if len(vision) > n and sum(vision[-n]) == len(vision[0]):
+                if sum([value for view in vision[-n:] for value in view])==(len(vision[0])*n):
+                    self.bonus = Config.simulation_time - time
+                    target_reached=True
+                        #print(f" !!!  Robot gazed Target {n} consecutive times  !!!")
+
+
+
+            '''if sum(self.controller.actor_controller.get_current_vision_input())==9:
+                print( "Gaze:", full_gaze," - VISION: ",self.controller.actor_controller.get_current_vision_input())
+                full_gaze+=1
+                if full_gaze > 10:
+                    print("Robot gazed Target 2s!")
+                    self.bonus = Config.simulation_time - time
+                    target_reached=True
+            else:
+                full_gaze=0'''
+            #If it gazes at target for 2 seconds
+            # 10 controls/s so if in 10 controls the robot is seeing white,
+            # it means he was looking for 1 s
+            
+
             if not self.headless:
                 self.update_view(time)
         if not self.headless:
             self.close_view()
-
-        # sample one final time
-        results.environment_states.append(
-            EnvironmentState(time, self.get_actor_state(0))
-        )
         return results, self.bonus
     
     def get_actor_state(self, robot_index):

@@ -13,7 +13,7 @@ import abrain
 class Config:
     simulation_time: Annotated[float, "Duration of the simulation"] = 20
     control_frequency: Annotated[float, "How frequently to call the controller"] = 10
-    sampling_frequency : Annotated[float, "How frequently to sample/collect Environment States"] = 0.011
+    sampling_frequency : Annotated[float, "How frequently to sample/collect Environment States"] = 30
     ground_size: Annotated[float, "Total size of the arena"] = 10
     #levels: Annotated[list[float], "Difficulty levels"] = [.0, .1, .2, .3]
     #num_obstacles: Annotated[int, "Number of obstacles"] = 3*2*len(levels)

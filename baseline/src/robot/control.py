@@ -1,4 +1,4 @@
-import math
+#import math
 from typing import List, Optional
 import numpy as np
 from mujoco import MjModel, MjData
@@ -38,6 +38,8 @@ class ANNControl:
             self._step = 0
             self.lum_input_list=[]
 
+            self.current_vision_input=[]
+
         def get_ANN(self):
             return self.brain
 
@@ -46,7 +48,7 @@ class ANNControl:
 
         def get_robot_vision(self):
             return self.lum_input_list
-        
+
         def get_luminosity_input(self,img):
             lum_input=[]
             #First Method, Averaging RGB values
@@ -73,10 +75,10 @@ class ANNControl:
             lum_input = self.get_luminosity_input(img)
             input.extend(lum_input)
 
-            #2-Sin Input
+            '''#2-Sin Input
             freq=0.01
             sin_input = math.sin(2 * math.pi * freq) * self._step
-            input.append(sin_input)
+            input.append(sin_input)'''
             
             #3-Hinge Input
             hinge_input = [pos for pos in data.sensors]
@@ -112,7 +114,7 @@ class ANNControl:
             w, h = self.brain_dna.vision
                
             inputs=utils.distribute_points(-1,w,h)
-            inputs.append(Point(0,-0.8,0))
+            #inputs.append(Point(0,-0.8,0))
             hinge_input=utils.distribute_points(-0.9,len(active_hinges),1)
             inputs.extend(hinge_input)
 

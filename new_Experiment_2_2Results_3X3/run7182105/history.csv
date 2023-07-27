@@ -1,5 +1,0 @@
-genome,fitnesses,descriptors,eval_time
-"{VisionData(w=0, h=0), CPPN:8:3([1, 1], [13,14])}",{'brightness': 14.39360929557008},"{'white_gazing': 0.14393609295570045, 'distance': 0.00029994422773276696}",0
-"{VisionData(w=0, h=0), CPPN:8:3([1, 1], [13,14])}",{'brightness': 14.39360929557008},"{'white_gazing': 0.14393609295570045, 'distance': 0.00029994422773276696}",0
-"{VisionData(w=0, h=0), CPPN:8:3([1, 1], [13,14])}",{'brightness': 14.39360929557008},"{'white_gazing': 0.14393609295570045, 'distance': 0.00013518982052707066}",0
-"{VisionData(w=0, h=0), CPPN:8:3([1, 1], [13,14])}",{'brightness': 14.39360929557008},"{'white_gazing': 0.14393609295570045, 'distance': 0.00024955127100111254}",0

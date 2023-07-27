@@ -1,0 +1,392 @@
+[2023-07-19 16:06:10,129]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-07-19 16:06:10,129]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-07-19 16:06:10,129]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-07-19 16:06:10,130]|[INFO]|[evolution] Grid size: (8, 8)
+[2023-07-19 16:06:10,131]|[INFO]|[evolution]    bounds: [[0, 1], (0, 5.5)]
+[2023-07-19 16:06:10,131]|[INFO]|[evolution]      bins: [0.125, 0.6875]
+[2023-07-19 16:06:10,131]|[INFO]|[my_map_elite] Generated run id: 7191606
+[2023-07-19 16:06:10,131]|[INFO]|[my_map_elite] Run folder: new_Experiment_2_2Results_3X3\run7191606
+[2023-07-19 16:06:10,132]|[INFO]|[my_map_elite] Parallel: 1
+[2023-07-19 16:06:10,132]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': './new_Experiment_2_2Results_3X3',
+ 'batch_size': 20,
+ 'budget': 800,
+ 'descriptor_names': ['white_gazing', 'distance'],
+ 'grid_size': 8,
+ 'id': 7191606,
+ 'initial_mutations': 3,
+ 'levels': 0,
+ 'overwrite': False,
+ 'run_folder': 'new_Experiment_2_2Results_3X3\\run7191606',
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 1,
+ 'tournament': 3,
+ 'verbosity': 1,
+ 'vision_h': 3,
+ 'vision_w': 3}
+[2023-07-19 16:06:10,136]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\new_Experiment_2_2Results_3X3\run7191606\config.json
+[2023-07-19 16:06:10,138]|[INFO]|[evolution] Starting illumination!
+alg_name  iteration cont_size evals     nb_updated     avg       std       min       max       ft_min              ft_max              qd_score  elapsed
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+7191606   0         3/64      20        4              [24.4638] [7.6943]  [14.4227] [33.1155] [0.1031,0.0000]     [0.1442,1.6076]     0.67      21.41  
+7191606   1         5/64      20        4              [26.8526] [7.3632]  [14.4227] [33.5657] [0.1088,0.0000]     [0.1442,1.6076]     1.22      17.78  
+7191606   2         5/64      20        1              [30.3384] [4.0204]  [22.5708] [33.5657] [0.1088,0.2781]     [0.1359,1.6076]     1.38      15.67  
+7191606   3         6/64      20        1              [29.4457] [4.1779]  [22.5708] [33.5657] [0.1088,0.2781]     [0.1359,3.1996]     1.61      16.39  
+7191606   4         7/64      20        3              [28.9802] [5.7392]  [20.8715] [37.1678] [0.1088,0.2437]     [0.1725,3.1996]     1.84      16.03  
+7191606   5         7/64      20        1              [28.9864] [5.7323]  [20.8715] [37.1678] [0.1116,0.2437]     [0.1725,3.1996]     1.84      15.89  
+7191606   6         8/64      20        2              [28.3479] [5.6135]  [20.8715] [37.1678] [0.1116,0.2437]     [0.1725,3.1996]     2.06      16.02  
+7191606   7         9/64      20        2              [33.1203] [14.2217] [20.8715] [70.5447] [0.1116,0.2437]     [0.3561,3.1996]     2.71      16.01  
+7191606   8         9/64      20        0              [33.1203] [14.2217] [20.8715] [70.5447] [0.1116,0.2437]     [0.3561,3.1996]     2.71      16.26  
+7191606   9         9/64      20        4              [35.4926] [13.7908] [20.8715] [70.5447] [0.0954,0.3126]     [0.3561,3.1996]     2.90      16.15  
+7191606   10        10/64     20        1              [35.573]  [13.0853] [20.8715] [70.5447] [0.0954,0.3126]     [0.3561,3.1996]     3.23      15.65  
+7191606   11        10/64     20        0              [35.573]  [13.0853] [20.8715] [70.5447] [0.0954,0.3126]     [0.3561,3.1996]     3.23      16.33  
+7191606   12        10/64     20        1              [35.6427] [13.022]  [20.8715] [70.5447] [0.0954,0.3126]     [0.3561,3.1996]     3.24      16.61  
+7191606   13        10/64     20        2              [36.9165] [12.4402] [20.8715] [70.5447] [0.0954,0.3126]     [0.3561,3.1996]     3.36      16.23  
+7191606   14        10/64     20        0              [36.9165] [12.4402] [20.8715] [70.5447] [0.0954,0.3126]     [0.3561,3.1996]     3.36      16.32  
+7191606   15        10/64     20        3              [36.9949] [12.4389] [20.8715] [70.5447] [0.1026,0.0316]     [0.3561,3.1996]     3.36      16.05  
+7191606   16        10/64     20        0              [36.9949] [12.4389] [20.8715] [70.5447] [0.1026,0.0316]     [0.3561,3.1996]     3.36      16.12  
+7191606   17        10/64     20        0              [36.9949] [12.4389] [20.8715] [70.5447] [0.1026,0.0316]     [0.3561,3.1996]     3.36      15.49  
+7191606   18        10/64     20        0              [36.9949] [12.4389] [20.8715] [70.5447] [0.1026,0.0316]     [0.3561,3.1996]     3.36      15.21  
+7191606   19        10/64     20        1              [36.9978] [12.4391] [20.8715] [70.5447] [0.1026,0.4223]     [0.3561,3.1996]     3.36      15.20  
+7191606   20        10/64     20        0              [36.9978] [12.4391] [20.8715] [70.5447] [0.1026,0.4223]     [0.3561,3.1996]     3.36      15.51  
+7191606   21        10/64     20        1              [37.1895] [12.4416] [20.8715] [70.5447] [0.1026,0.4223]     [0.3561,3.1996]     3.38      15.30  
+7191606   22        10/64     20        1              [37.2041] [12.4424] [20.8715] [70.5447] [0.1026,0.3706]     [0.3561,3.1996]     3.38      15.55  
+7191606   23        10/64     20        1              [37.7124] [12.0296] [20.8715] [70.5447] [0.1026,0.3706]     [0.3561,2.9503]     3.43      15.79  
+7191606   24        10/64     20        0              [37.7124] [12.0296] [20.8715] [70.5447] [0.1026,0.3706]     [0.3561,2.9503]     3.43      15.53  
+7191606   25        10/64     20        0              [37.7124] [12.0296] [20.8715] [70.5447] [0.1026,0.3706]     [0.3561,2.9503]     3.43      15.34  
+7191606   26        10/64     20        3              [37.8475] [12.0019] [20.8715] [70.5447] [0.1078,0.1391]     [0.3561,2.9503]     3.44      15.75  
+7191606   27        10/64     20        1              [37.894]  [11.9973] [20.8715] [70.5447] [0.1078,0.1391]     [0.3561,2.9503]     3.44      15.10  
+7191606   28        10/64     20        1              [40.1917] [12.469]  [20.8715] [70.5447] [0.1078,0.1391]     [0.3561,2.9503]     3.65      16.67  
+7191606   29        10/64     20        1              [40.2135] [12.4633] [20.8715] [70.5447] [0.1078,0.1391]     [0.3561,2.9503]     3.66      17.67  
+7191606   30        10/64     20        2              [40.8119] [11.7602] [25.5773] [70.5447] [0.1078,0.1391]     [0.3561,2.9503]     3.71      17.30  
+7191606   31        10/64     20        0              [40.8119] [11.7602] [25.5773] [70.5447] [0.1078,0.1391]     [0.3561,2.9503]     3.71      15.83  
+7191606   32        11/64     20        1              [38.9371] [12.6839] [20.1888] [70.5447] [0.1078,0.1391]     [0.3561,2.9844]     3.89      17.36  
+7191606   33        11/64     20        1              [39.4547] [13.3477] [20.1888] [70.5447] [0.1078,0.1391]     [0.3561,3.1361]     3.95      24.37  
+7191606   34        11/64     20        0              [39.4547] [13.3477] [20.1888] [70.5447] [0.1078,0.1391]     [0.3561,3.1361]     3.95      20.66  
+7191606   35        11/64     20        1              [39.4969] [13.3375] [20.1888] [70.5447] [0.1078,0.1391]     [0.3561,3.1361]     3.95      20.96  
+7191606   36        11/64     20        1              [39.5128] [13.3341] [20.1888] [70.5447] [0.1078,0.1391]     [0.3561,3.1361]     3.95      23.66  
+VISION 9.0 Gaze: 0
+VISION 9.0 Gaze: 1
+VISION 9.0 Gaze: 2
+VISION 9.0 Gaze: 3
+VISION 9.0 Gaze: 4
+VISION 9.0 Gaze: 5
+VISION 9.0 Gaze: 6
+VISION 9.0 Gaze: 7
+VISION 9.0 Gaze: 8
+VISION 9.0 Gaze: 9
+VISION 9.0 Gaze: 10
+VISION 9.0 Gaze: 11
+VISION 9.0 Gaze: 12
+VISION 9.0 Gaze: 13
+VISION 9.0 Gaze: 14
+VISION 9.0 Gaze: 15
+VISION 9.0 Gaze: 16
+VISION 9.0 Gaze: 17
+VISION 9.0 Gaze: 18
+VISION 9.0 Gaze: 19
+VISION 9.0 Gaze: 20
+Robot gazed Target 2s!
+VISION 9.0 Gaze: 0
+VISION 9.0 Gaze: 1
+VISION 9.0 Gaze: 2
+VISION 9.0 Gaze: 3
+VISION 9.0 Gaze: 4
+VISION 9.0 Gaze: 5
+VISION 9.0 Gaze: 6
+VISION 9.0 Gaze: 7
+VISION 9.0 Gaze: 8
+VISION 9.0 Gaze: 9
+VISION 9.0 Gaze: 10
+VISION 9.0 Gaze: 11
+VISION 9.0 Gaze: 12
+VISION 9.0 Gaze: 13
+VISION 9.0 Gaze: 14
+VISION 9.0 Gaze: 15
+VISION 9.0 Gaze: 16
+VISION 9.0 Gaze: 17
+VISION 9.0 Gaze: 18
+VISION 9.0 Gaze: 19
+VISION 9.0 Gaze: 20
+Robot gazed Target 2s!
+VISION 9.0 Gaze: 0
+VISION 9.0 Gaze: 1
+VISION 9.0 Gaze: 2
+VISION 9.0 Gaze: 3
+VISION 9.0 Gaze: 4
+VISION 9.0 Gaze: 5
+VISION 9.0 Gaze: 6
+VISION 9.0 Gaze: 7
+7191606   37        12/64     20        1              [44.5534] [21.0349] [20.1888] [100.]    [0.1078,0.1391]     [0.3561,3.7376]     4.86      22.11  
+VISION 9.0 Gaze: 0
+VISION 9.0 Gaze: 1
+VISION 9.0 Gaze: 2
+VISION 9.0 Gaze: 3
+VISION 9.0 Gaze: 4
+VISION 9.0 Gaze: 5
+VISION 9.0 Gaze: 6
+VISION 9.0 Gaze: 7
+VISION 9.0 Gaze: 8
+VISION 9.0 Gaze: 9
+VISION 9.0 Gaze: 10
+VISION 9.0 Gaze: 11
+VISION 9.0 Gaze: 12
+VISION 9.0 Gaze: 13
+VISION 9.0 Gaze: 14
+VISION 9.0 Gaze: 15
+VISION 9.0 Gaze: 16
+VISION 9.0 Gaze: 17
+VISION 9.0 Gaze: 18
+VISION 9.0 Gaze: 19
+VISION 9.0 Gaze: 20
+Robot gazed Target 2s!
+VISION 9.0 Gaze: 0
+VISION 9.0 Gaze: 1
+VISION 9.0 Gaze: 2
+VISION 9.0 Gaze: 3
+VISION 9.0 Gaze: 4
+VISION 9.0 Gaze: 5
+VISION 9.0 Gaze: 6
+VISION 9.0 Gaze: 7
+VISION 9.0 Gaze: 8
+VISION 9.0 Gaze: 9
+VISION 9.0 Gaze: 10
+VISION 9.0 Gaze: 11
+VISION 9.0 Gaze: 12
+VISION 9.0 Gaze: 13
+VISION 9.0 Gaze: 14
+VISION 9.0 Gaze: 15
+VISION 9.0 Gaze: 16
+VISION 9.0 Gaze: 17
+VISION 9.0 Gaze: 18
+VISION 9.0 Gaze: 19
+VISION 9.0 Gaze: 20
+Robot gazed Target 2s!
+VISION 9.0 Gaze: 0
+VISION 9.0 Gaze: 1
+VISION 9.0 Gaze: 2
+VISION 9.0 Gaze: 3
+VISION 9.0 Gaze: 4
+VISION 9.0 Gaze: 5
+VISION 9.0 Gaze: 6
+VISION 9.0 Gaze: 7
+7191606   38        12/64     20        1              [44.8027] [20.9621] [20.1888] [100.]    [0.1078,0.1391]     [0.3561,3.7376]     4.89      20.29  
+VISION 9.0 Gaze: 0
+VISION 9.0 Gaze: 1
+VISION 9.0 Gaze: 2
+VISION 9.0 Gaze: 3
+VISION 9.0 Gaze: 4
+VISION 9.0 Gaze: 5
+VISION 9.0 Gaze: 6
+VISION 9.0 Gaze: 7
+VISION 9.0 Gaze: 8
+VISION 9.0 Gaze: 9
+VISION 9.0 Gaze: 10
+VISION 9.0 Gaze: 11
+VISION 9.0 Gaze: 12
+VISION 9.0 Gaze: 13
+VISION 9.0 Gaze: 14
+VISION 9.0 Gaze: 15
+VISION 9.0 Gaze: 16
+VISION 9.0 Gaze: 17
+VISION 9.0 Gaze: 18
+VISION 9.0 Gaze: 19
+VISION 9.0 Gaze: 20
+Robot gazed Target 2s!
+VISION 9.0 Gaze: 0
+VISION 9.0 Gaze: 1
+VISION 9.0 Gaze: 2
+VISION 9.0 Gaze: 3
+VISION 9.0 Gaze: 4
+VISION 9.0 Gaze: 5
+VISION 9.0 Gaze: 6
+VISION 9.0 Gaze: 7
+VISION 9.0 Gaze: 8
+VISION 9.0 Gaze: 9
+VISION 9.0 Gaze: 10
+VISION 9.0 Gaze: 11
+VISION 9.0 Gaze: 12
+VISION 9.0 Gaze: 13
+VISION 9.0 Gaze: 14
+VISION 9.0 Gaze: 15
+VISION 9.0 Gaze: 16
+VISION 9.0 Gaze: 17
+VISION 9.0 Gaze: 18
+VISION 9.0 Gaze: 19
+VISION 9.0 Gaze: 20
+Robot gazed Target 2s!
+VISION 9.0 Gaze: 0
+VISION 9.0 Gaze: 1
+VISION 9.0 Gaze: 2
+VISION 9.0 Gaze: 3
+VISION 9.0 Gaze: 4
+VISION 9.0 Gaze: 5
+VISION 9.0 Gaze: 6
+VISION 9.0 Gaze: 7
+VISION 9.0 Gaze: 0
+VISION 9.0 Gaze: 1
+VISION 9.0 Gaze: 2
+VISION 9.0 Gaze: 3
+VISION 9.0 Gaze: 4
+VISION 9.0 Gaze: 5
+VISION 9.0 Gaze: 6
+VISION 9.0 Gaze: 7
+VISION 9.0 Gaze: 8
+VISION 9.0 Gaze: 9
+VISION 9.0 Gaze: 10
+VISION 9.0 Gaze: 11
+VISION 9.0 Gaze: 12
+VISION 9.0 Gaze: 13
+VISION 9.0 Gaze: 14
+VISION 9.0 Gaze: 15
+VISION 9.0 Gaze: 16
+VISION 9.0 Gaze: 17
+VISION 9.0 Gaze: 18
+VISION 9.0 Gaze: 19
+VISION 9.0 Gaze: 20
+Robot gazed Target 2s!
+VISION 9.0 Gaze: 0
+VISION 9.0 Gaze: 1
+VISION 9.0 Gaze: 2
+VISION 9.0 Gaze: 3
+VISION 9.0 Gaze: 4
+VISION 9.0 Gaze: 5
+VISION 9.0 Gaze: 6
+VISION 9.0 Gaze: 7
+VISION 9.0 Gaze: 8
+VISION 9.0 Gaze: 9
+VISION 9.0 Gaze: 10
+VISION 9.0 Gaze: 11
+VISION 9.0 Gaze: 12
+VISION 9.0 Gaze: 13
+VISION 9.0 Gaze: 14
+VISION 9.0 Gaze: 15
+VISION 9.0 Gaze: 16
+VISION 9.0 Gaze: 17
+VISION 9.0 Gaze: 18
+VISION 9.0 Gaze: 19
+VISION 9.0 Gaze: 20
+Robot gazed Target 2s!
+VISION 9.0 Gaze: 0
+VISION 9.0 Gaze: 1
+VISION 9.0 Gaze: 2
+VISION 9.0 Gaze: 3
+VISION 9.0 Gaze: 4
+VISION 9.0 Gaze: 5
+VISION 9.0 Gaze: 6
+VISION 9.0 Gaze: 7
+VISION 9.0 Gaze: 0
+VISION 9.0 Gaze: 1
+VISION 9.0 Gaze: 2
+VISION 9.0 Gaze: 3
+VISION 9.0 Gaze: 4
+VISION 9.0 Gaze: 5
+VISION 9.0 Gaze: 6
+VISION 9.0 Gaze: 7
+VISION 9.0 Gaze: 8
+VISION 9.0 Gaze: 9
+VISION 9.0 Gaze: 10
+VISION 9.0 Gaze: 11
+VISION 9.0 Gaze: 12
+VISION 9.0 Gaze: 13
+VISION 9.0 Gaze: 14
+VISION 9.0 Gaze: 15
+VISION 9.0 Gaze: 16
+VISION 9.0 Gaze: 17
+VISION 9.0 Gaze: 18
+VISION 9.0 Gaze: 19
+VISION 9.0 Gaze: 20
+Robot gazed Target 2s!
+VISION 9.0 Gaze: 0
+VISION 9.0 Gaze: 1
+VISION 9.0 Gaze: 2
+VISION 9.0 Gaze: 3
+VISION 9.0 Gaze: 4
+VISION 9.0 Gaze: 5
+VISION 9.0 Gaze: 6
+VISION 9.0 Gaze: 7
+VISION 9.0 Gaze: 8
+VISION 9.0 Gaze: 9
+VISION 9.0 Gaze: 10
+VISION 9.0 Gaze: 11
+VISION 9.0 Gaze: 12
+VISION 9.0 Gaze: 13
+VISION 9.0 Gaze: 14
+VISION 9.0 Gaze: 15
+VISION 9.0 Gaze: 16
+VISION 9.0 Gaze: 17
+VISION 9.0 Gaze: 18
+VISION 9.0 Gaze: 19
+VISION 9.0 Gaze: 20
+Robot gazed Target 2s!
+VISION 9.0 Gaze: 0
+VISION 9.0 Gaze: 1
+VISION 9.0 Gaze: 2
+VISION 9.0 Gaze: 3
+VISION 9.0 Gaze: 4
+VISION 9.0 Gaze: 5
+VISION 9.0 Gaze: 6
+VISION 9.0 Gaze: 7
+7191606   39        12/64     20        0              [44.8027] [20.9621] [20.1888] [100.]    [0.1078,0.1391]     [0.3561,3.7376]     4.89      21.97  
+Finished optimisation using algorithm '7191606'. Total elapsed: 689.743123000022.
+[2023-07-19 16:17:40,020]|[INFO]|[evolution] Summary Algorithm:
+  batch_size: 20
+  budget: 800
+  container:  Summary Grid:
+    activity_per_bin: [[5. 7. 2. 2. 1. 0. 0. 0.]  [9. 7. 6. 2. 4. 1. 0. 0.]  [0. 0. 0. 0. 1. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]]
+    best: {id=746, fitness=(100.0,), features={'white_gazing': 0.24341730205877402, 'distance': 3.737634273680766}}
+    best_features: [0.24341730205877402, 3.737634273680766]
+    best_fitness: (100.0,)
+    best_index: (1, 5)
+    capacity: 64
+    curiosity: [[-31.  -30.5 -30.5 -30.5 -17.    0.    0.    0. ]  [-30.5 -30.  -30.5 -30.5 -29.5  -4.    0.    0. ]  [  0.    0.    0.    0.  -31.    0.    0.    0. ]  [  0.    0.    0.    0.    0.    0.    0.    0. ]  [  0.    0.    0.    0.    0.    0.    0 ...
+    depot: None
+    discard_random_on_bin_overload: False
+    features: {(0, 0): [Features([0.1077884119040166, 0.13905270510802487])], (0, 1): [Features([0.11640584337851077, 0.872691606129817])], (0, 2): [Features([0.12038689317528875, 1.404281993978301])], (0, 3): [Features([0.12049695807072872, 2.204529396460817 ...
+    features_domain: [[0, 1], (0, 5.5)]
+    features_extrema: ((0.1077884119040166, 0.356082745196405), (0.13905270510802487, 3.737634273680766))
+    filled_bins: 12
+    fitness: {(0, 0): [Fitness([37.7196804647785])], (0, 1): [Fitness([36.67392883079158])], (0, 2): [Fitness([33.827160493827165])], (0, 3): [Fitness([25.577342047930284])], (0, 4): [Fitness([20.188816267247642])], (0, 5): [], (0, 6): [], (0, 7): [], (1, 0) ...
+    fitness_domain: [(0, 110)]
+    fitness_extrema: ((20.188816267247642, 100.0),)
+    free: 52
+    history_recentness_per_bin: {(0, 0): [3, 8, 21, 29, 36], (0, 1): [6, 14, 16, 17, 22, 44, 45], (0, 2): [4, 35], (0, 3): [13, 41], (0, 4): [42], (0, 5): [], (0, 6): [], (0, 7): [], (1, 0): [1, 2, 9, 11, 12, 20, 27, 30, 32], (1, 1): [5, 7, 19, 28, 34, 37, 40], (1, 2): [15, 24 ...
+    items: [{id=148, fitness=(70.54466230936819,), features={'white_gazing': 0.356082745196405, 'distance': 2.9503266613763377}}, {id=427, fitness=(38.21350762527233,), features={'white_gazing': 0.144664598493209, 'distance': 2.0785195797977005}}, {id=448, ...
+    max_items_per_bin: 1
+    name: Grid-1624997886800
+    nb_added: 47
+    nb_discarded: 35
+    nb_items_per_bin: [[1. 1. 1. 1. 1. 0. 0. 0.]  [1. 1. 1. 1. 1. 1. 0. 0.]  [0. 0. 0. 0. 1. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0.]]
+    nb_operations: 82
+    nb_rejected: 0
+    quality: {(0, 0): Fitness([37.7196804647785]), (0, 1): Fitness([36.67392883079158]), (0, 2): Fitness([33.827160493827165]), (0, 3): Fitness([25.577342047930284]), (0, 4): Fitness([20.188816267247642]), (0, 5): None, (0, 6): None, (0, 7): None, (1, 0): Fi ...
+    quality_array: [[[ 37.71968046]   [ 36.67392883]   [ 33.82716049]   [ 25.57734205]   [ 20.18881627]   [         nan]   [         nan]   [         nan]]   [[ 37.92302106]   [ 38.18445897]   [ 40.04357298]   [ 38.21350763]   [ 58.73638344]   [100.        ]   [   ...
+    recentness: [17, 30, 31, 34, 35, 39, 40, 41, 42, 44, 45, 46]
+    recentness_per_bin: {(0, 0): [36], (0, 1): [45], (0, 2): [35], (0, 3): [41], (0, 4): [42], (0, 5): [], (0, 6): [], (0, 7): [], (1, 0): [32], (1, 1): [40], (1, 2): [47], (1, 3): [31], (1, 4): [43], (1, 5): [46], (1, 6): [], (1, 7): [], (2, 0): [], (2, 1): [], (2, 2) ...
+    shape: (8, 8)
+    size: 12
+    solutions: {(0, 0): [{id=539, fitness=(37.7196804647785,), features={'white_gazing': 0.1077884119040166, 'distance': 0.13905270510802487}}], (0, 1): [{id=735, fitness=(36.67392883079158,), features={'white_gazing': 0.11640584337851077, 'distance': 0.872691 ...
+  current_iter: 40
+  deepcopy_on_selection: True
+  dimension: None
+  genealogical_info: [[20, 17], [21, 5], [22, 5], [23, 5], [24, 8], [25, 5], [26, 5], [27, 5], [28, 17], [29, 17], [30, 5], [31, 17], [32, 8], [33, 17], [34, 8], [35, 8], [36, 8], [37, 17], [38, 8], [39, 17], [40, 39], [41, 28], [42, 39], [43, 39], [44, 39], [45, 39 ...
+  history: [{id=17, fitness=(33.11546840958606,), features={'white_gazing': 0.11160176992263635, 'distance': 1.6075538745128946}}, {id=20, fitness=(33.11546840958606,), features={'white_gazing': 0.11160176992263635, 'distance': 1.6075538745128946}}, {id=5, ...
+  id_manager: <abrain.core.genome.GIDManager object at 0x0000017A43C1E8F0>
+  labels: ['brightness', 'white_gazing', 'distance']
+  name: 7191606
+  nb_evaluations: 800
+  nb_evaluations_in_iteration: 0
+  nb_max_iter: 40
+  nb_suggestions: 800
+  nb_suggestions_in_iteration: 0
+  nb_updated: 47
+  nb_updated_in_iteration: 0
+  optimisation_task: maximisation
+  rng: <random.Random object at 0x0000017A45CA7F00>
+[2023-07-19 16:17:41,217]|[INFO]|[my_map_elite] Generated new_Experiment_2_2Results_3X3\run7191606\plots\iteration-final_grid_fitness.png
+[2023-07-19 16:17:41,918]|[INFO]|[my_map_elite] Generated new_Experiment_2_2Results_3X3\run7191606\plots\iteration-final_grid_activity.png
+[2023-07-19 16:17:42,497]|[INFO]|[my_map_elite] Generated new_Experiment_2_2Results_3X3\run7191606\plots\iteration-final_grid_curiosity.png
+[2023-07-19 16:17:42,520]|[INFO]|[evolution] All results are available under new_Experiment_2_2Results_3X3\run7191606
+[2023-07-19 16:17:42,521]|[INFO]|[evolution] Unified storage file is new_Experiment_2_2Results_3X3\run7191606/iteration-final.p
+[2023-07-19 16:17:42,522]|[INFO]|[evolution] Completed evolution in 11 minutes and 32.39 seconds

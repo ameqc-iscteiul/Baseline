@@ -1,0 +1,31 @@
+[2023-07-27 00:14:19,396]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-07-27 00:14:19,396]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-07-27 00:14:19,396]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-07-27 00:14:19,397]|[INFO]|[evolution] Grid size: (12, 12)
+[2023-07-27 00:14:19,397]|[INFO]|[evolution]    bounds: [(0, 5.5), [0, 1]]
+[2023-07-27 00:14:19,398]|[INFO]|[evolution]      bins: [0.4583333333333333, 0.08333333333333333]
+[2023-07-27 00:14:19,398]|[INFO]|[my_map_elite] Generated run id: 7270014
+[2023-07-27 00:14:19,398]|[INFO]|[my_map_elite] Run folder: Experiment_Test\4X4\run7270014
+[2023-07-27 00:14:19,398]|[INFO]|[my_map_elite] Parallel: 1
+[2023-07-27 00:14:19,399]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': './Experiment_Test/4X4',
+ 'batch_size': 10,
+ 'budget': 300,
+ 'descriptor_names': ['distance', 'white_gazing'],
+ 'grid_size': 12,
+ 'id': 7270014,
+ 'initial_level': 0,
+ 'initial_mutations': 2,
+ 'numb_levels': 4,
+ 'overwrite': False,
+ 'run_folder': 'Experiment_Test\\4X4\\run7270014',
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 1,
+ 'tournament': 3,
+ 'verbosity': 1,
+ 'vision_h': 4,
+ 'vision_w': 4}
+[2023-07-27 00:14:19,415]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\Experiment_Test\4X4\run7270014\config.json
+Change level at every 75 evaluations
+[2023-07-27 00:14:19,417]|[INFO]|[evolution] Starting illumination!

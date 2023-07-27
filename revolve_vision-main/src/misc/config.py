@@ -26,7 +26,9 @@ class Config:
         OSMESA = auto()
         GLFW = auto()
 
-    opengl_lib: Annotated[str, "OpenGL back-end for vision"] = OpenGLLib.GLFW.name
+    #opengl_lib: Annotated[str, "OpenGL back-end for vision"] = OpenGLLib.GLFW.name
+    opengl_lib: Annotated[str, "OpenGL back-end for vision"] = OpenGLLib.EGL.name
+
 
     class RetinaConfiguration(str, Enum):
         # Mangled

@@ -30,6 +30,8 @@ class Options:
 
         #Algorithm parameters
         self.seed: int = 100
+
+        #Change for Linux!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         self.threads: int = 1
 
         self.batch_size: int = 20
@@ -37,7 +39,7 @@ class Options:
 
         self.tournament: int = 3
         #-Grid options
-        self.grid_size : int = 12
+        self.grid_size : int = 10
         #-number of initial mutations for abrain's genome
         self.initial_mutations: int = 3
 
@@ -45,44 +47,52 @@ class Options:
         #Evaluator Options:
         #-----------------
         #Scenario:
-        self.initial_level : int = 0
+        self.level : int = 0
         self.numb_levels : int = 0 
+        self.evaluation : int = 0
+        self.counter : int = 0
+
         #-Robot Vision
-        self.vision_w: int = 2
-        self.vision_h: int = 2
+        self.vision_w: int = 4
+        self.vision_h: int = 4
         #fitness name
         self.fitness_name: str
         #descriptor names
         self.descriptor_names = []
 
         
-def eval_mujoco(ind:QDIndividual, evaluator : Optional[Evaluator], grid : Optional[Grid], revaluate : bool = False):
+def eval_mujoco(ind:QDIndividual, algo : Algorithm, options : Options,logger : Optional[Logger]):
     assert isinstance(ind, QDIndividual)
     assert isinstance(ind.genome, RVGenome)
     assert ind.id() is not None, "ID-less individual"
-    # Check if it's time to change the level
-    change_scenario_at = (evaluator.eval_budget // evaluator.numb_levels)
-    if evaluator.counter == change_scenario_at and evaluator.evaluation != evaluator.eval_budget-1:
-        evaluator.counter = 0
-        print("!!!!!!!!!!!!!!!!!Next level!!!!!!!!!!!!!!!")
-        print("evaluator.evaluation", evaluator.evaluation)
-        # Calculate the next level
-        next_level = evaluator.runner_options.level + 1
-        evaluator.runner_options.level = min(next_level, 6)
-        # Reset the evaluation count for the next level
-        evaluator.runner_options.level +=1
-
-        for _, element in enumerate(grid):
-            eval_mujoco(element, evaluator, grid, revaluate=True)
-            
+    #logging.info(f"evaluation: {options.evaluation}")
+    evaluator = Evaluator()
+    evaluator.set_options(options.descriptor_names, options.vision_w, options.vision_h, options.level)
+    '''Check if it is time to change level'''
+    if options.counter == options.budget // options.numb_levels and options.evaluation != options.budget-1:
+        logging.info(f"Level change! {options.evaluation}")
+        logger.summary_plots(extraname=f'{options.evaluation}')
+        options.counter = 0
+        '''Change Level'''
+        options.level=min(options.level + 1, 6)
+        evaluator.set_level(options.level)
+        updates=[]
+        '''Revaluate'''
+        for _, element in enumerate(algo.container):
+            individual : QDIndividual = element
+            r: EvaluationResult = evaluator.evaluate_evo(individual.genome)
+            individual.update(r)
+            updates.append(individual)
+        algo.update_grid(updates)
+        logger.summary_plots(extraname=f'{options.evaluation}after_Update')
+    else:
+        options.counter += 1
     r: EvaluationResult = evaluator.evaluate_evo(ind.genome)
     ind.update(r)
+    options.evaluation +=1
 
-    if revaluate == False:
-        evaluator.counter += 1
-        evaluator.evaluation +=1
-        #print("ind",ind)
-        return ind
+    #print("ind",ind)
+    return ind
 
 
 def evolution (args : Options()):
@@ -108,12 +118,9 @@ def evolution (args : Options()):
 
     ########################################################################################
     
-    evaluator = Evaluator()
-    '''r = RunnerOptions()
-    r.view=RunnerOptions.View()
-    evaluator.set_runner_options(r)'''
-    evaluator.set_options(args.descriptor_names, args.vision_w, args.vision_h, args.budget, args.numb_levels,args.initial_level)
     
+    evaluator = Evaluator()
+    evaluator.set_options(args.descriptor_names, args.vision_w, args.vision_h, args.level)
     grid = Grid(shape=(args.grid_size, args.grid_size),
                 max_items_per_bin=1,
                 fitness_domain=evaluator.fitness_bounds(),
@@ -145,15 +152,24 @@ def evolution (args : Options()):
                     log_base_path=args.run_folder)
     tee.set_log_path(run_folder.joinpath("log"))
 
-    
-    '''with ParallelismManager(parallelism_type = "none", max_workers=args.threads) as mgr:
-        #mgr.executor._mp_context = multiprocessing.get_context("fork")  # TODO: Very brittle
-        logging.info("Starting illumination!")
-        best = algo.optimise(evaluate=eval_mujoco, executor=mgr.executor, batch_mode=True)'''
-
     logging.info("Starting illumination!")
-    new_eval =  partial(eval_mujoco, evaluator=evaluator, grid=grid)
-    best = algo.optimise(evaluate=new_eval, batch_mode=True)
+    logging.info(f"level {args.level}")
+
+    import platform
+    if platform.system() == "Linux":
+        from qdpy.base import ParallelismManager
+        import multiprocessing
+        with ParallelismManager(parallelism_type = "sequential", max_workers=args.threads) as mgr:
+            #mgr.executor._mp_context = multiprocessing.get_context("fork")  # TODO: Very brittle
+            #algo = Algorithm(grid, args, labels=[evaluator.fitness_name(), *evaluator.descriptor_names()])
+            best = algo.optimise(evaluate=partial(eval_mujoco, algo=algo, options = args, logger=logger), executor=mgr.executor, batch_mode=True)
+    elif platform.system() == "Windows":
+        best = algo.optimise(evaluate=partial(eval_mujoco, algo=algo, options = args,logger=logger), batch_mode=True)
+    else:
+        print("Unknown operating system")
+   
+
+    logging.info(f"level {args.level}")
 
     
     #Store all Map Elites final Solutions
@@ -178,33 +194,12 @@ def evolution (args : Options()):
         g=create_genealogical_tree(algo.genealogical_info)
         json.dump(g, file)'''
     
-    
-    
-    ''' 
-    n=10
-    n_best_individuals = sorted(grid, key=lambda x: x.fitness[0], reverse=True)[:n]
-    #print("best_individuals:", best_individuals)
-    #Collect Best
-    i=0
-    for element in n_best_individuals:
-        i+=1
-        with open(Path(args.run_folder).joinpath(f"best{i}.json"), 'w') as f:
-            data = {
-                "id": element.id(), "parents": element.genome.parents(),
-                "fitnesses": element.fitnesses,
-                "descriptors": element.descriptors,
-                #"stats": best.stats,
-                "genome": element.genome.to_json()
-            }
-            logging.info(f"best:\n{pprint.pformat(data)}")
-            json.dump(data, f)
-    '''
       
     # Print results info
     logging.info(algo.summary())
 
     # Plot the results
-    logger.summary_plots()
+    logger.summary_plots(extraname='final')
 
     logging.info(f"All results are available under {logger.log_base_path}")
     logging.info(f"Unified storage file is {logger.log_base_path}/{logger.final_filename}")

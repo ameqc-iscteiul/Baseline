@@ -82,6 +82,7 @@ class ANNControl:
             
             #3-Hinge Input
             hinge_input = [pos for pos in data.sensors]
+            #print("hinge_input", hinge_input)
             input.extend(hinge_input)
 
             self.i_buffer[:] = input

@@ -7,8 +7,8 @@ from abrain.core.genome import GIDManager
 
 @dataclass
 class VisionData:
-    w: int = 0
-    h: int = 0
+    w: int = 4
+    h: int = 4
     def __iter__(self):
         return iter(astuple(self))
 

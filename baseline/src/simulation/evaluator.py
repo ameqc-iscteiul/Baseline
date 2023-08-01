@@ -16,9 +16,11 @@ import math
 import abrain
 logger = logging.getLogger(__name__)
 
+
+'''Object Responsible for the Evaluations. Only concerned with one evaluation'''
 class Evaluator:
     runner_options = RunnerOptions()
-    
+
     #Fitness Name
     fitness_function : str
     #Descriptor Names
@@ -27,29 +29,27 @@ class Evaluator:
     vision_w: int
     vision_h: int
 
-
-    eval_budget : int
-    counter : int = 0
-    numb_levels : int = 0
-    evaluation : int = 0
-    
     #To Store Results
     actor_states = []  
     vision_results = []
     bonus=0
 
     @classmethod
-    def set_options(cls, descriptor_names, vision_w,vision_h, eval_budget, levels ,initial_level ):
+    def set_options(cls, descriptor_names, vision_w,vision_h, level):
         cls.vision_w, cls.vision_h = vision_w, vision_h
         cls.features = descriptor_names
-        cls.numb_levels = levels
-        cls.eval_budget = eval_budget
-        cls.runner_options.level=initial_level
+        cls.runner_options.level=level
 
 
     @classmethod
     def set_runner_options(cls, options: RunnerOptions):
         cls.runner_options = options
+    
+    @classmethod
+    def set_level(cls, level: int):
+        cls.runner_options.level = level
+        logger.warning(f"Change to level {cls.runner_options.level}")
+
 
     @classmethod
     def set_view_dims(cls, w,h):
@@ -130,6 +130,18 @@ class Evaluator:
         if score > 110 : score = 110
         return{"brightness": score }
     
+        '''n=3
+        #check the last n gazes amount of white seen
+        white_total=sum([value for view in Evaluator.vision_results[-n:] for value in view])
+        max_white_poss = len(Evaluator.vision_results[0])*n
+        
+        score = (white_total*100/max_white_poss) + Evaluator.bonus
+        if score > 110 :
+            print("Fitness higher the 110")
+            score = 110
+        
+        return{"brightness": score }'''
+    
     @classmethod
     @lru_cache(maxsize=1)
     def fitness_bounds(cls):
@@ -171,7 +183,7 @@ class Evaluator:
                 distance_bounds = (0, 5.5)
                 bounds.append(distance_bounds)
             elif cls.features[i] =="white_gazing":
-                white_gazing_bounds = [0, 1]
+                white_gazing_bounds = [0.075, 0.75]
                 bounds.append(white_gazing_bounds)
             elif cls.features[i] =="avg_speed":
                 avg_speed_bounds = [0.05, 0.6]

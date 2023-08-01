@@ -6,7 +6,7 @@ from enum import Enum, auto
 from inspect import isclass
 from pathlib import Path
 from typing import Annotated, get_type_hints, Tuple
-
+import platform
 import abrain
 
 
@@ -15,8 +15,7 @@ class Config:
     control_frequency: Annotated[float, "How frequently to call the controller"] = 10
     sampling_frequency : Annotated[float, "How frequently to sample/collect Environment States"] = 30
     ground_size: Annotated[float, "Total size of the arena"] = 10
-    #levels: Annotated[list[float], "Difficulty levels"] = [.0, .1, .2, .3]
-    #num_obstacles: Annotated[int, "Number of obstacles"] = 3*2*len(levels)
+    
 
     abrain = abrain.Config
 
@@ -25,9 +24,13 @@ class Config:
         EGL = auto()
         OSMESA = auto()
 
-    opengl_lib: Annotated[str, "OpenGL back-end for vision"] = OpenGLLib.GLFW.name
+    if platform.system() == "Linux":
+        opengl_lib: Annotated[str, "OpenGL back-end for vision"] = OpenGLLib.EGL.name
+    elif platform.system() == "Windows":
+        opengl_lib: Annotated[str, "OpenGL back-end for vision"] = OpenGLLib.GLFW.name
+    else:
+        print("Unknown operating system")    
 
-    with_vision: Annotated[bool, "Activate/deactivate visual inputs"] = True
     
     @classmethod
     def write_json(cls, file: Path):

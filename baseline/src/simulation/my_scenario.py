@@ -15,9 +15,27 @@ from simulation.runner import Runner,RunnerOptions
 
 Runner.actorController_t = SensorControlData
 
+def GECKO()-> Body:
 
-def build_robot(brain_dna: RVGenome, vision_w, vision_h):
-    
+    def add_arms(m: Module):
+        m.left = ActiveHinge(math.pi / 2.0)
+        m.left.attachment = ActiveHinge(math.pi / 2.0)
+        m.left.attachment.attachment = Brick(0.0)
+        m.right = ActiveHinge(math.pi / 2.0)
+        m.right.attachment = ActiveHinge(math.pi / 2.0)
+        m.right.attachment.attachment = Brick(0.0)
+
+    body = Body()
+    body.core.front = Brick(0.0)
+    body.core.back = Brick(0.0)
+    for side in ['front', 'back']:
+        brick = Brick(0.0)
+        setattr(body.core, side, brick)
+        add_arms(brick)
+    body.finalize()
+    return body
+
+def default():
     body = Body()
     body.core.left = ActiveHinge(math.pi / 2.0)
     body.core.left.attachment = ActiveHinge(math.pi / 2.0)
@@ -26,10 +44,13 @@ def build_robot(brain_dna: RVGenome, vision_w, vision_h):
     body.core.right.attachment = ActiveHinge(math.pi / 2.0)
     body.core.right.attachment.attachment = Brick(0.0)
     body.finalize()
+    return body
 
+
+def build_robot(brain_dna: RVGenome, vision_w, vision_h):
     brain_dna.vision.w, brain_dna.vision.h = vision_w,vision_h
 
-    return ModularRobot(body, ANNControl.Brain(brain_dna))
+    return ModularRobot(GECKO(), ANNControl.Brain(brain_dna))
 
 # ==============================================================================
 # Scenario
@@ -151,77 +172,7 @@ class Scenario:
             
             return xml
         
-        def default_obstacle_set(xml):
-            #Obstacle 
-            xml.worldbody.add(
-                    "geom",
-                    type="box",
-                    pos="0.4 0.3 0",
-                    size=".1 .1 .06",
-                    rgba="1 0 0 1"
-                )
-            
-            #Obstacle 
-            xml.worldbody.add(
-                    "geom",
-                    type="box",
-                    pos="0.4 -0.3 0",
-                    size=".1 .1 .06",
-                    rgba="1 0 0 1"
-                )
-            
-            #Obstacle 
-            xml.worldbody.add(
-                    "geom",
-                    type="box",
-                    pos="0.4 0.5 0",
-                    size=".1 .1 .06",
-                    rgba="1 0 0 1"
-                )
-            
-            #Obstacle 
-            xml.worldbody.add(
-                    "geom",
-                    type="box",
-                    pos="0.4 -0.5 0",
-                    size=".1 .1 .06",
-                    rgba="1 0 0 1"
-                )
-            
-            #Obstacle 
-            xml.worldbody.add(
-                    "geom",
-                    type="box",
-                    pos="0.1 -0.3 0",
-                    size=".1 .1 .06",
-                    rgba="1 0 0 1"
-                )
-            #Obstacle 
-            xml.worldbody.add(
-                    "geom",
-                    type="box",
-                    pos="0.1 0.3 0",
-                    size=".1 .1 .06",
-                    rgba="1 0 0 1"
-                )
-            
-            #Obstacle 
-            xml.worldbody.add(
-                    "geom",
-                    type="box",
-                    pos="0.1 -0.5 0",
-                    size=".1 .1 .06",
-                    rgba="1 0 0 1"
-                )
-            #Obstacle 
-            xml.worldbody.add(
-                    "geom",
-                    type="box",
-                    pos="0.1 0.5 0",
-                    size=".1 .1 .06",
-                    rgba="1 0 0 1"
-                )
-            return xml
+
 
         def generate_mountain_coordinates(center, height, step_height):
             coordinates = []

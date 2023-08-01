@@ -1,0 +1,115 @@
+[2023-07-30 21:07:04,641]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-07-30 21:07:04,642]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-07-30 21:07:04,642]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-07-30 21:07:04,643]|[INFO]|[evolution] Grid size: (10, 10)
+[2023-07-30 21:07:04,644]|[INFO]|[evolution]    bounds: [(0, 5.5), [0.075, 0.75]]
+[2023-07-30 21:07:04,644]|[INFO]|[evolution]      bins: [0.55, 0.0675]
+[2023-07-30 21:07:04,644]|[INFO]|[my_map_elite] Generated run id: 7302107
+[2023-07-30 21:07:04,645]|[INFO]|[my_map_elite] Run folder: baseline\Testing_level_change\4X4_0_to_3\run7302107
+[2023-07-30 21:07:04,645]|[INFO]|[my_map_elite] Parallel: 1
+[2023-07-30 21:07:04,646]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': 'baseline/Testing_level_change/4X4_0_to_3',
+ 'batch_size': 20,
+ 'budget': 200,
+ 'counter': 0,
+ 'descriptor_names': ['distance', 'white_gazing'],
+ 'evaluation': 0,
+ 'grid_size': 10,
+ 'id': 7302107,
+ 'initial_mutations': 2,
+ 'level': 0,
+ 'numb_levels': 2,
+ 'overwrite': False,
+ 'run_folder': 'baseline\\Testing_level_change\\4X4_0_to_3\\run7302107',
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 1,
+ 'tournament': 3,
+ 'verbosity': 1,
+ 'vision_h': 4,
+ 'vision_w': 4}
+[2023-07-30 21:07:04,654]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\baseline\Testing_level_change\4X4_0_to_3\run7302107\config.json
+[2023-07-30 21:07:04,656]|[INFO]|[evolution] Starting illumination!
+[2023-07-30 21:07:04,657]|[INFO]|[evolution] level 0
+alg_name  iteration cont_size evals     nb_updated     avg       std       min       max       ft_min              ft_max              qd_score  elapsed
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+7302107   0         3/100     20        8              [24.1857] [7.4296]  [15.5147] [33.6601] [0.1487,0.0889]     [0.6310,0.1938]     0.66      23.17  
+7302107   1         3/100     20        1              [25.3077] [6.1854]  [18.8807] [33.6601] [0.1487,0.0947]     [0.5998,0.1938]     0.69      19.75  
+7302107   2         4/100     20        3              [26.1315] [4.8308]  [20.768]  [33.6601] [0.1487,0.1150]     [1.8332,0.1938]     0.95      19.79  
+7302107   3         5/100     20        2              [26.1683] [6.2741]  [15.8333] [33.6601] [0.1487,0.1029]     [1.8332,0.1938]     1.19      19.89  
+7302107   4         5/100     20        2              [27.232]  [7.3416]  [15.8333] [35.4412] [0.1487,0.1029]     [1.8332,0.1938]     1.24      19.62  
+[2023-07-30 21:08:46,892]|[INFO]|[evolution] Level change! 100
+[2023-07-30 21:08:47,186]|[INFO]|[my_map_elite] Generated baseline\Testing_level_change\4X4_0_to_3\run7302107\plots\iteration-final100_grid_fitness.png
+[2023-07-30 21:08:47,448]|[INFO]|[my_map_elite] Generated baseline\Testing_level_change\4X4_0_to_3\run7302107\plots\iteration-final100_grid_activity.png
+[2023-07-30 21:08:47,712]|[INFO]|[my_map_elite] Generated baseline\Testing_level_change\4X4_0_to_3\run7302107\plots\iteration-final100_grid_curiosity.png
+[2023-07-30 21:08:47,730]|[WARNING]|[evaluator] Change to level 1
+[2023-07-30 21:08:53,080]|[INFO]|[my_map_elite] Generated baseline\Testing_level_change\4X4_0_to_3\run7302107\plots\iteration-final100after_Update_grid_fitness.png
+[2023-07-30 21:08:53,315]|[INFO]|[my_map_elite] Generated baseline\Testing_level_change\4X4_0_to_3\run7302107\plots\iteration-final100after_Update_grid_activity.png
+[2023-07-30 21:08:53,554]|[INFO]|[my_map_elite] Generated baseline\Testing_level_change\4X4_0_to_3\run7302107\plots\iteration-final100after_Update_grid_curiosity.png
+7302107   5         5/100     20        6              [20.6062] [2.3586]  [16.7647] [22.9902] [0.1219,0.1057]     [1.8370,0.1819]     0.94      26.44  
+7302107   6         5/100     20        2              [21.1846] [2.9892]  [16.7647] [25.3431] [0.1102,0.1057]     [1.8370,0.1819]     0.96      20.75  
+7302107   7         5/100     20        3              [21.9853] [3.4859]  [16.7647] [25.5229] [0.1210,0.1037]     [1.8370,0.1915]     1.00      20.59  
+7302107   8         5/100     20        2              [24.5784] [6.1386]  [19.1095] [35.915]  [0.0641,0.1073]     [1.8370,0.1915]     1.12      20.23  
+7302107   9         5/100     20        1              [26.2157] [5.5224]  [19.3382] [35.915]  [0.0641,0.1063]     [1.6800,0.1915]     1.19      19.65  
+Finished optimisation using algorithm '7302107'. Total elapsed: 209.91827500006184.
+[2023-07-30 21:10:34,579]|[INFO]|[evolution] level 1
+[2023-07-30 21:10:34,589]|[INFO]|[evolution] Summary Algorithm:
+  batch_size: 20
+  budget: 200
+  container:  Summary Grid:
+    activity_per_bin: [[ 8.  6.  0.  0.  0.  0.  0.  0.  0.  0.]  [10.  0.  0.  0.  0.  0.  0.  0.  0.  0.]  [ 2.  0.  0.  0.  0.  0.  0.  0.  0.  0.]  [ 3.  0.  0.  0.  0.  0.  0.  0.  0.  0.]  [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]  [ 0.  0.  0.  0.  0.  0.  0.  ...
+    best: {id=170, fitness=(35.91503267973855,), features={'distance': 0.06410127585691121, 'white_gazing': 0.12970198959519968}}
+    best_features: [0.06410127585691121, 0.12970198959519968]
+    best_fitness: (35.91503267973855,)
+    best_index: (0, 0)
+    capacity: 100
+    curiosity: [[-11.  -12.    0.    0.    0.    0.    0.    0.    0.    0. ]  [-14.    0.    0.    0.    0.    0.    0.    0.    0.    0. ]  [ -9.5   0.    0.    0.    0.    0.    0.    0.    0.    0. ]  [-12.    0.    0.    0.    0.    0.    0.    0.    0.   ...
+    depot: None
+    discard_random_on_bin_overload: False
+    features: {(0, 0): [Features([0.06410127585691121, 0.12970198959519968])], (0, 1): [Features([0.12104121914753761, 0.19146545161338685])], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (1, 0): [Features([0 ...
+    features_domain: [(0, 5.5), [0.075, 0.75]]
+    features_extrema: ((0.06410127585691121, 1.6800055677864336), (0.10630244689809143, 0.19146545161338685))
+    filled_bins: 6
+    fitness: {(0, 0): [Fitness([35.91503267973855])], (0, 1): [Fitness([23.186274509803923])], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (1, 0): [Fitness([25.343137254901954])], (1, 1): [], (1, 2): [], (1 ...
+    fitness_domain: [(0, 110)]
+    fitness_extrema: ((19.338235294117645, 35.91503267973855),)
+    free: 95
+    history_recentness_per_bin: {(0, 0): [2, 6, 8, 15, 19, 23, 25, 28], (0, 1): [1, 4, 5, 7, 24, 26], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (1, 0): [3, 9, 10, 11, 14, 16, 17, 18, 21, 22], (1, 1): [], (1, 2): [], (1, 3): ...
+    items: [{id=120, fitness=(25.343137254901954,), features={'distance': 0.6986804452955636, 'white_gazing': 0.14027660875675463}}, {id=148, fitness=(23.186274509803923,), features={'distance': 0.12104121914753761, 'white_gazing': 0.19146545161338685}}, { ...
+    max_items_per_bin: 1
+    name: Grid-1923543480448
+    nb_added: 29
+    nb_discarded: 24
+    nb_items_per_bin: [[1. 1. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0.  ...
+    nb_operations: 53
+    nb_rejected: 0
+    quality: {(0, 0): Fitness([35.91503267973855]), (0, 1): Fitness([23.186274509803923]), (0, 2): None, (0, 3): None, (0, 4): None, (0, 5): None, (0, 6): None, (0, 7): None, (0, 8): None, (0, 9): None, (1, 0): Fitness([25.343137254901954]), (1, 1): None, (1 ...
+    quality_array: [[[35.91503268]   [23.18627451]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]]   [[25.34313725]   [        nan]   [        nan]   [        nan]   [        nan]   [ ...
+    recentness: [21, 25, 26, 27, 28]
+    recentness_per_bin: {(0, 0): [28], (0, 1): [26], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (1, 0): [22], (1, 1): [], (1, 2): [], (1, 3): [], (1, 4): [], (1, 5): [], (1, 6): [], (1, 7): [], (1, 8): [], (1, 9): [] ...
+    shape: (10, 10)
+    size: 5
+    solutions: {(0, 0): [{id=170, fitness=(35.91503267973855,), features={'distance': 0.06410127585691121, 'white_gazing': 0.12970198959519968}}], (0, 1): [{id=148, fitness=(23.186274509803923,), features={'distance': 0.12104121914753761, 'white_gazing': 0.191 ...
+  current_iter: 10
+  deepcopy_on_selection: True
+  dimension: None
+  genealogical_info: []
+  history: []
+  id_manager: <abrain.core.genome.GIDManager object at 0x000001BFC671AAA0>
+  labels: ['brightness', 'distance', 'white_gazing']
+  name: 7302107
+  nb_evaluations: 205
+  nb_evaluations_in_iteration: 5
+  nb_max_iter: 10
+  nb_suggestions: 200
+  nb_suggestions_in_iteration: 0
+  nb_updated: 30
+  nb_updated_in_iteration: 0
+  optimisation_task: maximisation
+  rng: <random.Random object at 0x000001BFC8E30CD0>
+[2023-07-30 21:10:35,173]|[INFO]|[my_map_elite] Generated baseline\Testing_level_change\4X4_0_to_3\run7302107\plots\iteration-finalfinal_grid_fitness.png
+[2023-07-30 21:10:35,418]|[INFO]|[my_map_elite] Generated baseline\Testing_level_change\4X4_0_to_3\run7302107\plots\iteration-finalfinal_grid_activity.png
+[2023-07-30 21:10:35,676]|[INFO]|[my_map_elite] Generated baseline\Testing_level_change\4X4_0_to_3\run7302107\plots\iteration-finalfinal_grid_curiosity.png
+[2023-07-30 21:10:35,693]|[INFO]|[evolution] All results are available under baseline\Testing_level_change\4X4_0_to_3\run7302107
+[2023-07-30 21:10:35,694]|[INFO]|[evolution] Unified storage file is baseline\Testing_level_change\4X4_0_to_3\run7302107/iteration-final.p
+[2023-07-30 21:10:35,695]|[INFO]|[evolution] Completed evolution in 3 minutes and 31.05 seconds

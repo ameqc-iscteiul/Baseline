@@ -9,10 +9,11 @@ def run_experiment(result_folder_name, batch_size, budget_size, features, w, h, 
    o.budget=budget_size
    o.tournament = 3
    o.initial_mutations = 2
+   o.grid_size = 16
    o.vision_w=w
    o.vision_h=h
    o.numb_levels=numb_levels
-   o.initial_level=init_level
+   o.level=init_level
    o.descriptor_names=features
 
    evolution(o)
@@ -26,7 +27,7 @@ def main():
    run_experiment(f"baseline/Experiment_Traj_Gaze/{w}X{h}_only_level_3", 20, 4000, ["trajectory", "white_gazing"], w,h, 1, 3)
    #Increase from 0 to 3
    run_experiment(f"baseline/Experiment_Dist_Gaze/{w}X{h}_0_to_3", 20, 4000, ["distance", "white_gazing"], w,h, 4, 0)
-   run_experiment(f"baseline/Experiment_Dist_Gaze/{w}X{h}_0_to_3", 20, 4000, ["trajectory", "white_gazing"], w,h, 4, 0)
+   run_experiment(f"baseline/Experiment_Traj_Gaze/{w}X{h}_0_to_3", 20, 4000, ["trajectory", "white_gazing"], w,h, 4, 0)
 
    run_experiment(f"baseline/Experiment_Dist_Gaze/{w}X{h}_climb_ramp", 20, 6000, ["distance", "white_gazing"], w,h, 3, 4)
 

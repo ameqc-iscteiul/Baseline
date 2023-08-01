@@ -7,7 +7,6 @@ from functools import partial
 from pathlib import Path
 from random import Random
 from typing import Iterable, Optional, Sequence, Any
-
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -53,8 +52,15 @@ def normalize_run_parameters(options: NamedTuple):
     logging.info(f"Run folder: {options.run_folder}")
 
     # Check the thread parameter
-    import psutil
-    options.threads = max(1, min(options.threads, psutil.cpu_count(logical=False)))
+    import platform
+    if platform.system() == "Linux":
+        options.threads = max(1, min(options.threads, len(os.sched_getaffinity(0))))
+    elif platform.system() == "Windows":
+        import psutil
+        options.threads = max(1, min(options.threads, psutil.cpu_count(logical=False)))
+    else:
+        print("Unknown operating system")
+   
     logging.info(f"Parallel: {options.threads}")
 
     if options.verbosity >= 0:
@@ -185,11 +191,11 @@ class Algorithm(Evolution):
 
         def vary(parent):
             child = QDIndividual(parent.genome.mutated(self.rng, self.id_manager))
-            self.genealogical_info.append([child.id(), parent.id()])
+            '''self.genealogical_info.append([child.id(), parent.id()])
             #Save every child 
             if parent not in self.history:
                 self.history.append(parent)
-            self.history.append(child)
+            self.history.append(child)'''
             self._curiosity_lut[child.id()] = self.container.index_grid(parent.features)
             return child
 
@@ -221,6 +227,12 @@ class Algorithm(Evolution):
         if parent is not None:
             grid.curiosity[parent] += {True: 1, False: -.5}[added]
         return added
+    
+    def update_grid(self, ind_list):
+        for ind in ind_list:
+            ind : IndividualLike = ind
+            self.tell(ind)
+
 
 
 class Grid(containers.Grid):
@@ -238,9 +250,17 @@ class Grid(containers.Grid):
         r = containers.Grid.add(self, individual, raise_if_not_added_to_depot)
         return r
     
-    def fill(self, individual_list):
-        for indi in individual_list:
-            containers.Grid.add(self, indi)
+    def discard(self, individual: IndividualLike, also_from_depot: bool = True)-> None:
+        containers.Grid.discard(self, individual, also_from_depot)
+    
+    def empty(self):
+        to_remove=[]
+        for _, element in enumerate(self):
+            to_remove.append(element)
+        for i in to_remove:    
+            self.discard(i, True)
+
+
 
 
     
@@ -268,14 +288,14 @@ class Logger(algorithms.TQDMAlgorithmLogger):
         mid_rule = "-" * len(header)
         return header + "\n" + mid_rule
 
-    '''def _tell(self, algo: QDAlgorithmLike, ind: IndividualLike) -> None:
-        super()._tell(algo, ind)'''
+    def _tell(self, algo: QDAlgorithmLike, ind: IndividualLike) -> None:
+        super()._tell(algo, ind)
 
-    def summary_plots(self, **kwargs):
+    def summary_plots(self, extraname: Optional[str] ,**kwargs):
         summary_plots(evals=self.evals, iterations=self.iterations,
                       grid=self.algorithms[0].container,
                       labels=self.algorithms[0].labels,
-                      output_dir=self.log_base_path, name=Path(self.final_filename).stem,
+                      output_dir=self.log_base_path, name=Path(self.final_filename).stem+extraname,
                       **kwargs)
 
 

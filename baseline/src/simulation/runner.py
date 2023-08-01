@@ -92,16 +92,7 @@ class Runner(LocalRunner):
         self.options = options
         #print("Level:", options.level)
         self.bonus = 0
-
-        self.target_position=options.target_position
-        self.target_size=options.target_size
-        #target_area_side = self.target_size + .07
-        # Calculate the minimum and maximum boundaries of the target area
-        '''self.target_area_intervals = [round(self.target_position[0] - target_area_side,3),
-                                    round(self.target_position[0] + target_area_side,3),
-                                    round(self.target_position[1] - target_area_side,3),
-                                    round(self.target_position[1] + target_area_side,3)]'''
-
+        
         self.callbacks = {}
         if callbacks is not None:
             self.callbacks.update(callbacks)
@@ -257,23 +248,6 @@ class Runner(LocalRunner):
                 if sum([value for view in vision[-n:] for value in view])==(len(vision[0])*n):
                     self.bonus = Config.simulation_time - time
                     target_reached=True
-                        #print(f" !!!  Robot gazed Target {n} consecutive times  !!!")
-
-
-
-            '''if sum(self.controller.actor_controller.get_current_vision_input())==9:
-                print( "Gaze:", full_gaze," - VISION: ",self.controller.actor_controller.get_current_vision_input())
-                full_gaze+=1
-                if full_gaze > 10:
-                    print("Robot gazed Target 2s!")
-                    self.bonus = Config.simulation_time - time
-                    target_reached=True
-            else:
-                full_gaze=0'''
-            #If it gazes at target for 2 seconds
-            # 10 controls/s so if in 10 controls the robot is seeing white,
-            # it means he was looking for 1 s
-            
 
             if not self.headless:
                 self.update_view(time)

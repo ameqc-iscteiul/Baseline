@@ -9,7 +9,6 @@ def run_experiment(result_folder_name, batch_size, budget_size, features, w, h, 
    o.budget=budget_size
    o.tournament = 3
    o.initial_mutations = 2
-   o.grid_size = 16
    o.vision_w=w
    o.vision_h=h
    o.numb_levels=numb_levels

@@ -32,6 +32,7 @@ from colorama import Fore, Style
 from abrain.core.genome import GIDManager
 from robot.genome import RVGenome
 
+
 def normalize_run_parameters(options: NamedTuple):
     if options.id is None:
         options.id = int(time.strftime('%m%d%H%M'))
@@ -168,6 +169,7 @@ class Algorithm(Evolution):
 
         self.history=[]
         self.genealogical_info=[]
+        self.node={}
 
         def select(grid):
             #return self.rng.choice(grid)
@@ -191,11 +193,12 @@ class Algorithm(Evolution):
 
         def vary(parent):
             child = QDIndividual(parent.genome.mutated(self.rng, self.id_manager))
-            '''self.genealogical_info.append([child.id(), parent.id()])
-            #Save every child 
-            if parent not in self.history:
-                self.history.append(parent)
-            self.history.append(child)'''
+            self.genealogical_info.append((child.id(), parent.id()))
+            '''#Save every child 
+            if parent.id() not in self.history:
+                self.history.append(parent.id())
+            self.history.append(child.id())'''
+
             self._curiosity_lut[child.id()] = self.container.index_grid(parent.features)
             return child
 
@@ -219,18 +222,19 @@ class Algorithm(Evolution):
 
     def tell(self, individual: IndividualLike, *args, **kwargs) -> bool:
         grid: Grid = self.container
-        '''for _, element in enumerate(grid):
-            print(f" id={element.id()}, fitness={element.fitness[0]}")'''
-        #print("Current algo GRID: ",grid)
+        
         added = super().tell(individual, *args, **kwargs)
         parent = self._curiosity_lut.pop(individual.id(), None)
         if parent is not None:
             grid.curiosity[parent] += {True: 1, False: -.5}[added]
         return added
     
-    def update_grid(self, ind_list):
-        for ind in ind_list:
-            ind : IndividualLike = ind
+    def update_grid(self, updates):
+        #Remove old
+        self.container.empty()
+        #Add new
+        for ind, r in updates:
+            ind.update(r)
             self.tell(ind)
 
 
@@ -257,7 +261,7 @@ class Grid(containers.Grid):
         to_remove=[]
         for _, element in enumerate(self):
             to_remove.append(element)
-        for i in to_remove:    
+        for i in to_remove:  
             self.discard(i, True)
 
 
@@ -371,11 +375,11 @@ def summary_plots(evals: pd.DataFrame, iterations: pd.DataFrame, grid: Grid,
                    figsize=fig_size)
         plot_iterations(iterations["nb_updated"], path("container_updates"), ylabel="Number of updated bins",
                         figsize=fig_size)
-
+    
     for filename, cb_label, data, bounds in [
         ("grid_fitness", labels[0], grid.quality_array[..., 0], grid.fitness_domain[0]),
-        ("grid_activity", "activity", grid.activity_per_bin, (0, np.max(grid.activity_per_bin))),
-        ("grid_curiosity", "curiosity", grid.curiosity, "equal")
+        #("grid_activity", "activity", grid.activity_per_bin, (0, np.max(grid.activity_per_bin))),
+        #("grid_curiosity", "curiosity", grid.curiosity, "equal")
     ]:
         plot_path = path(filename)
         plot_grid(data=data, filename=plot_path,

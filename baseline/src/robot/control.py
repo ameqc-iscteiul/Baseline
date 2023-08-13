@@ -38,8 +38,6 @@ class ANNControl:
             self._step = 0
             self.lum_input_list=[]
 
-            self.current_vision_input=[]
-
         def get_ANN(self):
             return self.brain
 
@@ -70,25 +68,17 @@ class ANNControl:
         
         def step(self, dt: float, data: 'ControlData') -> None:
             input=[]
-            #1-Vision Input
-            img = self.vision.process(data.model, data.data)
-            lum_input = self.get_luminosity_input(img)
+            image_data = self.vision.process(data.model, data.data)
+            lum_input = self.get_luminosity_input(image_data)
+            #print("lum_input:   ", lum_input)
+            self.lum_input_list.append(lum_input)
             input.extend(lum_input)
-
-            '''#2-Sin Input
-            freq=0.01
-            sin_input = math.sin(2 * math.pi * freq) * self._step
-            input.append(sin_input)'''
-            
-            #3-Hinge Input
+            #2-Hinge Input
             hinge_input = [pos for pos in data.sensors]
-            #print("hinge_input", hinge_input)
             input.extend(hinge_input)
-
             self.i_buffer[:] = input
             self._step += 1
             self.brain.__call__(self.i_buffer, self.o_buffer)
-            self.lum_input_list.append(lum_input)
 
 
         
@@ -103,9 +93,40 @@ class ANNControl:
     class Brain(Brain):
         def __init__(self, brain_dna: RVGenome):
             self.brain_dna = brain_dna
-      
+
         def make_controller(self, body: Body, dof_ids: List[int]) -> ActorController:
-            
+            inputs, outputs = [], []
+            #1-Vision Input
+            w, h = self.brain_dna.get_vision()
+            inputs=utils.distribute_points(-1, w, h)
+            #2-Hinge Input and Output
+            parsed_coords = body.to_tree_coordinates()
+            bounds = np.zeros((2, 3), dtype=int)
+            np.quantile([c[1].tolist() for c in parsed_coords], [0, 1], axis=0, out=bounds)
+
+            if bounds[0][2] != bounds[1][2]:
+                raise NotImplementedError("Can only handle planar robots (with z=0 for all modules)")
+            x_min, x_max = bounds[0][0], bounds[1][0]
+            xrange = max(x_max-x_min, 1)
+            y_min, y_max = bounds[0][1], bounds[1][1]
+            yrange = max(y_max-y_min, 1)
+
+            hinges_map = {
+                c[0].id: (
+                    2 * (c[1].x - x_min) / xrange - 1 if xrange > 1 else 0,
+                    2 * (c[1].y - y_min) / yrange - 1 if yrange > 1 else 0)
+                for c in parsed_coords if isinstance(c[0], ActiveHinge)
+            }
+            for i, did in enumerate(dof_ids):
+                    p = hinges_map[did]
+                    ip = Point(p[1], -0.9, p[0])
+                    inputs.append(ip)
+                    op = Point(p[1], 1, p[0])
+                    outputs.append(op)
+
+            '''
+            Old Controller
+            #make controller:
             inputs, outputs = [], []
             active_hinges_unsorted = body.find_active_hinges()
             active_hinge_map = {
@@ -120,8 +141,43 @@ class ANNControl:
             inputs.extend(hinge_input)
 
             outputs=utils.distribute_points(1,len(active_hinges),1)
+            '''
+
+
+            '''#1-Vision Input
+            image_data = self.vision.process(data.model, data.data)
+            #print("img",image_data)
+            
+            # Calculate the midpoint index along the vertical centerline
+            midpoint_index = image_data.shape[1] // 2
+            # Split the image into left and right sub-images
+            left_subimg = image_data[:, :midpoint_index]
+            right_subimg = image_data[:, midpoint_index:]
+
+            #print('left_half',self.get_luminosity_input(left_subimg))
+            #print('right_half',self.get_luminosity_input(right_subimg))
+            left_lum=self.get_luminosity_input(left_subimg)
+            right_lum=self.get_luminosity_input(right_subimg)
+            #print("right_lum",right_lum)
+            
+            # Apply the contrast filter to each pixel in the array
+            # "make darker go darker" (dark corresponds to lower then bound)
+            left_lum = np.clip(left_lum, 0.0, 1.0)
+            filtered_left_lum = list(np.vectorize(lambda pixel: utils.contrast_filter(pixel, contrast_factor=0.5, bound_value=0.5))(left_lum))
+            right_lum = np.clip(right_lum, 0.0, 1.0)
+            filtered_right_lum = list(np.vectorize(lambda pixel: utils.contrast_filter(pixel, contrast_factor=0.5, bound_value=0.5))(right_lum))
+
+            left_score= sum(filtered_left_lum)/len(filtered_left_lum)
+            right_score= sum(filtered_right_lum)/len(filtered_right_lum)
+
+            lum_input = [left_score, right_score]
+            '''
 
             return ANNControl.Controller(self.brain_dna.brain, inputs, outputs)
+        
+        
+
+        
 
             
             

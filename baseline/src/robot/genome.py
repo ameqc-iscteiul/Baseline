@@ -1,14 +1,15 @@
 import copy
 from dataclasses import dataclass, astuple
+import os
 from random import Random
 from typing import Optional
-from abrain import Genome as ANNGenome
+from abrain import Genome as ANNGenome, plotly_render
 from abrain.core.genome import GIDManager
 
 @dataclass
 class VisionData:
-    w: int = 4
-    h: int = 4
+    w: int = 0
+    h: int = 0
     def __iter__(self):
         return iter(astuple(self))
 
@@ -25,9 +26,16 @@ class RVGenome:
 
     def parents(self):
         return self.brain.parents()
+    
+    def set_vision(self, w, h):
+        self.vision.w=w
+        self.vision.h=h
+
+    def get_vision(self):
+        return self.vision.w, self.vision.h
 
     def __repr__(self):
-        return f"{{{str(self.vision)}, {str(self.brain)}}}"
+        return f"{str(self.brain)}"
 
 
     def mutate(self, rng: Random) -> None:
@@ -64,21 +72,15 @@ class RVGenome:
             assert isinstance(self.vision, VisionData)
 
     def to_json(self):
-        if self.vision is None:
-            return self.brain.to_json()
-        else:
-            return dict(brain=self.brain.to_json(), vision=self.vision.__dict__)
+        return self.brain.to_json()
+        
     
     @staticmethod
     def from_json(data) -> 'RVGenome':
         """Recreate a RVGenome from string json representation
         """
+        return RVGenome(ANNGenome.from_json(data))
 
-        ## TODO Remove retro-compatibility
-        if "brain" not in data:
-            return RVGenome(ANNGenome.from_json(data))
-
-        return RVGenome(ANNGenome.from_json(data["brain"]))
 
     @staticmethod
     def from_dot(path: str, rng: Random):

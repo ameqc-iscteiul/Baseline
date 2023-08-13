@@ -47,7 +47,6 @@ class RunnerOptions:
     target_size : float = 0.5
 
     level:int=0
-    return_ann=False
     
     @dataclass
     class View:
@@ -67,7 +66,6 @@ class RunnerOptions:
         height: int = 480
         fps: int = 24
     record: Optional[Record] = None
-
     save_folder: Optional[Path] = None
 
 class DefaultActorControl(ActorControl):
@@ -212,7 +210,6 @@ class Runner(LocalRunner):
         )
         
         #RUN LOOP
-        full_gaze=0
         target_reached=False
         while ((time := self.data.time) < Config.simulation_time ) and target_reached is False:
             # do control if it is time
@@ -241,11 +238,12 @@ class Runner(LocalRunner):
                 last_sample_time = int(time / sample_step) * sample_step
                 results.environment_states.append(EnvironmentState(time, self.get_actor_state(0)))
             
-            n=3
+            #If there are n consecutive fullgazes, the simulation stops.
+            n=4
             vision = self.controller.actor_controller.get_robot_vision()
             #if the current gaze was full, check if the last n gazes were also full
-            if len(vision) > n and sum(vision[-n]) == len(vision[0]):
-                if sum([value for view in vision[-n:] for value in view])==(len(vision[0])*n):
+            if len(vision) >= n and sum(vision[-1]) == len(vision[0]):
+                if all(sum(view) == len(vision[0]) for view in vision[-n:]):
                     self.bonus = Config.simulation_time - time
                     target_reached=True
 
@@ -253,6 +251,7 @@ class Runner(LocalRunner):
                 self.update_view(time)
         if not self.headless:
             self.close_view()
+
         return results, self.bonus
     
     def get_actor_state(self, robot_index):

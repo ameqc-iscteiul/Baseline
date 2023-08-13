@@ -1,0 +1,127 @@
+[2023-08-01 20:45:29,263]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-08-01 20:45:29,263]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-08-01 20:45:29,264]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-08-01 20:45:29,266]|[INFO]|[evolution] Grid size: (16, 16)
+[2023-08-01 20:45:29,266]|[INFO]|[evolution]    bounds: [(0, 5.5), [0.075, 0.75]]
+[2023-08-01 20:45:29,267]|[INFO]|[evolution]      bins: [0.34375, 0.0421875]
+[2023-08-01 20:45:29,267]|[INFO]|[my_map_elite] Generated run id: 8012045
+[2023-08-01 20:45:29,267]|[INFO]|[my_map_elite] Run folder: baseline\Testing_outs\4X4_0_to_3\run8012045
+[2023-08-01 20:45:29,268]|[INFO]|[my_map_elite] Parallel: 1
+[2023-08-01 20:45:29,268]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': 'baseline/Testing_outs/4X4_0_to_3',
+ 'batch_size': 10,
+ 'budget': 100,
+ 'counter': 0,
+ 'descriptor_names': ['distance', 'white_gazing'],
+ 'evaluation': 0,
+ 'grid_size': 16,
+ 'id': 8012045,
+ 'initial_mutations': 3,
+ 'level': 0,
+ 'numb_levels': 3,
+ 'overwrite': False,
+ 'run_folder': 'baseline\\Testing_outs\\4X4_0_to_3\\run8012045',
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 1,
+ 'tournament': 3,
+ 'verbosity': 1,
+ 'vision_h': 4,
+ 'vision_w': 4}
+[2023-08-01 20:45:29,272]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\baseline\Testing_outs\4X4_0_to_3\run8012045\config.json
+[2023-08-01 20:45:29,273]|[INFO]|[evolution] Starting illumination!
+[2023-08-01 20:45:29,273]|[INFO]|[evolution] Level: 0
+alg_name  iteration cont_size evals     nb_updated     avg       std       min       max       ft_min              ft_max              qd_score  elapsed
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+8012045   0         2/256     10        4              [16.3358] [0.625]   [15.7108] [16.9608] [0.0000,0.0926]     [0.2292,0.1571]     0.30      8.54   
+8012045   1         3/256     10        1              [16.6068] [0.6382]  [15.7108] [17.1487] [0.0000,0.0926]     [0.4788,0.1571]     0.45      6.05   
+8012045   2         4/256     10        3              [18.7643] [1.4554]  [16.9608] [20.7925] [0.0770,0.0926]     [1.3203,0.1181]     0.68      5.76   
+[2023-08-01 20:45:51,448]|[INFO]|[evolution] Level change! 33
+[2023-08-01 20:45:51,728]|[INFO]|[my_map_elite] Generated baseline\Testing_outs\4X4_0_to_3\run8012045\plots\iteration-final33_grid_fitness.png
+[2023-08-01 20:45:51,981]|[INFO]|[my_map_elite] Generated baseline\Testing_outs\4X4_0_to_3\run8012045\plots\iteration-final33_grid_activity.png
+[2023-08-01 20:45:52,212]|[INFO]|[my_map_elite] Generated baseline\Testing_outs\4X4_0_to_3\run8012045\plots\iteration-final33_grid_curiosity.png
+[2023-08-01 20:45:52,222]|[WARNING]|[evaluator] Change to level 1
+[2023-08-01 20:45:54,901]|[INFO]|[my_map_elite] Generated baseline\Testing_outs\4X4_0_to_3\run8012045\plots\iteration-final33after_Update_grid_fitness.png
+[2023-08-01 20:45:55,135]|[INFO]|[my_map_elite] Generated baseline\Testing_outs\4X4_0_to_3\run8012045\plots\iteration-final33after_Update_grid_activity.png
+[2023-08-01 20:45:55,355]|[INFO]|[my_map_elite] Generated baseline\Testing_outs\4X4_0_to_3\run8012045\plots\iteration-final33after_Update_grid_curiosity.png
+8012045   3         5/256     10        3              [18.232]  [0.9696]  [16.9608] [19.3873] [0.0789,0.0926]     [1.3203,0.1267]     0.83      9.97   
+8012045   4         5/256     10        3              [18.9755] [0.9193]  [17.6879] [20.2696] [0.1623,0.0943]     [1.3203,0.1249]     0.86      6.17   
+8012045   5         6/256     10        2              [20.2301] [3.7994]  [17.6879] [28.6111] [0.1623,0.0943]     [1.8016,0.1249]     1.10      6.09   
+[2023-08-01 20:46:16,232]|[INFO]|[evolution] Level change! 67
+[2023-08-01 20:46:16,461]|[INFO]|[my_map_elite] Generated baseline\Testing_outs\4X4_0_to_3\run8012045\plots\iteration-final67_grid_fitness.png
+[2023-08-01 20:46:16,735]|[INFO]|[my_map_elite] Generated baseline\Testing_outs\4X4_0_to_3\run8012045\plots\iteration-final67_grid_activity.png
+[2023-08-01 20:46:16,962]|[INFO]|[my_map_elite] Generated baseline\Testing_outs\4X4_0_to_3\run8012045\plots\iteration-final67_grid_curiosity.png
+[2023-08-01 20:46:16,971]|[WARNING]|[evaluator] Change to level 2
+[2023-08-01 20:46:18,867]|[WARNING]|[evaluator] Out-of-bounds value features,white_gazing: 0.07310049066438401 not in [0.075,0.75]
+[2023-08-01 20:46:21,579]|[INFO]|[my_map_elite] Generated baseline\Testing_outs\4X4_0_to_3\run8012045\plots\iteration-final67after_Update_grid_fitness.png
+[2023-08-01 20:46:21,819]|[INFO]|[my_map_elite] Generated baseline\Testing_outs\4X4_0_to_3\run8012045\plots\iteration-final67after_Update_grid_activity.png
+[2023-08-01 20:46:22,049]|[INFO]|[my_map_elite] Generated baseline\Testing_outs\4X4_0_to_3\run8012045\plots\iteration-final67after_Update_grid_curiosity.png
+[2023-08-01 20:46:23,314]|[WARNING]|[evaluator] Out-of-bounds value features,white_gazing: 0.07310049066438401 not in [0.075,0.75]
+8012045   6         6/256     20        6              [21.1329] [3.4175]  [17.933]  [25.9477] [0.1862,0.1086]     [1.1004,0.1399]     1.15      12.10  
+8012045   7         9/256     10        3              [21.978]  [5.0064]  [17.933]  [33.366]  [0.1862,0.1086]     [1.1004,0.1399]     1.80      6.29   
+8012045   8         10/256    10        3              [25.6683] [8.5313]  [17.933]  [37.6797] [0.0300,0.1086]     [1.1004,0.1735]     2.33      6.17   
+8012045   9         10/256    10        2              [26.2214] [8.1991]  [17.933]  [37.6797] [0.0300,0.0973]     [1.5426,0.1735]     2.38      6.55   
+Finished optimisation using algorithm '8012045'. Total elapsed: 73.73156590000144.
+[2023-08-01 20:46:43,008]|[INFO]|[evolution] Level: 2
+[2023-08-01 20:46:43,017]|[INFO]|[evolution] Summary Algorithm:
+  batch_size: 10
+  budget: 100
+  container:  Summary Grid:
+    activity_per_bin: [[4. 6. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [5. 3. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [3. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [2. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.  ...
+    best: {id=82, fitness=(37.679738562091494,), features={'distance': 0.6285687085889744, 'white_gazing': 0.14004078210858878}}
+    best_features: [0.6285687085889744, 0.14004078210858878]
+    best_fitness: (37.679738562091494,)
+    best_index: (1, 1)
+    capacity: 256
+    curiosity: [[-2.  -3.  -2.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.    0.   0. ]  [-1.5 -1.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.    0.   0. ]  [ 0.5 -2.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.    0.  ...
+    depot: None
+    discard_random_on_bin_overload: False
+    features: {(0, 0): [Features([0.3067156362697576, 0.11226512692790831])], (0, 1): [Features([0.029957392209048764, 0.12318587430821089])], (0, 2): [Features([0.27764374070825504, 0.17352217314082133])], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0,  ...
+    features_domain: [(0, 5.5), [0.075, 0.75]]
+    features_extrema: ((0.029957392209048764, 1.5425624763185044), (0.0972831067199442, 0.17352217314082133))
+    filled_bins: 13
+    fitness: {(0, 0): [Fitness([19.28104575163399])], (0, 1): [Fitness([35.63725490196077])], (0, 2): [Fitness([37.33660130718954])], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], ( ...
+    fitness_domain: [(0, 110)]
+    fitness_extrema: ((17.93300653594771, 37.679738562091494),)
+    free: 246
+    history_recentness_per_bin: {(0, 0): [2, 4, 12, 19], (0, 1): [1, 3, 7, 11, 17, 25], (0, 2): [23], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], (0, 15): [], (1, 0): [5, 8 ...
+    items: [{id=46, fitness=(18.104575163398692,), features={'distance': 0.19316390153374244, 'white_gazing': 0.11925334669442905}}, {id=63, fitness=(19.28104575163399,), features={'distance': 0.3067156362697576, 'white_gazing': 0.11226512692790831}}, {id= ...
+    max_items_per_bin: 1
+    name: Grid-2391352076816
+    nb_added: 27
+    nb_discarded: 17
+    nb_items_per_bin: [[1. 1. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.  ...
+    nb_operations: 44
+    nb_rejected: 0
+    quality: {(0, 0): Fitness([19.28104575163399]), (0, 1): Fitness([35.63725490196077]), (0, 2): Fitness([37.33660130718954]), (0, 3): None, (0, 4): None, (0, 5): None, (0, 6): None, (0, 7): None, (0, 8): None, (0, 9): None, (0, 10): None, (0, 11): None, (0 ...
+    quality_array: [[[19.28104575]   [35.6372549 ]   [37.33660131]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [   ...
+    recentness: [13, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+    recentness_per_bin: {(0, 0): [19], (0, 1): [25], (0, 2): [23], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], (0, 15): [], (1, 0): [26], (1, 1): [24], (1, 2): [],  ...
+    shape: (16, 16)
+    size: 10
+    solutions: {(0, 0): [{id=63, fitness=(19.28104575163399,), features={'distance': 0.3067156362697576, 'white_gazing': 0.11226512692790831}}], (0, 1): [{id=88, fitness=(35.63725490196077,), features={'distance': 0.029957392209048764, 'white_gazing': 0.123185 ...
+  current_iter: 11
+  deepcopy_on_selection: True
+  dimension: None
+  genealogical_info: []
+  history: []
+  id_manager: <abrain.core.genome.GIDManager object at 0x0000022CB304EBC0>
+  labels: ['brightness', 'distance', 'white_gazing']
+  name: 8012045
+  nb_evaluations: 111
+  nb_evaluations_in_iteration: 1
+  nb_max_iter: 10
+  nb_suggestions: 100
+  nb_suggestions_in_iteration: 0
+  nb_updated: 30
+  nb_updated_in_iteration: 0
+  optimisation_task: maximisation
+  rng: <random.Random object at 0x0000022CB36A7840>
+[2023-08-01 20:46:43,603]|[INFO]|[my_map_elite] Generated baseline\Testing_outs\4X4_0_to_3\run8012045\plots\iteration-finalfinal_grid_fitness.png
+[2023-08-01 20:46:43,839]|[INFO]|[my_map_elite] Generated baseline\Testing_outs\4X4_0_to_3\run8012045\plots\iteration-finalfinal_grid_activity.png
+[2023-08-01 20:46:44,073]|[INFO]|[my_map_elite] Generated baseline\Testing_outs\4X4_0_to_3\run8012045\plots\iteration-finalfinal_grid_curiosity.png
+[2023-08-01 20:46:44,085]|[INFO]|[evolution] All results are available under baseline\Testing_outs\4X4_0_to_3\run8012045
+[2023-08-01 20:46:44,085]|[INFO]|[evolution] Unified storage file is baseline\Testing_outs\4X4_0_to_3\run8012045/iteration-final.p
+[2023-08-01 20:46:44,085]|[INFO]|[evolution] Completed evolution in 1 minute and 14.82 seconds
+[2023-08-01 20:46:44,086]|[INFO]|[evolution] Generating Videos...
+[2023-08-01 20:49:44,210]|[INFO]|[evolution] DONE !

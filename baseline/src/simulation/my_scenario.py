@@ -16,7 +16,6 @@ from simulation.runner import Runner,RunnerOptions
 Runner.actorController_t = SensorControlData
 
 def GECKO()-> Body:
-
     def add_arms(m: Module):
         m.left = ActiveHinge(math.pi / 2.0)
         m.left.attachment = ActiveHinge(math.pi / 2.0)
@@ -24,7 +23,6 @@ def GECKO()-> Body:
         m.right = ActiveHinge(math.pi / 2.0)
         m.right.attachment = ActiveHinge(math.pi / 2.0)
         m.right.attachment.attachment = Brick(0.0)
-
     body = Body()
     body.core.front = Brick(0.0)
     body.core.back = Brick(0.0)
@@ -47,10 +45,15 @@ def default():
     return body
 
 
-def build_robot(brain_dna: RVGenome, vision_w, vision_h):
-    brain_dna.vision.w, brain_dna.vision.h = vision_w,vision_h
-
-    return ModularRobot(GECKO(), ANNControl.Brain(brain_dna))
+def build_robot(brain_dna: RVGenome, vision_w, vision_h, type):
+    brain_dna.set_vision(vision_w,vision_h)
+    if type==0:
+        robot = default()
+    elif type==1:
+        robot = GECKO()
+    else:
+        print("Wrong Body Type")
+    return ModularRobot(robot, ANNControl.Brain(brain_dna))
 
 # ==============================================================================
 # Scenario
@@ -173,65 +176,74 @@ class Scenario:
             return xml
         
 
+        def insert_rectangle(xml, position, base_length, base_width, base_height):
+            xml.worldbody.add(
+                        "geom",
+                        type="box",
+                        pos=position,
+                        size=f"{base_length} {base_width} {base_height}",
+                        rgba="1 0 0 1"
+                    )
+            return xml
+        def generate_mountain(xml, position, base_length, base_width, base_height, levels):
+            for l in range(levels+1):
+                xml=insert_rectangle(xml, position, base_length, base_width, base_height)
+                base_length-=base_length*.20
+                base_width-=base_width*.20
+                next_z = float(position.split()[-1])+base_height
+                #print(position.split()[0] + position.split()[1])
+                #print(next_z)
+                position = f'{position.split()[0]} {position.split()[1]} {str(next_z)}'
 
-        def generate_mountain_coordinates(center, height, step_height):
-            coordinates = []
-            for i in range(height):
-                start_x = center[0] - i
-                start_y = center[1] - i
-                end_x = center[0] + i
-                end_y = center[1] + i
+                #print(position)
 
-                for dx in [float(x) for x in range(int(start_x), int(end_x) + 1)]:
-                    for dy in [float(y) for y in range(int(start_y), int(end_y) + 1)]:
-                        coordinates.append(f"{dx} {dy} {i * step_height}")
-
-                coordinates.append(f"{center[0]} {center[1]} {(i + 1) * step_height}")
-
-            return coordinates
+            return xml
         
-        if options.level==1:
-            #xml = create_obstacle_grid(xml, [0.1,0,0], 1, 1, 0.27, 1.5)
-            xml = create_obstacle_grid(xml, [0,0,0], 1, 3, 0.05, 0.8)
-
-        if options.level==2:
-            xml = create_obstacle_grid(xml, [-0.8,0,0], 1, 3, 0.05, 0.8)
-            xml = create_obstacle_grid(xml, [0.8,0,0], 1, 4, 0.05, 0.8)
-        if options.level==3:
+        '''if options.level==0:
+            #xml  = generate_mountain(xml,'0 0 0',0.9,0.6,0.03, 4)
+            #xml  = generate_mountain(xml,'0 -0.8 0',0.9,0.6,0.03, 4)
+            xml  = generate_mountain(xml,'0 0 0',0.9,0.6,0.03, 4)
             xml = create_obstacle_grid(xml, [-1.6,0,0], 1, 2, 0.04, 0.8)
             xml = create_obstacle_grid(xml, [-0.8,0,0], 1, 3, 0.05, 0.8)
             xml = create_obstacle_grid(xml, [0,0,0], 1, 4, 0.06, 0.8)
-            xml = create_obstacle_grid(xml, [0.8,0,0], 1, 5, 0.07, 0.8)
-            xml = create_obstacle_grid(xml, [1.6,0,0], 1, 6, 0.08, 0.8)
+            xml = create_obstacle_grid(xml, [0.8,0,0], 1, 5, 0.08, 0.8)
+            xml = create_obstacle_grid(xml, [1.6,0,0], 1, 6, 0.09, 0.8)'''
+
+        if options.level==1:
+            xml = create_obstacle_grid(xml, [0,0,0], 1, 3, 0.05, 0.8)
+        if options.level==2:
+            xml = create_obstacle_grid(xml, [-0.8,0,0], 1, 3, 0.05, 0.8)
+            xml = create_obstacle_grid(xml, [0,0,0], 1, 4, 0.06, 0.8)
+            xml = create_obstacle_grid(xml, [0.8,0,0], 1, 3, 0.05, 0.8)
+        if options.level==3:
+            xml = create_obstacle_grid(xml, [-1.6,0,0], 1, 2, 0.06, 0.8)
+            xml = create_obstacle_grid(xml, [-0.8,0,0], 1, 3, 0.05, 0.8)
+            xml = create_obstacle_grid(xml, [0,0,0], 1, 4, 0.08, 0.8)
+            xml = create_obstacle_grid(xml, [0.8,0,0], 1, 3, 0.05, 0.8)
+            xml = create_obstacle_grid(xml, [1.6,0,0], 1, 2, 0.06, 0.8)
+        #Mountains
         if options.level==4:
-            #xml = create_Ramp(xml, [0,0,0], 35, 40, 0.02, 0.05, 0.3)
             pass
         if options.level==5:
-            xml = create_Ramp(xml, [0,0,0], 35, 40, 0.02, 0.05, 0.3)
+            xml  = generate_mountain(xml,'0 0 0',0.9,0.6,0.03, 2)
+       
         if options.level==6:
-            #xml = create_obstacle_grid(xml, [0,0,0], 6, 6, 0.05, 0.9)
-            xml = create_Ramp(xml, [0,0,0], 50, 50, 0.02, 0.05, 0.4)
+            #xml = create_obstacle_grid(xml, [1,0,0], 9, 6, 0.03, 0.5)
+            xml  = generate_mountain(xml,'0 -0.8 0',0.9,0.6,0.03, 6)
+            xml  = generate_mountain(xml,'0 0.8 0',0.9,0.6,0.03, 6)
+            xml  = generate_mountain(xml,'1 0 0',0.6,0.3,0.02, 3)
+
+        if options.level==7:
+            xml  = generate_mountain(xml,'0 0 0',1,1,0.03, 4)
+            xml  = generate_mountain(xml,'0 -0.8 0',0.9,0.6,0.03, 6)
+            xml  = generate_mountain(xml,'0 0.8 0',0.9,0.6,0.03, 6)
         else:
             pass
-        
-        '''
-        if options.level==1:
-            xml = default_obstacle_set(xml)
-        elif options.level==2:
-            xml = create_obstacle_grid(xml, [0.6,0,0], 4, 4, 0.04, 0.6)
-        elif options.level==3:
-            xml = create_obstacle_grid(xml, [0,0,0], 20, 20, 0.05, 0.4)
-        elif options.level==4:            
-            xml = create_Ramp(xml, [0,0,0], 30, 30, 0.04, 0.05, 0.3)
-        else:
-            pass'''
-
-
 
         for robot in robots:
             xml.worldbody.add('site',
                                 name=robot.full_identifier[:-1] + "_start",
-                                pos=robot.pos * [1, 1, 0], rgba=[0, 0, 1, 1],
+                                pos=robot.pos * [1, 1, 0], rgba=[0, 0, 0.1, 1],
                                 type="ellipsoid", size=[0.05, 0.05, 0.0001])
 
         for r in robots:

@@ -2,6 +2,7 @@ import json
 import logging
 from functools import partial
 import math
+import os
 import pprint
 import sys
 import time
@@ -11,12 +12,14 @@ from pathlib import Path
 import humanize
 from abrain.core.genome import logger as genome_logger
 import pandas as pd
-from utils import create_genealogical_tree
+from utils import save_grid, create_genealogy_tree, final_grid_ancestry
 from evo_alg.my_map_elite import Tee,QDIndividual,Algorithm, Grid, EvaluationResult, Logger
 from robot.genome import RVGenome
 from simulation.config import Config
 from simulation.evaluator import Evaluator
 from simulation.runner import RunnerOptions
+from rerun_best import make_videos
+
 
 class Options:
     def __init__(self):
@@ -27,72 +30,64 @@ class Options:
         self.overwrite: bool = False
         self.verbosity: int = 1
 
-
         #Algorithm parameters
-        self.seed: int = 100
-
-        #Change for Linux!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        self.threads: int = 1
+        self.seed: int = 100        
 
         self.batch_size: int = 20
+        self.threads: int = self.batch_size
         self.budget: int = 100
 
         self.tournament: int = 3
         #-Grid options
-        self.grid_size : int = 10
+        self.grid_size : int = 16
+        self.fitness_name: str
+        self.descriptor_names = []
         #-number of initial mutations for abrain's genome
-        self.initial_mutations: int = 3
+        self.initial_mutations: int = 2
 
         #-----------------
         #Evaluator Options:
         #-----------------
         #Scenario:
         self.level : int = 0
-        self.numb_levels : int = 0 
-        self.evaluation : int = 0
-        self.counter : int = 0
+        self.numb_levels: int = 0 
 
-        #-Robot Vision
-        self.vision_w: int = 4
-        self.vision_h: int = 4
-        #fitness name
-        self.fitness_name: str
-        #descriptor names
-        self.descriptor_names = []
+        #-Robot
+        self.vision_w: int 
+        self.vision_h: int 
+        self.robot_type : int = 0
 
-        
-def eval_mujoco(ind:QDIndividual, algo : Algorithm, options : Options,logger : Optional[Logger]):
+        self.make_change_videos=False
+        self.make_final_videos=False
+
+
+def eval_mujoco(ind : QDIndividual, evaluator : Evaluator , options : Options):
+    '''Happens in Multithreading'''
     assert isinstance(ind, QDIndividual)
     assert isinstance(ind.genome, RVGenome)
     assert ind.id() is not None, "ID-less individual"
-    #logging.info(f"evaluation: {options.evaluation}")
-    evaluator = Evaluator()
-    evaluator.set_options(options.descriptor_names, options.vision_w, options.vision_h, options.level)
-    '''Check if it is time to change level'''
-    if options.counter == options.budget // options.numb_levels and options.evaluation != options.budget-1:
-        logging.info(f"Level change! {options.evaluation}")
-        logger.summary_plots(extraname=f'{options.evaluation}')
-        options.counter = 0
-        '''Change Level'''
-        options.level=min(options.level + 1, 6)
-        evaluator.set_level(options.level)
-        updates=[]
-        '''Revaluate'''
-        for _, element in enumerate(algo.container):
-            individual : QDIndividual = element
-            r: EvaluationResult = evaluator.evaluate_evo(individual.genome)
-            individual.update(r)
-            updates.append(individual)
-        algo.update_grid(updates)
-        logger.summary_plots(extraname=f'{options.evaluation}after_Update')
-    else:
-        options.counter += 1
-    r: EvaluationResult = evaluator.evaluate_evo(ind.genome)
+    evaluator.set_options(options.descriptor_names,options.fitness_name,options.robot_type, options.vision_w, options.vision_h, options.level)
+    r: EvaluationResult = evaluator.evaluate(ind.genome)
     ind.update(r)
-    options.evaluation +=1
-
     #print("ind",ind)
     return ind
+
+def change_level(algo, evaluator, args, logger):
+    args.level+=1
+    evaluator.set_level(args.level)
+    
+    '''Revaluate'''
+    updates=[]
+    for _, element in enumerate(algo.container):
+        individual : QDIndividual = element
+        r: EvaluationResult = evaluator.evaluate(individual.genome)
+        updates.append((individual, r))
+    algo.update_grid(updates)
+
+    logger.summary_plots(extraname=f'_{args.level}_beginning')
+    save_grid(algo.container, f'{args.run_folder}/{args.level}', 'initial') 
+    return algo, evaluator, args
+
 
 
 def evolution (args : Options()):
@@ -120,7 +115,7 @@ def evolution (args : Options()):
     
     
     evaluator = Evaluator()
-    evaluator.set_options(args.descriptor_names, args.vision_w, args.vision_h, args.level)
+    evaluator.set_options(args.descriptor_names,args.fitness_name,args.robot_type, args.vision_w, args.vision_h, args.level)
     grid = Grid(shape=(args.grid_size, args.grid_size),
                 max_items_per_bin=1,
                 fitness_domain=evaluator.fitness_bounds(),
@@ -153,56 +148,66 @@ def evolution (args : Options()):
     tee.set_log_path(run_folder.joinpath("log"))
 
     logging.info("Starting illumination!")
-    logging.info(f"level {args.level}")
 
     import platform
     if platform.system() == "Linux":
         from qdpy.base import ParallelismManager
-        import multiprocessing
-        with ParallelismManager(parallelism_type = "sequential", max_workers=args.threads) as mgr:
+        #import multiprocessing
+        with ParallelismManager(parallelism_type = "multiprocessing", max_workers=args.threads) as mgr:
             #mgr.executor._mp_context = multiprocessing.get_context("fork")  # TODO: Very brittle
-            #algo = Algorithm(grid, args, labels=[evaluator.fitness_name(), *evaluator.descriptor_names()])
-            best = algo.optimise(evaluate=partial(eval_mujoco, algo=algo, options = args, logger=logger), executor=mgr.executor, batch_mode=True)
-    elif platform.system() == "Windows":
-        best = algo.optimise(evaluate=partial(eval_mujoco, algo=algo, options = args,logger=logger), batch_mode=True)
-    else:
-        print("Unknown operating system")
-   
-
-    logging.info(f"level {args.level}")
-
+            budget_per_level = int(args.budget/args.numb_levels)
+            for l in range(args.numb_levels):
+                if l>0: algo, evaluator, args = change_level(algo, evaluator, args, logger)
+                logging.info(f"Level : {args.level}")
+                best = algo.optimise(evaluate=partial(eval_mujoco, evaluator = evaluator, options = args), budget=budget_per_level, executor=mgr.executor,batch_mode=True)
+                #Save final grid/plots from this level
+                logging.info(f"Level {args.level} finished. Saving Final Grid & Plots ...")
+                logger.summary_plots(extraname=f'_{args.level}_end')
+                save_grid(algo.container, f'{args.run_folder}/{args.level}','final')    
     
-    #Store all Map Elites final Solutions
-    grid_pop = []
-    for _, element in enumerate(grid):
-        #print("element.fitness",element.fitness[0])
-        ind = { "id": element.id(), "parents": element.genome.parents(),
-                "fitnesses": element.fitness[0],
-                "descriptors": element.descriptors,
-                "genome": element.genome.to_json()}
-        
-        grid_pop.append(ind)
-    df = pd.DataFrame(grid_pop)
-    df = df.sort_values(by="fitnesses", ascending=False)
-    df.to_csv(Path(args.run_folder).joinpath("final_grid.csv"), index=False)
+    elif platform.system() == "Windows":
+        budget_per_level = int(args.budget/args.numb_levels)
+        for l in range(args.numb_levels):
+            if l>0: algo, evaluator, args = change_level(algo, evaluator, args, logger)
+            logging.info(f"Level : {args.level}")
+            best = algo.optimise(evaluate=partial(eval_mujoco, evaluator = evaluator, options = args), budget=budget_per_level,batch_mode=True)
+            #Save final grid/plots from this level
+            logging.info(f"Level {args.level} finished. Saving Final Grid & Plots ...")
+            logger.summary_plots(extraname=f'_{args.level}_end')
+            save_grid(algo.container, f'{args.run_folder}/{args.level}','final')        
+    else:
+        print("ERROR: Unknown operating system")
 
+     
+    
     '''history = pd.DataFrame(algo.history)
-    history.to_csv(Path(args.run_folder).joinpath("history.csv"), index=False)
+    history.to_csv(Path(args.run_folder).joinpath("history.csv"), index=False)'''
 
     # Save the genealogical tree dictionary as a JSON file
-    with open(Path(args.run_folder).joinpath("genealogical_tree.json"), "w") as file:
-        g=create_genealogical_tree(algo.genealogical_info)
-        json.dump(g, file)'''
+    
+    with open(Path(args.run_folder).joinpath("son_father_pairs.json"), "w") as file:
+        json.dump(algo.genealogical_info, file)
+
+    #problems in Linux with the graphs
+    '''final_ids=[]
+    for _, element in enumerate(grid):
+        final_ids.append(element.id())
+    
+    create_genealogy_tree(algo.genealogical_info, f'{args.run_folder}/genealogical_trees')
+    final_grid_ancestry(algo.genealogical_info,final_ids, f'{args.run_folder}/success_tree')'''
+    
     
       
     # Print results info
     logging.info(algo.summary())
-
     # Plot the results
     logger.summary_plots(extraname='final')
-
     logging.info(f"All results are available under {logger.log_base_path}")
     logging.info(f"Unified storage file is {logger.log_base_path}/{logger.final_filename}")
-
     duration = humanize.precisedelta(timedelta(seconds=time.perf_counter() - start))
     logging.info(f"Completed evolution in {duration}")
+   
+    logging.info(f"Generating Videos...")
+    #if args.make_change_videos: make_videos_before_after(args.run_folder)
+    if args.make_final_videos: make_videos(args.run_folder)
+    logging.info(f"DONE !")

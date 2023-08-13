@@ -1,0 +1,52 @@
+[2023-08-09 17:32:50,275]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-08-09 17:32:50,291]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-08-09 17:32:50,291]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-08-09 17:32:50,294]|[INFO]|[evolution] Grid size: (20, 20)
+[2023-08-09 17:32:50,294]|[INFO]|[evolution]    bounds: [[-2.5, 2.5], [0.075, 0.75]]
+[2023-08-09 17:32:50,295]|[INFO]|[evolution]      bins: [0.25, 0.03375]
+[2023-08-09 17:32:50,295]|[INFO]|[my_map_elite] Generated run id: 8091732
+[2023-08-09 17:32:50,295]|[INFO]|[my_map_elite] Run folder: baseline\results\testing_WG\run8091732
+[2023-08-09 17:32:50,296]|[INFO]|[my_map_elite] Parallel: 4
+[2023-08-09 17:32:50,296]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': 'baseline/results/testing_WG',
+ 'batch_size': 10,
+ 'budget': 200,
+ 'descriptor_names': ['trajectory', 'white_gazing'],
+ 'fitness_name': 'brightness',
+ 'grid_size': 20,
+ 'id': 8091732,
+ 'initial_mutations': 2,
+ 'level': 0,
+ 'make_change_videos': False,
+ 'make_final_videos': 0,
+ 'numb_levels': 1,
+ 'overwrite': False,
+ 'robot_type': 0,
+ 'run_folder': 'baseline\\results\\testing_WG\\run8091732',
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 4,
+ 'tournament': 3,
+ 'verbosity': 1,
+ 'vision_h': 4,
+ 'vision_w': 4}
+[2023-08-09 17:32:50,309]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\baseline\results\testing_WG\run8091732\config.json
+[2023-08-09 17:32:50,324]|[INFO]|[evolution] Starting illumination!
+[2023-08-09 17:32:50,333]|[INFO]|[evolution] Level : 0
+[2023-08-09 17:32:56,632]|[WARNING]|[evaluator] Out-of-bounds value features,white_gazing: 0.05467000032843954 not in [0.075,0.75]
+alg_name  iteration cont_size evals     nb_updated     avg       std       min       max       ft_min              ft_max              qd_score  elapsed
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+8091732   0         4/400     10        5              [15.7047] [0.2302]  [15.5147] [16.0784] [-0.1772,0.0750]    [0.0008,0.1571]     0.57      9.39   
+[2023-08-09 17:33:00,984]|[WARNING]|[evaluator] Out-of-bounds value features,white_gazing: 0.05467000032843954 not in [0.075,0.75]
+[2023-08-09 17:33:03,556]|[WARNING]|[evaluator] Out-of-bounds value features,white_gazing: 0.05467000032843954 not in [0.075,0.75]
+8091732   1         5/400     10        1              [16.7516] [2.104]   [15.5147] [20.9395] [-0.1772,0.0750]    [0.6769,0.1571]     0.76      6.52   
+[2023-08-09 17:33:06,867]|[WARNING]|[evaluator] Out-of-bounds value features,white_gazing: 0.06677176733339903 not in [0.075,0.75]
+[2023-08-09 17:33:07,538]|[WARNING]|[evaluator] Out-of-bounds value features,white_gazing: 0.07316361217853974 not in [0.075,0.75]
+[2023-08-09 17:33:08,180]|[WARNING]|[evaluator] Out-of-bounds value features,white_gazing: 0.06972936578316422 not in [0.075,0.75]
+[2023-08-09 17:33:08,873]|[WARNING]|[evaluator] Out-of-bounds value features,white_gazing: 0.05467000032843954 not in [0.075,0.75]
+[2023-08-09 17:33:09,514]|[WARNING]|[evaluator] Out-of-bounds value features,white_gazing: 0.0610585607777449 not in [0.075,0.75]
+[2023-08-09 17:33:10,141]|[WARNING]|[evaluator] Out-of-bounds value features,white_gazing: 0.05998333169113533 not in [0.075,0.75]
+[2023-08-09 17:33:10,721]|[WARNING]|[evaluator] Out-of-bounds value features,white_gazing: 0.049735606135251395 not in [0.075,0.75]
+[2023-08-09 17:33:11,302]|[WARNING]|[evaluator] Out-of-bounds value features,white_gazing: 0.04493217722599926 not in [0.075,0.75]
+[2023-08-09 17:33:12,622]|[WARNING]|[evaluator] Out-of-bounds value features,white_gazing: 0.055593736657141894 not in [0.075,0.75]
+8091732   2         8/400     10        5              [17.2192] [2.055]   [15.5147] [20.9395] [-0.2985,0.0750]    [0.6769,0.1571]     1.25      6.36   

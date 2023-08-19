@@ -1,12 +1,15 @@
 import math
 import numpy as np
+import matplotlib.pyplot as plt
+from scipy.signal import find_peaks, savgol_filter
+from scipy.signal import periodogram
 from simulation.config import Config
 from simulation.my_scenario import Scenario, build_robot
 from simulation.runner import Runner, RunnerOptions, CallbackType
 from robot.vision import OpenGLVision
 from robot.genome import RVGenome
 from robot.control import ANNControl
-from utils import target_area_distance
+import utils 
 from evo_alg.my_map_elite import EvaluationResult
 from functools import lru_cache
 from typing import Dict, List, Tuple
@@ -14,6 +17,10 @@ from revolve2.core.physics.running import EnvironmentResults
 import logging
 import math
 import abrain
+from scipy.stats import mode
+from scipy.signal import medfilt
+
+
 logger = logging.getLogger(__name__)
 
 
@@ -78,6 +85,7 @@ class Evaluator:
             cls.actor_states.append(env_res.environment_states[i].actor_states)
         result.fitnesses = cls.fitness() 
         result.descriptors = cls._clip(cls.descriptors(), cls.descriptor_bounds(),"features")
+        #print( "Descriptors:",result.descriptors)
         return result
     
     @classmethod
@@ -188,32 +196,11 @@ class Evaluator:
                 avg = sum(view)/len(view)
                 x.append(avg)
                 #If an avg is 1, the view was fully white
-
-            '''full_white_views=0
-            if max(x)==1:
-                full_white_views = x.count(1)'''
-            #1-score = max(x)*75 + full_white_views + Evaluator.bonus
-
-            '''last_view = x[-1]'''
-            #2-score = max(x)*60 + last_view*30 + full_white_views + Evaluator.bonus
-
-            #Fitness (60 brightest + 30 last view)=90% if they see a full gaze, and one at the end. 
-            #Extra points for the amount of full whites they seen. Bonus for the time they saved 
-            
-            #3
             brightest_view=max(x)
             n=4
-            #Similar to the stop condition in Runner
             last_n_avgs = x[-n:]
             last_n_views_avg_brightness = sum(last_n_avgs)/len(last_n_avgs)
-           
-            score = brightest_view*90 + last_n_views_avg_brightness*10 + Evaluator.bonus
-
-            #If it gets at least one full white gaze : brightest_view=1 we get 60%
-            #If the last n views are fully white : we will get the other 40%, reaching 100% score!
-            #If they do that in less time, they get a time bonus!
-
-                    
+            score = brightest_view*80 + last_n_views_avg_brightness*20               
             return{"new": score }
         else:
             logger.warning(f"Invalid Fitness Function Name {Evaluator.fitness_function}")
@@ -223,7 +210,7 @@ class Evaluator:
     @classmethod
     @lru_cache(maxsize=1)
     def fitness_bounds(cls):
-        min_max = [0, 110]
+        min_max = [0, 100]
         return [tuple(min_max)]
 
     @staticmethod
@@ -239,15 +226,48 @@ class Evaluator:
     def descriptors() -> Dict[str, float]:
         descriptors = {}
         for i in range(2) :
-            if Evaluator.features[i] == "distance":
-                descriptors["distance"] = Evaluator.calculate_distance()
-            elif Evaluator.features[i] =="white_gazing":
-                descriptors["white_gazing"] = Evaluator.calculate_Avg_View()
+            
+            '''ANN Descriptors'''
+            if Evaluator.features[i] =="EdgePerNodeRatio":
+                e_n_ratio, axon = Evaluator.ann_descriptor()
+                descriptors["EdgePerNodeRatio"] = e_n_ratio
+
+            elif Evaluator.features[i] =="TotalEdgeSize":
+                e_n_ratio, axon = Evaluator.ann_descriptor()
+                descriptors["TotalEdgeSize"] = axon
+
+            elif Evaluator.features[i] =="AnnComplexity":
+                e_n_ratio, axon = Evaluator.ann_descriptor()
+                descriptors["AnnComplexity"] = axon * e_n_ratio
+
+            
+                '''Z coordinate Descriptors'''
+            elif Evaluator.features[i] =="estimated_mean_z":
+                kde_center, z_coords_with_max_density = Evaluator.get_Z_descriptors()
+                descriptors["estimated_mean_z"] = kde_center
+
+            elif Evaluator.features[i] =="max_density_z_coord":
+                kde_center, z_coords_with_max_density = Evaluator.get_Z_descriptors()
+                descriptors["max_density_z_coord"] = z_coords_with_max_density
+            
+            elif Evaluator.features[i] =="z_descriptor":
+                kde_center, z_coords_with_max_density = Evaluator.get_Z_descriptors()
+                descriptors["z_descriptor"] = (kde_center + z_coords_with_max_density)/2.0
+
+            elif Evaluator.features[i] =="z_oscilation_f":
+                descriptors["z_oscilation_f"] = Evaluator.calculate_z_oscilation_f()
+            
             elif Evaluator.features[i] =="avg_speed":
                 max_velocity, avg_speed = Evaluator.calculate_velocities()
                 descriptors["avg_speed"] = avg_speed
+            
+            
             elif Evaluator.features[i] =="trajectory":
                 descriptors["trajectory"] = Evaluator.trajectory_description()
+            elif Evaluator.features[i] == "distance":
+                descriptors["distance"] = Evaluator.calculate_distance()
+            elif Evaluator.features[i] =="white_gazing":
+                descriptors["white_gazing"] = Evaluator.calculate_Avg_View()
 
         #dir_changes = Evaluator.calculate_direction_changes()
         #covered_dist = Evaluator.calculate_covered_distance()
@@ -257,19 +277,31 @@ class Evaluator:
     def descriptor_bounds(cls):
         bounds=[]
         for i in range(2) :
-            if cls.features[i] == "distance":
-                distance_bounds = (0, 5.5)
-                bounds.append(distance_bounds)
-            elif cls.features[i] =="white_gazing":
-                white_gazing_bounds = [0.05, 0.4]
-                bounds.append(white_gazing_bounds)
-            elif cls.features[i] =="avg_speed":
-                avg_speed_bounds = [0.05, 0.6]
-                bounds.append(avg_speed_bounds)
-            elif cls.features[i] == "trajectory":
-                trajectory_bounds = [-2.5,2.5]
-                bounds.append(trajectory_bounds)
 
+            if cls.features[i] == "EdgePerNodeRatio":
+                #minimum 4 edges, condidering 32 nodes for gecko
+                bounds.append([0.1, 10])        
+            elif cls.features[i] == "estimated_mean_z":
+                bounds.append([0.03, 0.1])
+            elif cls.features[i] == "max_density_z_coord":
+                bounds.append([0.03, 0.1])
+            elif cls.features[i] == "z_descriptor":
+                bounds.append([0.025, 0.1])
+                
+
+            elif cls.features[i] == "z_oscilation_f":
+                bounds.append([0.01,10])
+
+            elif cls.features[i] =="avg_speed":
+                bounds.append([0.05, 0.6])
+
+
+            elif cls.features[i] == "distance":
+                bounds.append([0, 5.5])
+            elif cls.features[i] =="white_gazing":
+                bounds.append([0.05, 0.4])
+            elif cls.features[i] == "trajectory":
+                bounds.append([-2.5,2.5])
         max_velocity_bounds = (0, 2)
         dir_changes_bounds = (0, 100)
         covered_dist_bounds = (0, 6)
@@ -280,6 +312,24 @@ class Evaluator:
     def descriptor_names():
         return Evaluator.features
     
+    @staticmethod
+    def ann_descriptor():
+        #Total Length of the connections
+        ann: abrain.ANN =  Evaluator.get_ann()
+        stats : abrain.ANN.Stats= ann.stats()
+        neurons=0
+        for n in ann.neurons():
+            neurons+=1
+        if stats.edges != 0 and neurons!=0 :
+            ratio = stats.edges/neurons
+        else : ratio=0
+        #print("Edge to node Ratio", ratio)
+        #print("axons size ",stats.axons)
+
+        axon_node_ratio = stats.axons/neurons
+        return ratio , stats.axons
+        
+
     @staticmethod
     def calculate_distance():
         return float(((Evaluator.actor_states[-1].position[0] - Evaluator.actor_states[0].position[0]) ** 2 +
@@ -302,6 +352,66 @@ class Evaluator:
         average_velocity = sum(velocities) / len(velocities)
         max_velocity = max(velocities)
         return max_velocity, average_velocity
+    
+    
+    def get_Z_descriptors():
+        from scipy.stats import gaussian_kde
+        positions = [state.position for state in Evaluator.actor_states]
+        # Get the z coordinates from the positions list
+        z_coords = [pos[2] for pos in positions]        
+        '''plt.figure(figsize=(15, 5))
+        plt.plot(z_coords)
+        plt.xlabel('Time (s)')
+        plt.ylabel('Z coordinate')
+        plt.legend(['Original', 'Smoothed'])
+        plt.show()'''
+        # Perform kernel density estimation
+        kde = gaussian_kde(z_coords)
+        # Evaluate the KDE on a grid of values
+        grid = np.linspace(min(z_coords), max(z_coords), 1000)
+        density_values = kde(grid)
+        kde_center = np.sum(grid * density_values) / np.sum(density_values)
+        # Find the z-coordinates with the maximum density
+        z_coords_with_max_density = grid[np.argmax(density_values)]
+        #print("Z Coordinates with Maximum Density:", z_coords_with_max_density)
+        
+        
+        #print("kde_center", kde_center)
+        #print("Mean" ,np.mean(z_coords))
+        #print("Median", np.median(z_coords))
+
+        '''# Create a kernel density estimate (KDE) plot
+        plt.figure(figsize=(10, 6))
+        plt.hist(z_coords, bins=50, density=True, alpha=0.3, color='blue')
+        plt.plot(np.linspace(min(z_coords), max(z_coords), 100), 
+                np.exp(-0.5 * ((np.linspace(min(z_coords), max(z_coords), 100) - np.mean(z_coords)) / np.std(z_coords))**2) / (np.std(z_coords) * np.sqrt(2 * np.pi)), 
+                color='red', linewidth=2)
+        plt.title('Kernel Density Estimate of Z Coordinates')
+        plt.xlabel('Z Coordinate')
+        plt.xlim(0,0.3)
+        plt.ylabel('Density')
+        plt.grid(True)
+        plt.show()'''
+
+
+        return kde_center, z_coords_with_max_density
+
+        
+
+    @staticmethod
+    def calculate_z_oscilation_f():
+
+        Evaluator.calculate_amplitudes()
+
+        positions = [state.position for state in Evaluator.actor_states]
+        # Get the z coordinates from the positions list
+        z_coords = [pos[2] for pos in positions]
+        freqs, power = periodogram(z_coords, Config.sampling_frequency)
+        predominant_freq = freqs[np.argmax(power)]
+        #print(f'The predominant frequency is {predominant_freq:.2f} Hz')
+        
+        return predominant_freq
+
     
    
     
@@ -423,14 +533,14 @@ class Evaluator:
         
         return total_distance
     
-    @staticmethod
+    ''' @staticmethod
     def fitness2() -> Dict[str, float]:
         #Final distance to the square area 
         di = target_area_distance(Evaluator.actor_states[0].position, Evaluator.target_position, Evaluator.target_size)
         df = target_area_distance(Evaluator.actor_states[-1].position, Evaluator.target_position, Evaluator.target_size)
         closeness_score = 100 - (df * 100) / di
         score = closeness_score + Evaluator.bonus
-        return {"closeness": score}
+        return {"closeness": score}'''
     
 
 

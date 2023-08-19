@@ -5,6 +5,10 @@ import glob
 import pandas as pd
 from pathlib import Path
 import random
+import matplotlib.pyplot as plt
+from scipy.signal import find_peaks
+import numpy as np
+
 from abrain import plotly_render
 from simulation.evaluator import Evaluator
 from simulation.runner import RunnerOptions
@@ -54,7 +58,8 @@ def rerun(g : RVGenome, options, save_path=None, view=False, record=False, ANN_d
     e.set_runner_options(r)
     e.set_options(options['descriptor_names'],options['fitness_name'], options['robot_type'], options['vision_w'],options['vision_h'], options['level'])
     result = e.evaluate_rerun(g)
-
+    e.ann_descriptor()
+    
     if ANN_display and save_path is not None:
         os.makedirs(f'{save_path}/ANNs', exist_ok=True) 
         plotly_render(e.get_ann()).write_html(f'{save_path}/ANNs/{g.id()}.html')
@@ -70,13 +75,12 @@ def get_genealogical_trees(run_path):
     with open(Path(run_path).joinpath("son_father_pairs.json"), "r") as file:
         fam_list = json.load(file)
 
-    final_level = (int(options['level'])+int(options['numb_levels']))-1
-    #Get Final Grid
-    grid = pd.read_csv(f"{run_path}/{final_level}/final_grid.csv")
-    final_ids = grid['id'].tolist()
-    
-    create_genealogy_tree(fam_list, f'{run_path}/genealogical_trees')
-    final_grid_ancestry(fam_list, final_ids, f'{run_path}/success_tree')
+    #level = (int(options['level'])+int(options['numb_levels']))-1
+    for level in range(int(options['level']),int(options['level'])+int(options['numb_levels'])):
+        #Get Final Grid
+        grid = pd.read_csv(f"{run_path}/{level}/final_grid.csv")
+        final_ids = grid['id'].tolist()
+        final_grid_ancestry(fam_list, final_ids, f'{run_path}/{level}/success_tree')
     
 
 
@@ -85,7 +89,7 @@ def run_random_genome(name, view=False ):
     rng = random.Random()
     rng.seed(100)
     r = RunnerOptions()
-    r.level=0
+    r.level=8
     #r.return_ann=True
     if view:
         r.view=RunnerOptions.View()
@@ -98,46 +102,45 @@ def run_random_genome(name, view=False ):
     g = RVGenome.random(rng, GIDManager())
     #result = e.evaluate_rerun(g)
     result = e.evaluate_rerun(g)
-    #plotly_render(e.get_ann(g)).write_html(f'ANN_{name}.html')
     print("result", result)
 
+    
 
+    
 def main():
     
-    run_path = 'C:/Users/anton/Desktop/Thesis_Project/Baseline/baseline/results/test-g2/run8131843'
-    get_genealogical_trees(run_path)
+    '''run_random_genome('', view=True)
+    exit()'''
 
-
-
-    #for r in range(10):
-    run_random_genome('' )
-    exit()
-    run = 'run8032023'
-    run_path = f'C:/Users/anton/Desktop/Thesis_Project/Baseline/baseline/results/Default/{run}'
-    #make_videos_before_after(run_path)
-    #make_final_videos(run_path)
-    #exit()
+    run_path = f'C:/Users/anton/Desktop/Thesis_Project/Baseline/baseline/results/run8162309'
+    
     with open(f"{run_path}/config.json", "rb") as f:
         data = json.load(f)
         options = data["evolution"]
 
-    
+    final_grid = pd.read_csv(f"{run_path}/3/final_grid.csv")
+    #print(RVGenome.from_json(eval(final_grid['genome'].iloc[0])))
+    for i in range(1,4):
+        g = RVGenome.from_json(eval(final_grid['genome'].iloc[i]))
+        rerun(g, options, view=False)
+        g = RVGenome.from_json(eval(final_grid['genome'].iloc[-i]))
+        rerun(g, options, view=False)
 
-    level=options['level']
-    run_path=f'{run_path}/{level}'
-    final_grid = pd.read_csv(f"{run_path}/final_grid.csv")
+    #level=options['level']
+    #run_path=f'{run_path}/{level}'
+    #final_grid = pd.read_csv(f"{run_path}/final_grid.csv")
     #final_grid = pd.read_csv(f"baseline/src/final_grid.csv")
     # Extract 'trajectory' and 'white_gazing' columns from the 'descriptors' dictionary
-    final_grid[['trajectory', 'white_gazing']] = final_grid['descriptors'].apply(lambda x: pd.Series(eval(x)))
+    #final_grid[['trajectory', 'white_gazing']] = final_grid['descriptors'].apply(lambda x: pd.Series(eval(x)))
     # Drop the 'descriptors' column
-    final_grid = final_grid.drop('descriptors', axis=1)    
+    #final_grid = final_grid.drop('descriptors', axis=1)    
 
-    successful = final_grid[final_grid['fitnesses'] > 5]
+    #successful = final_grid[final_grid['fitnesses'] > 5]
     #print(successful)
     
     #for i in range(len(successful)):
-    g = RVGenome.from_json(eval(successful['genome'].iloc[0]))
-    rerun(g, options, save_path=run_path, view=True)
+    #g = RVGenome.from_json(eval(successful['genome'].iloc[0]))
+    #rerun(g, options, view=True)
 
 
     '''# Sort by 'white_gazing' column in descending order

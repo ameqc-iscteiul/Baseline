@@ -18,7 +18,7 @@ from robot.genome import RVGenome
 from simulation.config import Config
 from simulation.evaluator import Evaluator
 from simulation.runner import RunnerOptions
-from rerun_best import make_videos
+from Grid_Analyser import analyse_Experiment
 
 
 class Options:
@@ -34,7 +34,7 @@ class Options:
         self.seed: int = 100        
 
         self.batch_size: int = 20
-        self.threads: int = self.batch_size
+        self.threads: int = 1
         self.budget: int = 100
 
         self.tournament: int = 3
@@ -57,7 +57,6 @@ class Options:
         self.vision_h: int 
         self.robot_type : int = 0
 
-        self.make_change_videos=False
         self.make_final_videos=False
 
 
@@ -83,9 +82,9 @@ def change_level(algo, evaluator, args, logger):
         r: EvaluationResult = evaluator.evaluate(individual.genome)
         updates.append((individual, r))
     algo.update_grid(updates)
-
-    logger.summary_plots(extraname=f'_{args.level}_beginning')
-    save_grid(algo.container, f'{args.run_folder}/{args.level}', 'initial') 
+    '''Plots'''
+    #logger.summary_plots(extraname=f'_{args.level}_beginning')
+    #save_grid(algo.container, f'{args.run_folder}/{args.level}', 'initial') 
     return algo, evaluator, args
 
 
@@ -160,10 +159,8 @@ def evolution (args : Options()):
                 if l>0: algo, evaluator, args = change_level(algo, evaluator, args, logger)
                 logging.info(f"Level : {args.level}")
                 best = algo.optimise(evaluate=partial(eval_mujoco, evaluator = evaluator, options = args), budget=budget_per_level, executor=mgr.executor,batch_mode=True)
-                #Save final grid/plots from this level
                 logging.info(f"Level {args.level} finished. Saving Final Grid & Plots ...")
-                logger.summary_plots(extraname=f'_{args.level}_end')
-                save_grid(algo.container, f'{args.run_folder}/{args.level}','final')    
+                save_results(algo, args, logger)  
     
     elif platform.system() == "Windows":
         budget_per_level = int(args.budget/args.numb_levels)
@@ -171,43 +168,35 @@ def evolution (args : Options()):
             if l>0: algo, evaluator, args = change_level(algo, evaluator, args, logger)
             logging.info(f"Level : {args.level}")
             best = algo.optimise(evaluate=partial(eval_mujoco, evaluator = evaluator, options = args), budget=budget_per_level,batch_mode=True)
-            #Save final grid/plots from this level
             logging.info(f"Level {args.level} finished. Saving Final Grid & Plots ...")
-            logger.summary_plots(extraname=f'_{args.level}_end')
-            save_grid(algo.container, f'{args.run_folder}/{args.level}','final')        
+            save_results(algo, args, logger)   
     else:
         print("ERROR: Unknown operating system")
-
-     
     
-    '''history = pd.DataFrame(algo.history)
-    history.to_csv(Path(args.run_folder).joinpath("history.csv"), index=False)'''
-
-    # Save the genealogical tree dictionary as a JSON file
-    
-    with open(Path(args.run_folder).joinpath("son_father_pairs.json"), "w") as file:
-        json.dump(algo.genealogical_info, file)
-
-    #problems in Linux with the graphs
-    '''final_ids=[]
-    for _, element in enumerate(grid):
-        final_ids.append(element.id())
-    
-    create_genealogy_tree(algo.genealogical_info, f'{args.run_folder}/genealogical_trees')
-    final_grid_ancestry(algo.genealogical_info,final_ids, f'{args.run_folder}/success_tree')'''
-    
-    
-      
     # Print results info
     logging.info(algo.summary())
     # Plot the results
-    logger.summary_plots(extraname='final')
     logging.info(f"All results are available under {logger.log_base_path}")
     logging.info(f"Unified storage file is {logger.log_base_path}/{logger.final_filename}")
+
     duration = humanize.precisedelta(timedelta(seconds=time.perf_counter() - start))
     logging.info(f"Completed evolution in {duration}")
    
     logging.info(f"Generating Videos...")
-    #if args.make_change_videos: make_videos_before_after(args.run_folder)
-    if args.make_final_videos: make_videos(args.run_folder)
+    if args.make_final_videos: analyse_Experiment(args.run_folder)
     logging.info(f"DONE !")
+
+
+def save_results(algo, args, logger):
+    #Save final grid, plots, and genealogic_list from this level
+    save_path = f'{args.run_folder}/{args.level}'
+
+    '''Plots'''
+    logger.level_summary(save_path)
+
+    '''Grid'''
+    save_grid(algo.container,save_path,'final')
+
+    '''Tree'''
+    with open(Path(f"{args.run_folder}/{args.level}/son_father_pairs.json"), "w") as file:
+        json.dump(algo.genealogical_info, file)

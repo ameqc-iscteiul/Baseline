@@ -2,9 +2,10 @@
 from evolution import evolution, Options
 
 
-def run_experiment(result_folder_name, batch_size, budget_size, features, fitness, numb_levels, init_level, robot_type, grid_size, make_final_videos):
+def run_experiment(result_folder_name, batch_size, budget_size, features, fitness, numb_levels, init_level, robot_type, grid_size, make_final_videos, init_mut, threads):
     o = Options()
     o.base_folder = result_folder_name
+    o.threads=threads
     o.batch_size = batch_size
     o.budget = budget_size
     o.robot_type = robot_type
@@ -17,8 +18,8 @@ def run_experiment(result_folder_name, batch_size, budget_size, features, fitnes
     o.initial_mutations = 2
     o.vision_w = 4
     o.vision_h = 4
-    o.make_change_videos=False
     o.make_final_videos=make_final_videos
+    o.initial_mutations=init_mut
     evolution(o)
 
 
@@ -38,36 +39,39 @@ def get_user_input(prompt, default=None, input_type=str):
 
 
 def main():
-   print("Start")
-   folder_name = get_user_input("Enter result folder name:   ", "Default")
-   result_folder_name = f'baseline/results/{folder_name}'
-   batch_size = get_user_input("Enter batch size:   ", 10, int)
-   budget_size = get_user_input("Enter budget size:   ", 100, int)
-   print("[distance,white_gazing]","or","[trajectory,white_gazing]")
-   feature = get_user_input("Enter feature number: 1-Distance & White Gazing or 2-Trajectory & White Gazing :   ", 1, int)
-   if feature == 1:
-       features = ['distance','white_gazing']
-   elif feature == 2:
-       features = ['trajectory','white_gazing']
-   fitness = get_user_input("Enter fitness number: 1-Brightness || 2-Stareness || 3-new fitness || 4 - amount_of_white || 5-new:   ", 5, int)
-   if fitness == 1:
-       fitness = 'brightness'
-   elif fitness == 2:
-       fitness = 'stareness'
-   elif fitness == 3:
-       fitness = 'new_fitness'
-   elif fitness == 4:
-       fitness = 'count_white_pixels'
-   elif fitness == 5:
+    print("Start")
+    folder_name = get_user_input("Enter result folder name:   ", "Default")
+    result_folder_name = f'baseline/results/{folder_name}'
+    threads = get_user_input("Enter number of threaths:   ", 10, int)
+
+    batch_size = get_user_input("Enter batch size:   ", 10, int)
+    budget_size = get_user_input("Enter budget size:   ", 100, int)
+
+    feature = get_user_input("BD Pair: 1-EdgePerNodeRatio & Z_Mean | 2-EdgePerNodeRatio & max_density_z_coord  | 3- EdgePerNodeRatio & z_descriptor | 4- Trajectory & WG :  ", 1, int)
+    if feature == 1:
+        features = ['EdgePerNodeRatio','estimated_mean_z']
+    elif feature == 2:
+        features = ['EdgePerNodeRatio','max_density_z_coord']
+    elif feature == 3:
+        features = ['EdgePerNodeRatio','z_descriptor']
+    elif feature == 4:
+        features = ['trajectory','white_gazing']
+
+
+    fitness = get_user_input("Enter fitness number: 1- Official_Fitness || 2-Brightness :  ", 1, int)
+    if fitness == 1:
         fitness = 'new'
+    elif fitness == 2:
+        fitness = 'brightness'
 
+    init_mut= get_user_input("Initial Mutations: ", 2, int)
 
-   numb_levels = get_user_input("Enter number of levels:   ", 1, int)
-   init_level = get_user_input("Enter initial level:   ", 0, int)
-   robot_type = get_user_input("Enter Robot type: 0-Default or 1-Gecko:   ", 0, int) 
-   grid_size = get_user_input("Enter Grid size:   ", 20, int) 
-   make_final_videos=get_user_input("Make videos: 0-No : 1-Yes:   ", 0, bool) 
-   run_experiment(result_folder_name, batch_size, budget_size, features, fitness,numb_levels, init_level, robot_type, grid_size, make_final_videos)
+    numb_levels = get_user_input("Enter number of levels:   ", 1, int)
+    init_level = get_user_input("Enter initial level:   ", 0, int)
+    robot_type = get_user_input("Enter Robot type: 0-Default or 1-Gecko:   ", 0, int) 
+    grid_size = get_user_input("Enter Grid size:   ", 20, int) 
+    make_final_videos=get_user_input("Make videos: 0-No : 1-Yes:   ", 0, bool) 
+    run_experiment(result_folder_name, batch_size, budget_size, features, fitness,numb_levels, init_level, robot_type, grid_size, make_final_videos, init_mut, threads)
 
 
 if __name__ == '__main__':

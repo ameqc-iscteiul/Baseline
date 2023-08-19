@@ -124,7 +124,7 @@ class Scenario:
             "geom",
             type="box",
             pos=Scenario.target_pos,
-            size=f"{str(Scenario.target_size)} {str(Scenario.target_size)} 0.75",
+            size=f"{str(Scenario.target_size)} {str(Scenario.target_size)} 2",
             rgba="255 255 255 1"
         )
 
@@ -199,15 +199,19 @@ class Scenario:
 
             return xml
         
-        '''if options.level==0:
-            #xml  = generate_mountain(xml,'0 0 0',0.9,0.6,0.03, 4)
-            #xml  = generate_mountain(xml,'0 -0.8 0',0.9,0.6,0.03, 4)
-            xml  = generate_mountain(xml,'0 0 0',0.9,0.6,0.03, 4)
-            xml = create_obstacle_grid(xml, [-1.6,0,0], 1, 2, 0.04, 0.8)
-            xml = create_obstacle_grid(xml, [-0.8,0,0], 1, 3, 0.05, 0.8)
-            xml = create_obstacle_grid(xml, [0,0,0], 1, 4, 0.06, 0.8)
-            xml = create_obstacle_grid(xml, [0.8,0,0], 1, 5, 0.08, 0.8)
-            xml = create_obstacle_grid(xml, [1.6,0,0], 1, 6, 0.09, 0.8)'''
+        def generate_deception(xml):
+            
+            xml = insert_rectangle(xml, '1.6 0 0', 0.08, 0.08, 0.4)
+            xml = insert_rectangle(xml, '1.4 0.2 0', 0.08, 0.08, 0.4)
+            xml = insert_rectangle(xml, '1.4 -0.2 0', 0.08, 0.08, 0.4)
+            xml = insert_rectangle(xml, '1.2 0.4 0', 0.08, 0.08, 0.4)
+            xml = insert_rectangle(xml, '1.2 -0.4 0', 0.08, 0.08, 0.4)
+            xml = insert_rectangle(xml, '1 0.6 0', 0.08, 0.08, 0.4)
+            xml = insert_rectangle(xml, '1 -0.6 0', 0.08, 0.08, 0.4)
+            return xml
+        
+
+
 
         if options.level==1:
             xml = create_obstacle_grid(xml, [0,0,0], 1, 3, 0.05, 0.8)
@@ -235,8 +239,20 @@ class Scenario:
 
         if options.level==7:
             xml  = generate_mountain(xml,'0 0 0',1,1,0.03, 4)
+            xml  = generate_mountain(xml,'0 -0.8 0',0.9,0.6,0.02, 6)
+            xml  = generate_mountain(xml,'0 0.8 0',0.9,0.6,0.02, 6)
+        
+        if options.level==8:
+            xml = generate_deception(xml)
+
+            xml  = generate_mountain(xml,'0 0 0',1,1,0.03, 4)
             xml  = generate_mountain(xml,'0 -0.8 0',0.9,0.6,0.03, 6)
             xml  = generate_mountain(xml,'0 0.8 0',0.9,0.6,0.03, 6)
+
+            xml = create_obstacle_grid(xml, [-10,0,0], 9, 9, 0.03, 0.2)
+
+
+
         else:
             pass
 

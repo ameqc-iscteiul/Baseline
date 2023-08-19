@@ -119,7 +119,7 @@ class ANNControl:
             }
             for i, did in enumerate(dof_ids):
                     p = hinges_map[did]
-                    ip = Point(p[1], -0.9, p[0])
+                    ip = Point(p[1], -0.8, p[0])
                     inputs.append(ip)
                     op = Point(p[1], 1, p[0])
                     outputs.append(op)

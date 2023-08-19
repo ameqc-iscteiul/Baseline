@@ -166,10 +166,7 @@ class Algorithm(Evolution):
         np.random.seed(options.seed % (2**32-1))
 
         self.id_manager = GIDManager()
-
-        self.history=[]
         self.genealogical_info=[]
-        self.node={}
 
         def select(grid):
             #return self.rng.choice(grid)
@@ -188,17 +185,12 @@ class Algorithm(Evolution):
             genome = RVGenome.random(self.rng, self.id_manager)
             for _ in range(options.initial_mutations):
                 genome.mutate(self.rng)
-            #print("initial indi", QDIndividual(genome))
+            #print("genome.id()",genome.id())
             return QDIndividual(genome)
 
         def vary(parent):
             child = QDIndividual(parent.genome.mutated(self.rng, self.id_manager))
             self.genealogical_info.append((child.id(), parent.id()))
-            '''#Save every child 
-            if parent.id() not in self.history:
-                self.history.append(parent.id())
-            self.history.append(child.id())'''
-
             self._curiosity_lut[child.id()] = self.container.index_grid(parent.features)
             return child
 
@@ -231,6 +223,7 @@ class Algorithm(Evolution):
     
     def update_grid(self, updates):
         #Remove old
+        self.genealogical_info=[]
         self.container.empty()
         #Add new
         for ind, r in updates:
@@ -295,12 +288,21 @@ class Logger(algorithms.TQDMAlgorithmLogger):
     def _tell(self, algo: QDAlgorithmLike, ind: IndividualLike) -> None:
         super()._tell(algo, ind)
 
-    def summary_plots(self, extraname: Optional[str] ,**kwargs):
+    def summary_plots(self,**kwargs):
         summary_plots(evals=self.evals, iterations=self.iterations,
                       grid=self.algorithms[0].container,
                       labels=self.algorithms[0].labels,
-                      output_dir=self.log_base_path, name=Path(self.final_filename).stem+extraname,
+                      output_dir=self.log_base_path,
+                      name=Path(self.final_filename).stem,
                       **kwargs)
+        
+    def level_summary(self,output_dir,**kwargs):
+        level_summary(evals=self.evals, iterations=self.iterations,
+                      grid=self.algorithms[0].container,
+                      labels=self.algorithms[0].labels,
+                      output_dir=output_dir,
+                      **kwargs)
+        
 
 
 def plot_grid(data, filename, xy_range, cb_range, labels, fig_size, cmap="inferno",
@@ -375,6 +377,30 @@ def summary_plots(evals: pd.DataFrame, iterations: pd.DataFrame, grid: Grid,
                    figsize=fig_size)
         plot_iterations(iterations["nb_updated"], path("container_updates"), ylabel="Number of updated bins",
                         figsize=fig_size)
+    
+    for filename, cb_label, data, bounds in [
+        ("grid_fitness", labels[0], grid.quality_array[..., 0], grid.fitness_domain[0]),
+        #("grid_activity", "activity", grid.activity_per_bin, (0, np.max(grid.activity_per_bin))),
+        #("grid_curiosity", "curiosity", grid.curiosity, "equal")
+    ]:
+        plot_path = path(filename)
+        plot_grid(data=data, filename=plot_path,
+                  xy_range=grid.features_domain, cb_range=bounds, labels=[cb_label, *labels[1:]],
+                  fig_size=fig_size, nb_ticks=ticks)
+                  
+def level_summary(evals: pd.DataFrame, iterations: pd.DataFrame, grid: Grid,
+                  output_dir: Path, labels, ext="png", fig_size=(4, 4), ticks=5):
+
+    output_path = Path(output_dir)
+    def path(filename): return output_path.joinpath(f"{filename}.{ext}")
+    output_path.mkdir(exist_ok=True)
+
+    plot_evals(evals["max0"], path("fitness_max"), ylabel="Fitness", figsize=fig_size)
+    ylim_contsize = (0, len(grid)) if np.isinf(grid.capacity) else (0, grid.capacity)
+    plot_evals(evals["cont_size"], path("container_size"), ylim=ylim_contsize, ylabel="Container size",
+                figsize=fig_size)
+    plot_iterations(iterations["nb_updated"], path("container_updates"), ylabel="Number of updated bins",
+                    figsize=fig_size)
     
     for filename, cb_label, data, bounds in [
         ("grid_fitness", labels[0], grid.quality_array[..., 0], grid.fitness_domain[0]),

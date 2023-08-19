@@ -1,6 +1,7 @@
 import math
 import os
 from pathlib import Path
+import numpy as np
 import pandas as pd
 from abrain import Point
 import matplotlib.pyplot as plt
@@ -39,15 +40,6 @@ def create_genealogy_tree(pairs: list, save_path: str):
     # Create a NodeStyle object to customize the node appearance
     ns = NodeStyle()
     ns['size'] = 10
-    
-    '''# Render each tree and save it as a separate image
-    for i, root in enumerate(roots):
-        # Apply the NodeStyle to all nodes in the tree
-        for n in root.traverse():
-            n.set_style(ns)
-        
-        # Render the tree and save it as an image
-        root.render(f'{save_path}lineage_{i}.png', tree_style=ts)'''
 
     # Render each tree and save it as a separate image
     for i, root in enumerate(roots):
@@ -58,6 +50,13 @@ def create_genealogy_tree(pairs: list, save_path: str):
         
         # Render the tree and save it as an image
         root.render(f'{save_path}lineage_{i}.png', tree_style=ts)
+
+def center_and_normalize(signal):
+    # Center the signal by subtracting its mean
+    centered_signal = signal - np.mean(signal)
+    # Normalize the centered signal by dividing by its standard deviation
+    normalized_signal = centered_signal / np.std(centered_signal)
+    return normalized_signal
 
 def final_grid_ancestry(pairs: list, final_ids ,filename: str):
     # Create a dictionary to store the parent of each child
@@ -107,7 +106,7 @@ def save_grid(grid, run_folder, name):
     plt.ylabel('Fitness')
     plt.xlabel('Individuals')
     # Save the plot to the specified file
-    plt.savefig(Path(run_folder).joinpath(f"{name}_fit_BoxPlot.png"))
+    plt.savefig(Path(run_folder).joinpath(f"{name}_BoxPlot.png"))
 
 
 def target_area_distance(position, target_position, target_side_len):

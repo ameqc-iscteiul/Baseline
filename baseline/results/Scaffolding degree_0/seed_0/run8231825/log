@@ -1,0 +1,39 @@
+[2023-08-23 18:25:33,453]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-08-23 18:25:33,454]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-08-23 18:25:33,454]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-08-23 18:25:33,455]|[INFO]|[evolution] Grid size: (10, 10)
+[2023-08-23 18:25:33,456]|[INFO]|[evolution]    bounds: [[4, 100], [0.04, 0.16]]
+[2023-08-23 18:25:33,456]|[INFO]|[evolution]      bins: [9.6, 0.012]
+[2023-08-23 18:25:33,456]|[INFO]|[my_map_elite] Generated run id: 8231825
+[2023-08-23 18:25:33,457]|[INFO]|[my_map_elite] Run folder: baseline\results\Scaffolding degree_0\seed_0\run8231825
+[2023-08-23 18:25:33,457]|[INFO]|[my_map_elite] Parallel: 4
+[2023-08-23 18:25:33,457]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': 'baseline/results/Scaffolding degree_0/seed_0',
+ 'batch_size': 10,
+ 'budget': 50,
+ 'descriptor_names': ['complexity', 'z_descriptor'],
+ 'fitness_name': 'new',
+ 'grid_size': 10,
+ 'id': 8231825,
+ 'initial_mutations': 2,
+ 'level': 0,
+ 'make_final_videos': False,
+ 'numb_levels': 1,
+ 'overwrite': False,
+ 'robot_type': 0,
+ 'run_folder': 'baseline\\results\\Scaffolding degree_0\\seed_0\\run8231825',
+ 'seed': 0,
+ 'snapshots': 10,
+ 'threads': 4,
+ 'tournament': 3,
+ 'verbosity': 1,
+ 'vision_h': 4,
+ 'vision_w': 4}
+[2023-08-23 18:25:33,463]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\baseline\results\Scaffolding degree_0\seed_0\run8231825\config.json
+[2023-08-23 18:25:33,464]|[INFO]|[evolution] Starting illumination!
+[2023-08-23 18:25:33,464]|[INFO]|[evolution] Level : 0
+Peaks type:  <class 'numpy.ndarray'>
+Peaks:  [ 58  98 102 156 214 326 377 425 443 472 504 523 548 580 619 647 674 702]
+first peak: [0.06350878 0.03731086 0.0383315  0.03693864 0.04011195 0.04117707
+ 0.04255314 0.04246557 0.04225628 0.03807562 0.05781599 0.03695899
+ 0.04935835 0.06525265 0.04240297 0.03959144 0.04359036 0.03770453]

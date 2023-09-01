@@ -1,0 +1,47 @@
+[2023-08-22 18:43:45,652]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-08-22 18:43:45,652]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-08-22 18:43:45,652]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-08-22 18:43:45,652]|[INFO]|[evolution] Grid size: (16, 16)
+[2023-08-22 18:43:45,652]|[INFO]|[evolution]    bounds: [[0.15, 8.5], [0.04, 0.16]]
+[2023-08-22 18:43:45,652]|[INFO]|[evolution]      bins: [0.521875, 0.0075]
+[2023-08-22 18:43:45,652]|[INFO]|[my_map_elite] Generated run id: 8221843
+[2023-08-22 18:43:45,652]|[INFO]|[my_map_elite] Run folder: baseline\results\Default\run8221843
+[2023-08-22 18:43:45,652]|[INFO]|[my_map_elite] Parallel: 4
+[2023-08-22 18:43:45,652]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': 'baseline/results/Default',
+ 'batch_size': 10,
+ 'budget': 40,
+ 'descriptor_names': ['EdgePerNodeRatio', 'estimated_mean_z'],
+ 'fitness_name': 'new',
+ 'grid_size': 16,
+ 'id': 8221843,
+ 'initial_mutations': 2,
+ 'level': 0,
+ 'make_final_videos': 0,
+ 'numb_levels': 1,
+ 'overwrite': False,
+ 'robot_type': 0,
+ 'run_folder': 'baseline\\results\\Default\\run8221843',
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 4,
+ 'tournament': 3,
+ 'verbosity': 1,
+ 'vision_h': 4,
+ 'vision_w': 4}
+[2023-08-22 18:43:45,669]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\baseline\results\Default\run8221843\config.json
+[2023-08-22 18:43:45,670]|[INFO]|[evolution] Starting illumination!
+[2023-08-22 18:43:45,670]|[INFO]|[evolution] Level : 0
+[2023-08-22 18:43:47,841]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.03010320326598294 not in [0.04,0.16]
+[2023-08-22 18:43:49,368]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.03154009638632458 not in [0.04,0.16]
+[2023-08-22 18:43:51,107]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:43:51,107]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:43:52,849]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:43:54,433]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.0301112645782289 not in [0.04,0.16]
+[2023-08-22 18:43:57,694]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:43:57,694]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:43:59,419]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:43:59,419]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:44:00,956]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030097355920972454 not in [0.04,0.16]
+[2023-08-22 18:44:02,743]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:44:02,743]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]

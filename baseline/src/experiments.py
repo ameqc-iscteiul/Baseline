@@ -1,67 +1,100 @@
 #!/usr/bin/env python3
+import pickle
 from evolution import evolution, Options
+from replicates_experiment import plot_seed_results
+import matplotlib.pyplot as plt
 
+def run_experiment(result_folder_name, batch_size, budget_size, features, fitness, numb_levels, init_level, robot_type, grid_size, make_final_videos, init_mut, threads):
+    o = Options()
 
-def run_experiment(result_folder_name, batch_size, budget_size, features, w, h, numb_levels, init_level):
-   o=Options()
-   o.base_folder=result_folder_name
-   o.batch_size=batch_size
-   o.budget=budget_size
-   o.tournament = 3
-   o.initial_mutations = 2
-   o.grid_size = 16
-   o.vision_w=w
-   o.vision_h=h
-   o.numb_levels=numb_levels
-   o.level=init_level
-   o.descriptor_names=features
+    o.base_folder = result_folder_name
 
-   evolution(o)
+    o.threads = threads
+    o.batch_size = batch_size
+    o.budget = budget_size
+
+    o.numb_levels = numb_levels
+    o.level = init_level
+
+    o.grid_size = grid_size
+    o.tournament = 3
+    o.descriptor_names = features
+    o.fitness_name = fitness
+    
+    o.robot_type = robot_type
+    o.initial_mutations = init_mut
+    o.vision_w = 4
+    o.vision_h = 4
+
+    o.make_final_videos = make_final_videos
+
+    return evolution(o)
+
+def plot_comparative_results(values_list, names, save_path, y_label):
+   plt.figure(figsize=(10, 6))
+   for i, values in enumerate(values_list):
+      plt.plot(values, label=f"Experiment {names[i]}")
+   plt.xlabel('Evaluations')
+   plt.ylabel(y_label)
+   plt.title(f'{y_label} Across Replicates')
+   plt.grid(True)
+   plt.legend()
+
+   plt.savefig(f'{save_path}/{y_label}_plot.png')
 
 def main():
-   print("Start")
+   result_folder_name = f'baseline/results/Comparing_Experiments4/'
+   threads=25
+   batch_size=25
+   budget_size=200000
+   numb_levels = 1
+   init_level = 6
+   robot_type = 1
+   grid_size =  16
 
-   w,h = 4,4
-   #Only on harder
-   run_experiment(f"baseline/Experiment_Dist_Gaze/{w}X{h}_only_level_3", 20, 4000, ["distance", "white_gazing"], w,h, 1, 3)
-   run_experiment(f"baseline/Experiment_Traj_Gaze/{w}X{h}_only_level_3", 20, 4000, ["trajectory", "white_gazing"], w,h, 1, 3)
-   #Increase from 0 to 3
-   run_experiment(f"baseline/Experiment_Dist_Gaze/{w}X{h}_0_to_3", 20, 4000, ["distance", "white_gazing"], w,h, 4, 0)
-   run_experiment(f"baseline/Experiment_Traj_Gaze/{w}X{h}_0_to_3", 20, 4000, ["trajectory", "white_gazing"], w,h, 4, 0)
+   avgs=[]
+   maxs=[]
+   QDs=[]
+   stats = run_experiment(f'{result_folder_name}/E_Z_peaks_Avg-G-0-6mut', batch_size, budget_size, ['edges','z_peaks_avg'], 'new', numb_levels, init_level, robot_type, grid_size, True, 3, threads)
+   avgs.append(stats['Avg'].tolist())
+   maxs.append(stats['Max'].tolist())
+   QDs.append(stats['QDs'].tolist())
 
-   run_experiment(f"baseline/Experiment_Dist_Gaze/{w}X{h}_climb_ramp", 20, 6000, ["distance", "white_gazing"], w,h, 3, 4)
+   '''stats = run_experiment(f'{result_folder_name}/E_Z_peaks_Avg-G-0-6mut', batch_size, budget_size, ['edges','z_descriptor'], 'new', numb_levels, init_level, robot_type, grid_size, True, 3, threads)
+   avgs.append(stats['Avg'].tolist())
+   maxs.append(stats['Max'].tolist())
+   QDs.append(stats['QDs'].tolist())'''
 
    
-  
 
-   '''w=2
-   h=2
-   run_experiment(f"./new_Experiment_1Results_{w}X{h}", 20, evals, ["white_gazing", "avg_speed"], w,h,l)
-   run_experiment(f"./new_Experiment_2Results_{w}X{h}", 20, evals, ["white_gazing", "distance"], w,h,l)
-   run_experiment(f"./new_Experiment_3Results_{w}X{h}", 20, evals, ["trajectory", "white_gazing"], w,h,l)
+   
 
-   w=3
-   h=2
-   run_experiment(f"./new_Experiment_1Results_{w}X{h}", 20, evals, ["white_gazing", "avg_speed"], w,h,l)
-   run_experiment(f"./new_Experiment_2Results_{w}X{h}", 20, evals, ["white_gazing", "distance"], w,h,l)
-   run_experiment(f"./new_Experiment_3Results_{w}X{h}", 20, evals, ["trajectory", "white_gazing"], w,h,l)
+   '''stats = run_experiment(f'{result_folder_name}/C_Z_peaks_Avg-G-0-6mut', batch_size, budget_size, ['complexity','z_peaks_avg'], 'new', numb_levels, init_level, robot_type, grid_size, True, 6, threads)
+   avgs.append(stats['Avg'].tolist())
+   maxs.append(stats['Max'].tolist())
+   QDs.append(stats['QDs'].tolist())   
+
+   stats = run_experiment(f'{result_folder_name}/C_Z-G-0-6mut', batch_size, budget_size, ['complexity','z_descriptor'], 'new', numb_levels, init_level, robot_type, grid_size, True, 6, threads)
+   avgs.append(stats['Avg'].tolist())
+   maxs.append(stats['Max'].tolist())
+   QDs.append(stats['QDs'].tolist())'''
 
 
-   w=3
-   h=3
-   run_experiment(f"./new_Experiment_1Results_{w}X{h}", 20, evals, ["white_gazing", "avg_speed"], w,h,l)
-   run_experiment(f"./new_Experiment_2Results_{w}X{h}", 20, evals, ["white_gazing", "distance"], w,h,l)
+   names=['E_Z_peaks_Avg']
+          #,'C_Z_peaks_Avg']
+   # #, 'E_Z', 'C_Z']
 
-   w=4
-   h=3
-   run_experiment(f"./new_Experiment_1Results_{w}X{h}", 20, evals, ["white_gazing", "avg_speed"], w,h,l)
-   run_experiment(f"./new_Experiment_2Results_{w}X{h}", 20, evals, ["white_gazing", "distance"], w,h,l)
-   run_experiment(f"./new_Experiment_3Results_{w}X{h}", 20, evals, ["trajectory", "white_gazing"], w,h,l)
+   plot_comparative_results(avgs, names, result_folder_name, 'Average_Fitness')
+   plot_comparative_results(maxs, names, result_folder_name, 'Max_Fitness')
+   plot_comparative_results(QDs, names, result_folder_name, 'QD_Score')   
 
-   w=4
-   h=4
-   run_experiment(f"./new_Experiment_1Results_{w}X{h}", 20, evals, ["white_gazing", "avg_speed"], w,h,l=0)
-   run_experiment(f"./new_Experiment_2Results_{w}X{h}", 20, evals, ["white_gazing", "distance"], w,h,l=0)
-   run_experiment(f"./new_Experiment_3Results_{w}X{h}", 20, evals, ["trajectory", "white_gazing"], w,h,l)'''
+
+   with open(f'baseline/results/Comparing_Experiments4/avgs.pkl', 'wb') as f:
+      pickle.dump(avgs, f)
+   with open(f'baseline/results/Comparing_Experiments4/maxs.pkl', 'wb') as f:
+      pickle.dump(maxs, f)
+   with open(f'baseline/results/Comparing_Experiments4/QDs.pkl', 'wb') as f:
+      pickle.dump(QDs, f)
+   
 if __name__ == '__main__':
     main()

@@ -63,7 +63,7 @@ def rerun(g : RVGenome, options, save_path=None, view=False, record=False, ANN_d
     if ANN_display and save_path is not None:
         os.makedirs(f'{save_path}/ANNs', exist_ok=True) 
         plotly_render(e.get_ann()).write_html(f'{save_path}/ANNs/{g.id()}.html')
-       
+    #print(result)
         
 def get_genealogical_trees(run_path):
     #Get Options
@@ -72,7 +72,7 @@ def get_genealogical_trees(run_path):
         options = data["evolution"]
     
     #Get son father pairs
-    with open(Path(run_path).joinpath("son_father_pairs.json"), "r") as file:
+    with open(Path(run_path).joinpath(f"{options['level']}/son_father_pairs.json"), "r") as file:
         fam_list = json.load(file)
 
     #level = (int(options['level'])+int(options['numb_levels']))-1
@@ -89,7 +89,7 @@ def run_random_genome(name, view=False ):
     rng = random.Random()
     rng.seed(100)
     r = RunnerOptions()
-    r.level=8
+    r.level=6
     #r.return_ann=True
     if view:
         r.view=RunnerOptions.View()
@@ -97,12 +97,12 @@ def run_random_genome(name, view=False ):
     e.set_runner_options(r)
     #e.set_view_dims(2,1)
     #e.set_descriptors(["trajectory", "white_gazing"])
-    e.set_options(["trajectory", "white_gazing"],'brightness', 0, 4,4, r.level)
+    e.set_options(["EdgePerNodeRatio", "estimated_mean_z"],'brightness', 1, 4,4, r.level)
 
     g = RVGenome.random(rng, GIDManager())
     #result = e.evaluate_rerun(g)
     result = e.evaluate_rerun(g)
-    print("result", result)
+    #print("result", result)
 
     
 
@@ -112,56 +112,26 @@ def main():
     '''run_random_genome('', view=True)
     exit()'''
 
-    run_path = f'C:/Users/anton/Desktop/Thesis_Project/Baseline/baseline/results/run8162309'
+    run_path = f'C:/Users/anton/Desktop/Thesis_Project/Baseline/baseline/results/run8300544'
     
     with open(f"{run_path}/config.json", "rb") as f:
         data = json.load(f)
         options = data["evolution"]
 
-    final_grid = pd.read_csv(f"{run_path}/3/final_grid.csv")
+    final_grid = pd.read_csv(f"{run_path}/6/final_grid.csv")
+   
     #print(RVGenome.from_json(eval(final_grid['genome'].iloc[0])))
-    for i in range(1,4):
+    '''print('best')
+    for i in range(10):
         g = RVGenome.from_json(eval(final_grid['genome'].iloc[i]))
-        rerun(g, options, view=False)
-        g = RVGenome.from_json(eval(final_grid['genome'].iloc[-i]))
-        rerun(g, options, view=False)
-
-    #level=options['level']
-    #run_path=f'{run_path}/{level}'
-    #final_grid = pd.read_csv(f"{run_path}/final_grid.csv")
-    #final_grid = pd.read_csv(f"baseline/src/final_grid.csv")
-    # Extract 'trajectory' and 'white_gazing' columns from the 'descriptors' dictionary
-    #final_grid[['trajectory', 'white_gazing']] = final_grid['descriptors'].apply(lambda x: pd.Series(eval(x)))
-    # Drop the 'descriptors' column
-    #final_grid = final_grid.drop('descriptors', axis=1)    
-
-    #successful = final_grid[final_grid['fitnesses'] > 5]
-    #print(successful)
-    
-    #for i in range(len(successful)):
-    #g = RVGenome.from_json(eval(successful['genome'].iloc[0]))
-    #rerun(g, options, view=True)
-
-
-    '''# Sort by 'white_gazing' column in descending order
-    sorted_gazing = successful.sort_values(by = 'white_gazing', ascending=False)
-    highest_gazer = RVGenome.from_json(eval(sorted_gazing['genome'].iloc[0]))
-    lowest_gazer = RVGenome.from_json(eval(sorted_gazing['genome'].iloc[-1]))
-    rerun(highest_gazer, options, run_path, view=True)
-    rerun(lowest_gazer, options, run_path, view=True)'''
-
-    
-    
+        rerun(g, options, view=False, save_path=None, ANN_display=False)'''
         
-
-
-    '''pickle_file_path = "./Experiment_Results/run7071728/iteration-010.p"
-
-    # Unpickle the object
-    with open(pickle_file_path, "rb") as f:
-        unpickled_object = pickle.load(f)
-
-    print("unpickled_object",unpickled_object)'''
-
+    #print('worse')
+    for i in range(173,180):    
+        g = RVGenome.from_json(eval(final_grid['genome'].iloc[i]))
+        rerun(g, options, view=True, save_path=None,ANN_display=False)
+    
+    #get_genealogical_trees(run_path)
+        
 if __name__ == "__main__":
     main()

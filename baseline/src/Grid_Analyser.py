@@ -26,15 +26,14 @@ def get_Grid (grid_path):
     for key in final_grid['descriptors'].iloc[0].keys():
         final_grid[key] = final_grid['descriptors'].apply(lambda x: x.get(key))
     final_grid = final_grid.drop('descriptors', axis=1)
-
     return final_grid
 
 def get_genealogical_trees(grid_df, run_path):
     #Get son father pairs
     with open(Path(run_path).joinpath("son_father_pairs.json"), "r") as file:
         fam_list = json.load(file)
-    final_ids = grid_df['id'].tolist()
-    final_grid_ancestry(fam_list, final_ids, f'{run_path}/gen_tree')    
+    os.makedirs(f'{run_path}/Genealogy', exist_ok=True) 
+    final_grid_ancestry(fam_list, grid_df, f'{run_path}/Genealogy')    
 
 def extract_from_grid(grid_df, options, run_path):
     for i in range(len(grid_df)):
@@ -67,9 +66,8 @@ def rerun(g : RVGenome, options, save_path=None, view=False, record=False, ANN_d
        
         
 '''Main Mth'''
-def analyse_Grid(run_path, options, top=5):
+def analyse_Grid(run_path, options, top=10):
     grid_df = get_Grid(run_path)
-    
     #Analyse Best Solutions
     sorted_grid = grid_df.sort_values(by='fitnesses', ascending=False)
     champs = sorted_grid.head(top)
@@ -79,17 +77,15 @@ def analyse_Grid(run_path, options, top=5):
     
     #Analyse the Successful with extreme Descriptor Values
     features=list(grid_df.columns[-2:])
-    successful = grid_df[grid_df['fitnesses'] >= 70.0]
+    
     for i in range(2):
-        grid_aux = successful.sort_values(by=f'{features[i]}', ascending=False)
+        grid_aux = grid_df.sort_values(by=f'{features[i]}', ascending=False, inplace=False)
         extremes_grid = pd.concat([grid_aux.head(top), grid_aux.tail(top)], ignore_index=True).drop_duplicates()
         save_path = f'{run_path}/Extremes/{features[i]}'
         os.makedirs(f'{save_path}', exist_ok=True)
         extract_from_grid(extremes_grid, options, save_path)
         extremes_grid.drop(['parents','genome'], axis=1,inplace=False).to_csv(f'{save_path}/collectio.csv', index=False)
-    
-    '''Check where the successful came from'''
-    get_genealogical_trees(successful, run_path)
+
     
 
 def analyse_Experiment(experiment_path):
@@ -106,7 +102,7 @@ def analyse_Experiment(experiment_path):
 
 
 def main():
-    run_path = 'C:/Users/anton/Desktop/Thesis_Project/Baseline/baseline/results/run8162309'
+    run_path = 'C:/Users/anton/Desktop/Thesis_Project/Baseline/baseline/results/run8221306'
     analyse_Experiment(run_path)
 
 if __name__ == "__main__":

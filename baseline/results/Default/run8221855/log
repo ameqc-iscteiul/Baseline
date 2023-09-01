@@ -1,0 +1,143 @@
+[2023-08-22 18:55:30,558]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-08-22 18:55:30,558]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-08-22 18:55:30,558]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-08-22 18:55:30,558]|[INFO]|[evolution] Grid size: (16, 16)
+[2023-08-22 18:55:30,558]|[INFO]|[evolution]    bounds: [[0.15, 8.5], [0.04, 0.16]]
+[2023-08-22 18:55:30,558]|[INFO]|[evolution]      bins: [0.521875, 0.0075]
+[2023-08-22 18:55:30,558]|[INFO]|[my_map_elite] Generated run id: 8221855
+[2023-08-22 18:55:30,558]|[INFO]|[my_map_elite] Run folder: baseline\results\Default\run8221855
+[2023-08-22 18:55:30,558]|[INFO]|[my_map_elite] Parallel: 4
+[2023-08-22 18:55:30,558]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': 'baseline/results/Default',
+ 'batch_size': 10,
+ 'budget': 20,
+ 'descriptor_names': ['EdgePerNodeRatio', 'estimated_mean_z'],
+ 'fitness_name': 'new',
+ 'grid_size': 16,
+ 'id': 8221855,
+ 'initial_mutations': 2,
+ 'level': 0,
+ 'make_final_videos': 0,
+ 'numb_levels': 1,
+ 'overwrite': False,
+ 'robot_type': 0,
+ 'run_folder': 'baseline\\results\\Default\\run8221855',
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 4,
+ 'tournament': 3,
+ 'verbosity': 1,
+ 'vision_h': 4,
+ 'vision_w': 4}
+[2023-08-22 18:55:30,572]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\baseline\results\Default\run8221855\config.json
+[2023-08-22 18:55:30,573]|[INFO]|[evolution] Starting illumination!
+[2023-08-22 18:55:30,573]|[INFO]|[evolution] Level : 0
+[2023-08-22 18:55:32,755]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.03010320326598294 not in [0.04,0.16]
+[2023-08-22 18:55:34,353]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.03154009638632458 not in [0.04,0.16]
+[2023-08-22 18:55:36,152]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:55:36,153]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:55:37,979]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:55:39,573]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.0301112645782289 not in [0.04,0.16]
+[2023-08-22 18:55:42,761]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:55:42,762]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:55:44,523]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:55:44,523]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:55:45,997]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030097355920972454 not in [0.04,0.16]
+[2023-08-22 18:55:47,772]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:55:47,772]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+alg_name  iteration cont_size evals     nb_updated     avg       std       min       max       ft_min              ft_max              qd_score  elapsed
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+8221855   0         5/256     10        6              [18.0747] [0.9921]  [16.1479] [18.7255] [0.1500,0.0400]     [3.3333,0.0720]     0.90      17.21  
+[2023-08-22 18:55:50,960]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:55:50,961]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:55:52,667]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:55:54,371]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:55:57,441]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.03208450633957361 not in [0.04,0.16]
+[2023-08-22 18:55:58,970]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.03154009638632458 not in [0.04,0.16]
+[2023-08-22 18:56:02,102]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:56:03,848]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:56:03,849]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+8221855   1         6/256     10        2              [17.9645] [0.8645]  [16.7741] [18.7255] [0.1500,0.0400]     [3.3333,0.0755]     1.08      16.08  
+Finished optimisation using algorithm '8221855'. Total elapsed: 33.28810709994286.
+[2023-08-22 18:56:03,863]|[INFO]|[evolution] Level 0 finished. Saving Final Grid & Plots ...
+EVALS     alg_name  iteration  cont_size       max0   elapsed
+0    8221855          0          1  18.696078  2.192671
+1    8221855          0          2  18.725490  1.588408
+2    8221855          0          2  18.725490  1.794022
+3    8221855          0          3  18.725490  1.824230
+4    8221855          0          3  18.725490  1.593374
+5    8221855          0          4  18.725490  1.460798
+6    8221855          0          4  18.725490  1.724964
+7    8221855          0          4  18.725490  1.759206
+8    8221855          0          5  18.725490  1.472602
+9    8221855          0          5  18.725490  1.773698
+10   8221855          1          5  18.725490  1.456254
+11   8221855          1          5  18.725490  1.719514
+12   8221855          1          5  18.725490  1.705994
+13   8221855          1          5  18.725490  1.703686
+14   8221855          1          5  18.725490  1.468558
+15   8221855          1          5  18.725490  1.597466
+16   8221855          1          5  18.725490  1.528938
+17   8221855          1          6  18.725490  1.431077
+18   8221855          1          6  18.725490  1.697164
+19   8221855          1          6  18.725490  1.746610
+[2023-08-22 18:56:04,368]|[INFO]|[my_map_elite] Generated baseline\results\Default\run8221855\0\grid_fitness.png
+[2023-08-22 18:56:04,454]|[INFO]|[evolution] Summary Algorithm:
+  batch_size: 10
+  budget: 20
+  container:  Summary Grid:
+    activity_per_bin: [[2. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.  ...
+    best: {id=1, fitness=(18.725490196078432,), features={'EdgePerNodeRatio': 3.3333333333333335, 'estimated_mean_z': 0.04}}
+    best_features: [3.3333333333333335, 0.04]
+    best_fitness: (18.725490196078432,)
+    best_index: (6, 0)
+    capacity: 256
+    curiosity: [[-1.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.    0.   0. ]  [-1.5  0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.    0.   0. ]  [ 0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.    0.  ...
+    depot: None
+    discard_random_on_bin_overload: False
+    features: {(0, 0): [Features([0.15, 0.04])], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], (0, 15): [], (1, 0): [Features([0.923 ...
+    features_domain: [[0.15, 8.5], [0.04, 0.16]]
+    features_extrema: ((0.15, 3.3333333333333335), (0.04, 0.07552624240523025))
+    filled_bins: 6
+    fitness: {(0, 0): [Fitness([18.700980392156865])], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], (0, 15): [], (1, 0): [Fitness( ...
+    fitness_domain: [(0, 100)]
+    fitness_extrema: ((16.774101307189543, 18.725490196078432),)
+    free: 250
+    history_recentness_per_bin: {(0, 0): [1, 3], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], (0, 15): [], (1, 0): [4], (1, 1): [], (1, 2): [], (1, 3 ...
+    items: [{id=1, fitness=(18.725490196078432,), features={'EdgePerNodeRatio': 3.3333333333333335, 'estimated_mean_z': 0.04}}, {id=2, fitness=(18.700980392156865,), features={'EdgePerNodeRatio': 0.15, 'estimated_mean_z': 0.04}}, {id=3, fitness=(18.7009803 ...
+    max_items_per_bin: 1
+    name: Grid-2946913772464
+    nb_added: 8
+    nb_discarded: 2
+    nb_items_per_bin: [[1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.  ...
+    nb_operations: 10
+    nb_rejected: 0
+    quality: {(0, 0): Fitness([18.700980392156865]), (0, 1): None, (0, 2): None, (0, 3): None, (0, 4): None, (0, 5): None, (0, 6): None, (0, 7): None, (0, 8): None, (0, 9): None, (0, 10): None, (0, 11): None, (0, 12): None, (0, 13): None, (0, 14): None, (0,  ...
+    quality_array: [[[18.70098039]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [   ...
+    recentness: [1, 2, 3, 5, 6, 7]
+    recentness_per_bin: {(0, 0): [3], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], (0, 15): [], (1, 0): [4], (1, 1): [], (1, 2): [], (1, 3):  ...
+    shape: (16, 16)
+    size: 6
+    solutions: {(0, 0): [{id=2, fitness=(18.700980392156865,), features={'EdgePerNodeRatio': 0.15, 'estimated_mean_z': 0.04}}], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [] ...
+  current_iter: 2
+  deepcopy_on_selection: True
+  dimension: None
+  genealogical_info: [(10, 5), (11, 2), (12, 3), (13, 3), (14, 5), (15, 1), (16, 1), (17, 5), (18, 3), (19, 2)]
+  id_manager: <abrain.core.genome.GIDManager object at 0x000002AE7FBAC070>
+  labels: ['new', 'EdgePerNodeRatio', 'estimated_mean_z']
+  name: 8221855
+  nb_evaluations: 20
+  nb_evaluations_in_iteration: 0
+  nb_max_iter: 2
+  nb_suggestions: 20
+  nb_suggestions_in_iteration: 0
+  nb_updated: 8
+  nb_updated_in_iteration: 0
+  optimisation_task: maximisation
+  rng: <random.Random object at 0x000002AE0E2CD040>
+  stats:           Avg       Std        Max         QDs 0   18.696078  0.000000  18.696078   18.696078 1   18.710784  0.014706  18.725490   37.421569 2   18.713235  0.012255  18.725490   37.426471 3   18.709150  0.011554  18.725490   56.127451 4   18.709 ...
+[2023-08-22 18:56:04,458]|[INFO]|[evolution] All results are available under baseline\results\Default\run8221855
+[2023-08-22 18:56:04,458]|[INFO]|[evolution] Unified storage file is baseline\results\Default\run8221855/iteration-final.p
+[2023-08-22 18:56:04,458]|[INFO]|[evolution] Completed evolution in 33.90 seconds
+[2023-08-22 18:56:04,458]|[INFO]|[evolution] Generating Videos...
+[2023-08-22 18:56:04,458]|[INFO]|[evolution] DONE !

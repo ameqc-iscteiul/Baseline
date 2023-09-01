@@ -44,7 +44,7 @@ class RunnerOptions:
     #Scenario options
     robot_position = [-2, 0, 0]
     target_position = [2, 0, 0]
-    target_size : float = 0.25
+    target_size : float = 0.3
 
     level:int=0
     

@@ -182,7 +182,7 @@ class Scenario:
                         type="box",
                         pos=position,
                         size=f"{base_length} {base_width} {base_height}",
-                        rgba="1 0 0 1"
+                        rgba="0.2 0.2 0 1"
                     )
             return xml
         def generate_mountain(xml, position, base_length, base_width, base_height, levels):
@@ -199,62 +199,96 @@ class Scenario:
 
             return xml
         
-        def generate_deception(xml):
+        def generate_deception(xml, x=1, side=0.03, height=0.25, space=0.09, level=2):
             
-            xml = insert_rectangle(xml, '1.6 0 0', 0.08, 0.08, 0.4)
-            xml = insert_rectangle(xml, '1.4 0.2 0', 0.08, 0.08, 0.4)
-            xml = insert_rectangle(xml, '1.4 -0.2 0', 0.08, 0.08, 0.4)
-            xml = insert_rectangle(xml, '1.2 0.4 0', 0.08, 0.08, 0.4)
-            xml = insert_rectangle(xml, '1.2 -0.4 0', 0.08, 0.08, 0.4)
-            xml = insert_rectangle(xml, '1 0.6 0', 0.08, 0.08, 0.4)
-            xml = insert_rectangle(xml, '1 -0.6 0', 0.08, 0.08, 0.4)
+            xml = insert_rectangle(xml, f'{x} 0 0', side, side, height)
+            y=space
+            for _ in range(level):
+                x-=space
+                xml = insert_rectangle(xml, f'{x} {y} 0', side, side, height)
+                xml = insert_rectangle(xml, f'{x} {-y} 0', side, side, height)
+                y+=space
+        
             return xml
         
-
-
-
         if options.level==1:
-            xml = create_obstacle_grid(xml, [0,0,0], 1, 3, 0.05, 0.8)
+            xml = create_obstacle_grid(xml, [-2.5,0,0], 1, 8, 0.02, 0.3)
         if options.level==2:
-            xml = create_obstacle_grid(xml, [-0.8,0,0], 1, 3, 0.05, 0.8)
-            xml = create_obstacle_grid(xml, [0,0,0], 1, 4, 0.06, 0.8)
-            xml = create_obstacle_grid(xml, [0.8,0,0], 1, 3, 0.05, 0.8)
+            xml = create_obstacle_grid(xml, [-2.5,0,0], 1, 8, 0.02, 0.3)
+            xml = create_obstacle_grid(xml, [-2.5,0,0], 2, 9, 0.02, 0.3) 
         if options.level==3:
-            xml = create_obstacle_grid(xml, [-1.6,0,0], 1, 2, 0.06, 0.8)
-            xml = create_obstacle_grid(xml, [-0.8,0,0], 1, 3, 0.05, 0.8)
-            xml = create_obstacle_grid(xml, [0,0,0], 1, 4, 0.08, 0.8)
-            xml = create_obstacle_grid(xml, [0.8,0,0], 1, 3, 0.05, 0.8)
-            xml = create_obstacle_grid(xml, [1.6,0,0], 1, 2, 0.06, 0.8)
-        #Mountains
+            xml = create_obstacle_grid(xml, [-2.5,0,0], 3, 8, 0.02, 0.3)
+            xml = create_obstacle_grid(xml, [-2.5,0,0], 2, 9, 0.02, 0.3)        
         if options.level==4:
-            pass
+            xml = create_obstacle_grid(xml, [-2.5,0,0], 3, 8, 0.02, 0.3)
+            xml = create_obstacle_grid(xml, [-2.5,0,0], 2, 9, 0.02, 0.3)
+            xml  = generate_mountain(xml,'0.7 0 0',0.7,1.3,0.02, 0)
         if options.level==5:
-            xml  = generate_mountain(xml,'0 0 0',0.9,0.6,0.03, 2)
-       
+            xml = create_obstacle_grid(xml, [-2.5,0,0], 3, 8, 0.02, 0.3)
+            xml = create_obstacle_grid(xml, [-2.5,0,0], 2, 9, 0.02, 0.3)
+            xml  = generate_mountain(xml,'0.7 0 0',0.7,1.3,0.02, 1)
         if options.level==6:
-            #xml = create_obstacle_grid(xml, [1,0,0], 9, 6, 0.03, 0.5)
-            xml  = generate_mountain(xml,'0 -0.8 0',0.9,0.6,0.03, 6)
-            xml  = generate_mountain(xml,'0 0.8 0',0.9,0.6,0.03, 6)
-            xml  = generate_mountain(xml,'1 0 0',0.6,0.3,0.02, 3)
-
-        if options.level==7:
-            xml  = generate_mountain(xml,'0 0 0',1,1,0.03, 4)
-            xml  = generate_mountain(xml,'0 -0.8 0',0.9,0.6,0.02, 6)
-            xml  = generate_mountain(xml,'0 0.8 0',0.9,0.6,0.02, 6)
-        
-        if options.level==8:
-            xml = generate_deception(xml)
-
-            xml  = generate_mountain(xml,'0 0 0',1,1,0.03, 4)
-            xml  = generate_mountain(xml,'0 -0.8 0',0.9,0.6,0.03, 6)
-            xml  = generate_mountain(xml,'0 0.8 0',0.9,0.6,0.03, 6)
-
-            xml = create_obstacle_grid(xml, [-10,0,0], 9, 9, 0.03, 0.2)
-
-
+            xml = create_obstacle_grid(xml, [-2.5,0,0], 3, 8, 0.02, 0.3)
+            xml = create_obstacle_grid(xml, [-2.5,0,0], 2, 9, 0.02, 0.3)
+            xml  = generate_mountain(xml,'0.7 0 0',0.7,1.3,0.02, 2)
 
         else:
             pass
+        '''
+        if options.level==1:            
+            xml = create_obstacle_grid(xml, [0,0,0], 3, 3, 0.025, 0.37)
+            xml = create_obstacle_grid(xml, [0,0,0], 4, 4, 0.027, 0.37)
+
+        if options.level==2:
+            xml = create_obstacle_grid(xml, [0,0,0], 6, 6, 0.027, 0.34)
+            xml = create_obstacle_grid(xml, [0,0,0], 7, 7, 0.033, 0.34)
+
+        if options.level==3:
+            xml = create_obstacle_grid(xml, [0,0,0], 12, 12, 0.027, 0.3)
+            xml = create_obstacle_grid(xml, [0,0,0], 13, 13, 0.033, 0.3)
+        
+        #Mountains
+        if options.level==4:
+            xml = create_obstacle_grid(xml, [0,0,0], 12, 12, 0.027, 0.3)
+            xml = create_obstacle_grid(xml, [0,0,0], 13, 13, 0.033, 0.3)
+            xml  = generate_mountain(xml,'-0.25 0 0',0.6,1.3,0.03, 1) 
+
+        if options.level==5:
+            xml = create_obstacle_grid(xml, [0,0,0], 12, 12, 0.027, 0.3)
+            xml = create_obstacle_grid(xml, [0,0,0], 13, 13, 0.033, 0.3)
+            xml  = generate_mountain(xml,'-0.25 0 0',0.6,1.3,0.031, 2)   
+
+       
+        if options.level==6:
+            xml = create_obstacle_grid(xml, [0,0,0], 12, 12, 0.027, 0.3)
+            xml = create_obstacle_grid(xml, [0,0,0], 13, 13, 0.033, 0.3)
+            xml  = generate_mountain(xml,'-0.25 0 0',0.6,1.3,0.032, 3)   
+
+        #Deception
+        if options.level==7:
+            xml = create_obstacle_grid(xml, [0,0,0], 12, 12, 0.027, 0.3)
+            xml = create_obstacle_grid(xml, [0,0,0], 13, 13, 0.033, 0.3)
+            xml  = generate_mountain(xml,'-0.25 0 0',0.6,1.3,0.032, 3)   
+            xml = generate_deception(xml, level=0)
+
+        
+        if options.level==8:
+            xml = create_obstacle_grid(xml, [0,0,0], 12, 12, 0.027, 0.3)
+            xml = create_obstacle_grid(xml, [0,0,0], 13, 13, 0.033, 0.3)
+            xml  = generate_mountain(xml,'-0.25 0 0',0.6,1.3,0.032, 3) 
+            xml = generate_deception(xml, level=1)
+  
+
+        if options.level==9:
+            xml = create_obstacle_grid(xml, [0,0,0], 12, 12, 0.027, 0.3)
+            xml = create_obstacle_grid(xml, [0,0,0], 13, 13, 0.033, 0.3)
+            xml  = generate_mountain(xml,'-0.25 0 0',0.6,1.3,0.032, 3)
+            xml = generate_deception(xml, level=2)'''
+
+
+
+
+       
 
         for robot in robots:
             xml.worldbody.add('site',

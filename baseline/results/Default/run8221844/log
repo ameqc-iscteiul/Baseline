@@ -1,0 +1,172 @@
+[2023-08-22 18:44:50,467]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-08-22 18:44:50,467]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-08-22 18:44:50,467]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-08-22 18:44:50,467]|[INFO]|[evolution] Grid size: (16, 16)
+[2023-08-22 18:44:50,467]|[INFO]|[evolution]    bounds: [[0.15, 8.5], [0.04, 0.16]]
+[2023-08-22 18:44:50,467]|[INFO]|[evolution]      bins: [0.521875, 0.0075]
+[2023-08-22 18:44:50,467]|[INFO]|[my_map_elite] Generated run id: 8221844
+[2023-08-22 18:44:50,467]|[INFO]|[my_map_elite] Run folder: baseline\results\Default\run8221844
+[2023-08-22 18:44:50,467]|[INFO]|[my_map_elite] Parallel: 4
+[2023-08-22 18:44:50,467]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': 'baseline/results/Default',
+ 'batch_size': 10,
+ 'budget': 40,
+ 'descriptor_names': ['EdgePerNodeRatio', 'estimated_mean_z'],
+ 'fitness_name': 'new',
+ 'grid_size': 16,
+ 'id': 8221844,
+ 'initial_mutations': 2,
+ 'level': 0,
+ 'make_final_videos': 0,
+ 'numb_levels': 1,
+ 'overwrite': False,
+ 'robot_type': 0,
+ 'run_folder': 'baseline\\results\\Default\\run8221844',
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 4,
+ 'tournament': 3,
+ 'verbosity': 1,
+ 'vision_h': 4,
+ 'vision_w': 4}
+[2023-08-22 18:44:50,467]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\baseline\results\Default\run8221844\config.json
+[2023-08-22 18:44:50,467]|[INFO]|[evolution] Starting illumination!
+[2023-08-22 18:44:50,482]|[INFO]|[evolution] Level : 0
+[2023-08-22 18:44:52,566]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.03010320326598294 not in [0.04,0.16]
+[2023-08-22 18:44:54,073]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.03154009638632458 not in [0.04,0.16]
+[2023-08-22 18:44:55,892]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:44:55,892]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:44:57,679]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:44:59,201]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.0301112645782289 not in [0.04,0.16]
+[2023-08-22 18:45:02,493]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:45:02,493]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:45:04,211]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:45:04,211]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:45:05,691]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030097355920972454 not in [0.04,0.16]
+[2023-08-22 18:45:07,542]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:45:07,542]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+alg_name  iteration cont_size evals     nb_updated     avg       std       min       max       ft_min              ft_max              qd_score  elapsed
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+8221844   0         5/256     10        6              [18.0747] [0.9921]  [16.1479] [18.7255] [0.1500,0.0400]     [3.3333,0.0720]     0.90      17.08  
+[2023-08-22 18:45:08,953]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\baseline\src\simulation\evaluator.py:378: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
+  plt.figure(figsize=(15, 5))
+
+[2023-08-22 18:45:10,788]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:45:10,788]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:45:12,496]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:45:14,394]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:45:17,600]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.03208450633957361 not in [0.04,0.16]
+[2023-08-22 18:45:19,193]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.03154009638632458 not in [0.04,0.16]
+[2023-08-22 18:45:23,141]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:45:25,020]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:45:25,021]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+8221844   1         6/256     10        2              [17.9645] [0.8645]  [16.7741] [18.7255] [0.1500,0.0400]     [3.3333,0.0755]     1.08      17.47  
+[2023-08-22 18:45:38,573]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030097355920972454 not in [0.04,0.16]
+[2023-08-22 18:45:40,202]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030097355920972454 not in [0.04,0.16]
+8221844   2         7/256     10        2              [18.0701] [0.9275]  [16.5282] [18.9493] [0.1500,0.0400]     [3.3333,0.0713]     1.26      16.64  
+[2023-08-22 18:45:50,832]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:45:53,828]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.03192283241212433 not in [0.04,0.16]
+8221844   3         9/256     10        5              [18.1722] [0.6406]  [17.0355] [18.9493] [0.1500,0.0400]     [3.3333,0.1043]     1.64      15.21  
+Finished optimisation using algorithm '8221844'. Total elapsed: 66.4062605999643.
+[2023-08-22 18:45:56,884]|[INFO]|[evolution] Level 0 finished. Saving Final Grid & Plots ...
+EVALS     alg_name  iteration  cont_size       max0   elapsed
+0    8221844          0          1  18.696078  2.083487
+1    8221844          0          2  18.725490  1.513746
+2    8221844          0          2  18.725490  1.821772
+3    8221844          0          3  18.725490  1.776299
+4    8221844          0          3  18.725490  1.527951
+5    8221844          0          4  18.725490  1.536962
+6    8221844          0          4  18.725490  1.748322
+7    8221844          0          4  18.725490  1.707792
+8    8221844          0          5  18.725490  1.479928
+9    8221844          0          5  18.725490  1.853728
+10   8221844          1          5  18.725490  1.486780
+11   8221844          1          5  18.725490  1.744575
+12   8221844          1          5  18.725490  1.699986
+13   8221844          1          5  18.725490  1.910052
+14   8221844          1          5  18.725490  1.617540
+15   8221844          1          5  18.725490  1.571842
+16   8221844          1          5  18.725490  1.603801
+17   8221844          1          6  18.725490  1.735022
+18   8221844          1          6  18.725490  2.198048
+19   8221844          1          6  18.725490  1.879379
+20   8221844          2          6  18.725490  1.644297
+21   8221844          2          7  18.725490  1.790704
+22   8221844          2          7  18.725490  1.756458
+23   8221844          2          7  18.725490  1.722003
+24   8221844          2          7  18.725490  1.745040
+25   8221844          2          7  18.725490  1.639532
+26   8221844          2          7  18.949346  1.651222
+27   8221844          2          7  18.949346  1.578013
+28   8221844          2          7  18.949346  1.631591
+29   8221844          2          7  18.949346  1.450291
+30   8221844          3          7  18.949346  1.435815
+31   8221844          3          7  18.949346  1.473847
+32   8221844          3          7  18.949346  1.475514
+33   8221844          3          8  18.949346  1.429263
+34   8221844          3          8  18.949346  1.610421
+35   8221844          3          8  18.949346  1.739178
+36   8221844          3          8  18.949346  1.487796
+37   8221844          3          8  18.949346  1.502112
+38   8221844          3          9  18.949346  1.495541
+39   8221844          3          9  18.949346  1.539965
+[2023-08-22 18:45:57,421]|[INFO]|[my_map_elite] Generated baseline\results\Default\run8221844\0\grid_fitness.png
+[2023-08-22 18:45:57,520]|[INFO]|[evolution] Summary Algorithm:
+  batch_size: 10
+  budget: 40
+  container:  Summary Grid:
+    activity_per_bin: [[2. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 2. 3. 0. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.  ...
+    best: {id=26, fitness=(18.94934640522876,), features={'EdgePerNodeRatio': 3.3333333333333335, 'estimated_mean_z': 0.07129210034216442}}
+    best_features: [3.3333333333333335, 0.07129210034216442]
+    best_fitness: (18.94934640522876,)
+    best_index: (6, 4)
+    capacity: 256
+    curiosity: [[-1.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.    0.   0. ]  [-1.5  0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.    0.   0. ]  [-1.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.    0.  ...
+    depot: None
+    discard_random_on_bin_overload: False
+    features: {(0, 0): [Features([0.15, 0.04])], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], (0, 15): [], (1, 0): [Features([0.923 ...
+    features_domain: [[0.15, 8.5], [0.04, 0.16]]
+    features_extrema: ((0.15, 3.3333333333333335), (0.04, 0.1043333777618171))
+    filled_bins: 9
+    fitness: {(0, 0): [Fitness([18.700980392156865])], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], (0, 15): [], (1, 0): [Fitness( ...
+    fitness_domain: [(0, 100)]
+    fitness_extrema: ((17.035539215686274, 18.94934640522876),)
+    free: 247
+    history_recentness_per_bin: {(0, 0): [1, 3], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], (0, 15): [], (1, 0): [4], (1, 1): [], (1, 2): [], (1, 3 ...
+    items: [{id=1, fitness=(18.725490196078432,), features={'EdgePerNodeRatio': 3.3333333333333335, 'estimated_mean_z': 0.04}}, {id=2, fitness=(18.700980392156865,), features={'EdgePerNodeRatio': 0.15, 'estimated_mean_z': 0.04}}, {id=3, fitness=(18.7009803 ...
+    max_items_per_bin: 1
+    name: Grid-1823817245616
+    nb_added: 15
+    nb_discarded: 6
+    nb_items_per_bin: [[1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 1. 1. 0. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.  ...
+    nb_operations: 21
+    nb_rejected: 0
+    quality: {(0, 0): Fitness([18.700980392156865]), (0, 1): None, (0, 2): None, (0, 3): None, (0, 4): None, (0, 5): None, (0, 6): None, (0, 7): None, (0, 8): None, (0, 9): None, (0, 10): None, (0, 11): None, (0, 12): None, (0, 13): None, (0, 14): None, (0,  ...
+    quality_array: [[[18.70098039]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [   ...
+    recentness: [1, 2, 3, 5, 9, 11, 12, 13, 14]
+    recentness_per_bin: {(0, 0): [3], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], (0, 15): [], (1, 0): [4], (1, 1): [], (1, 2): [], (1, 3):  ...
+    shape: (16, 16)
+    size: 9
+    solutions: {(0, 0): [{id=2, fitness=(18.700980392156865,), features={'EdgePerNodeRatio': 0.15, 'estimated_mean_z': 0.04}}], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [] ...
+  current_iter: 4
+  deepcopy_on_selection: True
+  dimension: None
+  genealogical_info: [(10, 5), (11, 2), (12, 3), (13, 3), (14, 5), (15, 1), (16, 1), (17, 5), (18, 3), (19, 2), (20, 10), (21, 17), (22, 10), (23, 10), (24, 10), (25, 10), (26, 10), (27, 8), (28, 8), (29, 10), (30, 17), (31, 17), (32, 17), (33, 17), (34, 21), (35, 1 ...
+  id_manager: <abrain.core.genome.GIDManager object at 0x000001A88E02C070>
+  labels: ['new', 'EdgePerNodeRatio', 'estimated_mean_z']
+  name: 8221844
+  nb_evaluations: 40
+  nb_evaluations_in_iteration: 0
+  nb_max_iter: 4
+  nb_suggestions: 40
+  nb_suggestions_in_iteration: 0
+  nb_updated: 15
+  nb_updated_in_iteration: 0
+  optimisation_task: maximisation
+  rng: <random.Random object at 0x000001A890689820>
+  stats: Empty DataFrame Columns: [Avg, Std, Max, QDs] Index: []
+[2023-08-22 18:45:57,524]|[INFO]|[evolution] All results are available under baseline\results\Default\run8221844
+[2023-08-22 18:45:57,525]|[INFO]|[evolution] Unified storage file is baseline\results\Default\run8221844/iteration-final.p
+[2023-08-22 18:45:57,525]|[INFO]|[evolution] Completed evolution in 1 minute and 7.05 seconds
+[2023-08-22 18:45:57,525]|[INFO]|[evolution] Generating Videos...
+[2023-08-22 18:45:57,525]|[INFO]|[evolution] DONE !

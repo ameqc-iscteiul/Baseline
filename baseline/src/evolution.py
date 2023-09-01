@@ -18,7 +18,7 @@ from robot.genome import RVGenome
 from simulation.config import Config
 from simulation.evaluator import Evaluator
 from simulation.runner import RunnerOptions
-from Grid_Analyser import analyse_Experiment
+from Grid_Analyser import analyse_Experiment, get_genealogical_trees
 
 
 class Options:
@@ -50,7 +50,7 @@ class Options:
         #-----------------
         #Scenario:
         self.level : int = 0
-        self.numb_levels: int = 0 
+        self.numb_levels: int = 1 
 
         #-Robot
         self.vision_w: int 
@@ -71,8 +71,13 @@ def eval_mujoco(ind : QDIndividual, evaluator : Evaluator , options : Options):
     #print("ind",ind)
     return ind
 
-def change_level(algo, evaluator, args, logger):
-    args.level+=1
+def change_level(algo, evaluator, args):
+    #Check what is the scaffolfing
+    if args.numb_levels==3:
+        args.level+=3
+    elif args.numb_levels==7:
+        args.level+=1
+    
     evaluator.set_level(args.level)
     
     '''Revaluate'''
@@ -82,9 +87,11 @@ def change_level(algo, evaluator, args, logger):
         r: EvaluationResult = evaluator.evaluate(individual.genome)
         updates.append((individual, r))
     algo.update_grid(updates)
-    '''Plots'''
+
+    #'''Plots'''
     #logger.summary_plots(extraname=f'_{args.level}_beginning')
     #save_grid(algo.container, f'{args.run_folder}/{args.level}', 'initial') 
+
     return algo, evaluator, args
 
 
@@ -150,22 +157,21 @@ def evolution (args : Options()):
 
     import platform
     if platform.system() == "Linux":
-        from qdpy.base import ParallelismManager
-        #import multiprocessing
-        with ParallelismManager(parallelism_type = "multiprocessing", max_workers=args.threads) as mgr:
-            #mgr.executor._mp_context = multiprocessing.get_context("fork")  # TODO: Very brittle
-            budget_per_level = int(args.budget/args.numb_levels)
-            for l in range(args.numb_levels):
-                if l>0: algo, evaluator, args = change_level(algo, evaluator, args, logger)
-                logging.info(f"Level : {args.level}")
-                best = algo.optimise(evaluate=partial(eval_mujoco, evaluator = evaluator, options = args), budget=budget_per_level, executor=mgr.executor,batch_mode=True)
-                logging.info(f"Level {args.level} finished. Saving Final Grid & Plots ...")
-                save_results(algo, args, logger)  
+        from qdpy.base import ParallelismManager 
+        #with ParallelismManager(parallelism_type = "multiprocessing", max_workers=args.threads) as mgr:
+        budget_per_level = int(args.budget/args.numb_levels)
+        for l in range(args.numb_levels):
+            if l>0: algo, evaluator, args = change_level(algo, evaluator, args)
+            logging.info(f"Level : {args.level}")
+            with ParallelismManager(parallelism_type = "multiprocessing", max_workers=args.threads) as mgr:
+                algo.optimise(evaluate=partial(eval_mujoco, evaluator = evaluator, options = args), budget=budget_per_level, executor=mgr.executor, batch_mode=True)
+            logging.info(f"Level {args.level} finished. Saving Final Grid & Plots ...")
+            save_results(algo, args, logger)  
     
     elif platform.system() == "Windows":
         budget_per_level = int(args.budget/args.numb_levels)
         for l in range(args.numb_levels):
-            if l>0: algo, evaluator, args = change_level(algo, evaluator, args, logger)
+            if l>0: algo, evaluator, args = change_level(algo, evaluator, args)
             logging.info(f"Level : {args.level}")
             best = algo.optimise(evaluate=partial(eval_mujoco, evaluator = evaluator, options = args), budget=budget_per_level,batch_mode=True)
             logging.info(f"Level {args.level} finished. Saving Final Grid & Plots ...")
@@ -184,7 +190,12 @@ def evolution (args : Options()):
    
     logging.info(f"Generating Videos...")
     if args.make_final_videos: analyse_Experiment(args.run_folder)
+    with open(f'{args.run_folder}/initial_pop.json', 'w') as file:
+        json.dump([obj.to_json() for obj in algo.init_pop], file)
+        
     logging.info(f"DONE !")
+
+    return algo.stats
 
 
 def save_results(algo, args, logger):
@@ -194,9 +205,15 @@ def save_results(algo, args, logger):
     '''Plots'''
     logger.level_summary(save_path)
 
+    '''Stats'''
+    algo.stats.to_csv(Path(save_path).joinpath(f"stats.csv"), index=False)
+
     '''Grid'''
-    save_grid(algo.container,save_path,'final')
+    grid_df = save_grid(algo.container,save_path,'final')
 
     '''Tree'''
     with open(Path(f"{args.run_folder}/{args.level}/son_father_pairs.json"), "w") as file:
         json.dump(algo.genealogical_info, file)
+    
+    get_genealogical_trees(grid_df, f"{args.run_folder}/{args.level}")
+

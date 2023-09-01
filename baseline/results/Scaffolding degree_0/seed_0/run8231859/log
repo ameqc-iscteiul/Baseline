@@ -1,0 +1,159 @@
+[2023-08-23 18:59:51,708]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-08-23 18:59:51,708]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-08-23 18:59:51,708]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-08-23 18:59:51,708]|[INFO]|[evolution] Grid size: (10, 10)
+[2023-08-23 18:59:51,708]|[INFO]|[evolution]    bounds: [[4, 100], [0.04, 0.16]]
+[2023-08-23 18:59:51,708]|[INFO]|[evolution]      bins: [9.6, 0.012]
+[2023-08-23 18:59:51,708]|[INFO]|[my_map_elite] Generated run id: 8231859
+[2023-08-23 18:59:51,708]|[INFO]|[my_map_elite] Run folder: baseline\results\Scaffolding degree_0\seed_0\run8231859
+[2023-08-23 18:59:51,708]|[INFO]|[my_map_elite] Parallel: 4
+[2023-08-23 18:59:51,708]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': 'baseline/results/Scaffolding degree_0/seed_0',
+ 'batch_size': 10,
+ 'budget': 50,
+ 'descriptor_names': ['complexity', 'z_descriptor'],
+ 'fitness_name': 'new',
+ 'grid_size': 10,
+ 'id': 8231859,
+ 'initial_mutations': 2,
+ 'level': 0,
+ 'make_final_videos': False,
+ 'numb_levels': 1,
+ 'overwrite': False,
+ 'robot_type': 0,
+ 'run_folder': 'baseline\\results\\Scaffolding degree_0\\seed_0\\run8231859',
+ 'seed': 0,
+ 'snapshots': 10,
+ 'threads': 4,
+ 'tournament': 3,
+ 'verbosity': 1,
+ 'vision_h': 4,
+ 'vision_w': 4}
+[2023-08-23 18:59:51,719]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\baseline\results\Scaffolding degree_0\seed_0\run8231859\config.json
+[2023-08-23 18:59:51,720]|[INFO]|[evolution] Starting illumination!
+[2023-08-23 18:59:51,721]|[INFO]|[evolution] Level : 0
+[2023-08-23 18:59:55,724]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030164908532233258 not in [0.04,0.16]
+[2023-08-23 18:59:57,573]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 18:59:57,573]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 18:59:57,605]|[WARNING]|[evaluator] Out-of-bounds value features,complexity: 0.0 not in [4,100]
+[2023-08-23 18:59:57,606]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 18:59:59,470]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 18:59:59,470]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 18:59:59,486]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:00:00,853]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 19:00:00,854]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 19:00:04,176]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 19:00:04,176]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 19:00:04,191]|[WARNING]|[evaluator] Out-of-bounds value features,complexity: 0.0 not in [4,100]
+[2023-08-23 19:00:04,191]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:00:05,585]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 19:00:05,585]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 19:00:07,310]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 19:00:07,310]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 19:00:07,326]|[WARNING]|[evaluator] Out-of-bounds value features,complexity: 0.0 not in [4,100]
+[2023-08-23 19:00:07,326]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:00:09,050]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 19:00:09,050]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 19:00:09,050]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+alg_name  iteration cont_size evals     nb_updated     avg       std       min       max       ft_min              ft_max              qd_score  elapsed
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+8231859   0         5/100     10        6              [17.7964] [1.3945]  [15.0392] [18.701]  [4.0000,0.0400]     [97.0000,0.0552]    0.89      17.35  
+[2023-08-23 19:00:10,431]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 19:00:10,431]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 19:00:12,125]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 19:00:12,140]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 19:00:12,140]|[WARNING]|[evaluator] Out-of-bounds value features,complexity: 0.0 not in [4,100]
+[2023-08-23 19:00:12,140]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:00:16,671]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 19:00:16,671]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 19:00:18,144]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 19:00:18,144]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 19:00:19,556]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 19:00:19,572]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 19:00:21,250]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 19:00:21,250]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 19:00:21,268]|[WARNING]|[evaluator] Out-of-bounds value features,complexity: 0.0 not in [4,100]
+[2023-08-23 19:00:21,269]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:00:22,630]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 19:00:22,630]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 19:00:24,324]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 19:00:24,324]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 19:00:24,339]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+8231859   1         5/100     10        0              [17.7964] [1.3945]  [15.0392] [18.701]  [4.0000,0.0400]     [97.0000,0.0552]    0.89      15.28  
+[2023-08-23 19:00:29,106]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.03899077204508845 not in [0.04,0.16]
+[2023-08-23 19:00:34,076]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 19:00:34,076]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 19:00:34,092]|[WARNING]|[evaluator] Out-of-bounds value features,complexity: 0.0 not in [4,100]
+[2023-08-23 19:00:34,092]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:00:35,721]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\fromnumeric.py:3464: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+
+[2023-08-23 19:00:35,721]|[WARNING]|[warnings] C:\Users\anton\Desktop\Thesis_Project\Baseline\.venv\lib\site-packages\numpy\core\_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[2023-08-23 19:00:35,737]|[WARNING]|[evaluator] Out-of-bounds value features,complexity: 0.0 not in [4,100]
+[2023-08-23 19:00:35,737]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]

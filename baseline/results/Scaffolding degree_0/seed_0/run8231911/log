@@ -1,0 +1,83 @@
+[2023-08-23 19:11:16,321]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-08-23 19:11:16,321]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-08-23 19:11:16,321]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-08-23 19:11:16,321]|[INFO]|[evolution] Grid size: (10, 10)
+[2023-08-23 19:11:16,321]|[INFO]|[evolution]    bounds: [[4, 100], [0.04, 0.16]]
+[2023-08-23 19:11:16,321]|[INFO]|[evolution]      bins: [9.6, 0.012]
+[2023-08-23 19:11:16,336]|[INFO]|[my_map_elite] Generated run id: 8231911
+[2023-08-23 19:11:16,336]|[INFO]|[my_map_elite] Run folder: baseline\results\Scaffolding degree_0\seed_0\run8231911
+[2023-08-23 19:11:16,336]|[INFO]|[my_map_elite] Parallel: 4
+[2023-08-23 19:11:16,336]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': 'baseline/results/Scaffolding degree_0/seed_0',
+ 'batch_size': 10,
+ 'budget': 50,
+ 'descriptor_names': ['complexity', 'z_descriptor'],
+ 'fitness_name': 'new',
+ 'grid_size': 10,
+ 'id': 8231911,
+ 'initial_mutations': 2,
+ 'level': 0,
+ 'make_final_videos': False,
+ 'numb_levels': 1,
+ 'overwrite': False,
+ 'robot_type': 0,
+ 'run_folder': 'baseline\\results\\Scaffolding degree_0\\seed_0\\run8231911',
+ 'seed': 0,
+ 'snapshots': 10,
+ 'threads': 4,
+ 'tournament': 3,
+ 'verbosity': 1,
+ 'vision_h': 4,
+ 'vision_w': 4}
+[2023-08-23 19:11:16,336]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\baseline\results\Scaffolding degree_0\seed_0\run8231911\config.json
+[2023-08-23 19:11:16,345]|[INFO]|[evolution] Starting illumination!
+[2023-08-23 19:11:16,345]|[INFO]|[evolution] Level : 0
+[2023-08-23 19:11:20,694]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030164908532233258 not in [0.04,0.16]
+[2023-08-23 19:11:22,390]|[WARNING]|[evaluator] Out-of-bounds value features,complexity: 0.0 not in [4,100]
+[2023-08-23 19:11:22,390]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:11:24,315]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:11:29,669]|[WARNING]|[evaluator] Out-of-bounds value features,complexity: 0.0 not in [4,100]
+[2023-08-23 19:11:29,670]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:11:32,983]|[WARNING]|[evaluator] Out-of-bounds value features,complexity: 0.0 not in [4,100]
+[2023-08-23 19:11:32,985]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:11:34,939]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+alg_name  iteration cont_size evals     nb_updated     avg       std       min       max       ft_min              ft_max              qd_score  elapsed
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+8231911   0         5/100     10        6              [17.7964] [1.3945]  [15.0392] [18.701]  [4.0000,0.0400]     [97.0000,0.0552]    0.89      18.62  
+[2023-08-23 19:11:38,333]|[WARNING]|[evaluator] Out-of-bounds value features,complexity: 0.0 not in [4,100]
+[2023-08-23 19:11:38,334]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:11:47,986]|[WARNING]|[evaluator] Out-of-bounds value features,complexity: 0.0 not in [4,100]
+[2023-08-23 19:11:47,986]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:11:51,263]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+8231911   1         5/100     10        0              [17.7964] [1.3945]  [15.0392] [18.701]  [4.0000,0.0400]     [97.0000,0.0552]    0.89      16.31  
+[2023-08-23 19:11:56,197]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.03899077204508845 not in [0.04,0.16]
+[2023-08-23 19:12:01,203]|[WARNING]|[evaluator] Out-of-bounds value features,complexity: 0.0 not in [4,100]
+[2023-08-23 19:12:01,203]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:12:02,942]|[WARNING]|[evaluator] Out-of-bounds value features,complexity: 0.0 not in [4,100]
+[2023-08-23 19:12:02,942]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+8231911   2         5/100     10        2              [18.1111] [1.0652]  [15.9951] [18.7549] [4.0000,0.0400]     [97.0000,0.0552]    0.91      16.57  
+[2023-08-23 19:12:09,568]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.03362732076336958 not in [0.04,0.16]
+[2023-08-23 19:12:11,286]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:12:13,026]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:12:14,775]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:12:16,548]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:12:18,262]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:12:19,990]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:12:21,728]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:12:23,452]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+8231911   3         5/100     10        1              [18.5111] [0.2861]  [17.9951] [18.7549] [4.0000,0.0400]     [97.0000,0.0552]    0.93      17.31  
+[2023-08-23 19:12:26,838]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.03617954473770791 not in [0.04,0.16]
+[2023-08-23 19:12:28,407]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.03899077204508845 not in [0.04,0.16]
+[2023-08-23 19:12:30,151]|[WARNING]|[evaluator] Out-of-bounds value features,complexity: 0.0 not in [4,100]
+[2023-08-23 19:12:30,151]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:12:31,903]|[WARNING]|[evaluator] Out-of-bounds value features,complexity: 0.0 not in [4,100]
+[2023-08-23 19:12:31,904]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.030078516435128436 not in [0.04,0.16]
+[2023-08-23 19:12:33,562]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.03899077204508845 not in [0.04,0.16]
+[2023-08-23 19:12:36,984]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.03362732076336958 not in [0.04,0.16]
+[2023-08-23 19:12:38,696]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.03362732076336958 not in [0.04,0.16]
+[2023-08-23 19:12:40,557]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.03362732076336958 not in [0.04,0.16]
+[2023-08-23 19:12:42,374]|[WARNING]|[evaluator] Out-of-bounds value features,z_descriptor: 0.03362732076336958 not in [0.04,0.16]
+8231911   4         6/100     10        1              [18.1351] [0.8805]  [16.2549] [18.7549] [4.0000,0.0400]     [97.0000,0.0700]    1.09      17.22  
+Finished optimisation using algorithm '8231911'. Total elapsed: 86.04701710003428.
+[2023-08-23 19:12:42,395]|[INFO]|[evolution] Level 0 finished. Saving Final Grid & Plots ...
+[2023-08-23 19:12:42,854]|[INFO]|[my_map_elite] Generated baseline\results\Scaffolding degree_0\seed_0\run8231911\0\grid_fitness.png

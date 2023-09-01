@@ -167,6 +167,9 @@ class Algorithm(Evolution):
 
         self.id_manager = GIDManager()
         self.genealogical_info=[]
+        self.stats = pd.DataFrame(columns=['Avg', 'Std', 'Max', 'QDs'])
+        self.init_pop=[]
+        
 
         def select(grid):
             #return self.rng.choice(grid)
@@ -185,7 +188,9 @@ class Algorithm(Evolution):
             genome = RVGenome.random(self.rng, self.id_manager)
             for _ in range(options.initial_mutations):
                 genome.mutate(self.rng)
+                
             #print("genome.id()",genome.id())
+            self.init_pop.append(QDIndividual(genome))
             return QDIndividual(genome)
 
         def vary(parent):
@@ -214,11 +219,12 @@ class Algorithm(Evolution):
 
     def tell(self, individual: IndividualLike, *args, **kwargs) -> bool:
         grid: Grid = self.container
-        
         added = super().tell(individual, *args, **kwargs)
         parent = self._curiosity_lut.pop(individual.id(), None)
         if parent is not None:
             grid.curiosity[parent] += {True: 1, False: -.5}[added]
+        
+        self.save_grid_stats()
         return added
     
     def update_grid(self, updates):
@@ -229,6 +235,14 @@ class Algorithm(Evolution):
         for ind, r in updates:
             ind.update(r)
             self.tell(ind)
+
+    def save_grid_stats(self):
+        fitness_values = np.array([ind.fitness.values for ind in self.container])
+        avg = float(np.mean(fitness_values, axis=0) if len(fitness_values) else np.nan)
+        std = float(np.std(fitness_values, axis=0))
+        max_f = float(np.max(fitness_values, axis=0))
+        qd_score = float(self.container.qd_score(normalized=False))
+        self.stats.loc[len(self.stats)] = [ avg, std, max_f, qd_score]
 
 
 
@@ -257,6 +271,10 @@ class Grid(containers.Grid):
         for i in to_remove:  
             self.discard(i, True)
 
+    
+
+        
+
 
 
 
@@ -271,7 +289,7 @@ class Logger(algorithms.TQDMAlgorithmLogger):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs,
-                         final_filename=Logger.final_filename,
+                         final_filename = Logger.final_filename,
                          iteration_filenames=self.iteration_filenames)
 
     def _started_optimisation(self, algo: QDAlgorithmLike) -> None:
@@ -372,6 +390,7 @@ def summary_plots(evals: pd.DataFrame, iterations: pd.DataFrame, grid: Grid,
 
     if name.endswith("final"):
         plot_evals(evals["max0"], path("fitness_max"), ylabel="Fitness", figsize=fig_size)
+        #plot_evals(ecal)
         ylim_contsize = (0, len(grid)) if np.isinf(grid.capacity) else (0, grid.capacity)
         plot_evals(evals["cont_size"], path("container_size"), ylim=ylim_contsize, ylabel="Container size",
                    figsize=fig_size)

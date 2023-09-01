@@ -15,13 +15,11 @@ def run_experiment(result_folder_name, batch_size, budget_size, features, fitnes
     o.fitness_name = fitness
     o.grid_size = grid_size
     o.tournament = 3
-    o.initial_mutations = 2
     o.vision_w = 4
     o.vision_h = 4
     o.make_final_videos=make_final_videos
     o.initial_mutations=init_mut
     evolution(o)
-
 
 def get_user_input(prompt, default=None, input_type=str):
     while True:
@@ -47,15 +45,15 @@ def main():
     batch_size = get_user_input("Enter batch size:   ", 10, int)
     budget_size = get_user_input("Enter budget size:   ", 100, int)
 
-    feature = get_user_input("BD Pair: 1-EdgePerNodeRatio & Z_Mean | 2-EdgePerNodeRatio & max_density_z_coord  | 3- EdgePerNodeRatio & z_descriptor | 4- Trajectory & WG :  ", 1, int)
+    feature = get_user_input("BD Pair: 1-White Gazing & Edges | 2-White Gazing & Complexity  | 3- White Gazing & z_descriptor | 4- White Gazing & z_peaks_avg :  ", 1, int)
     if feature == 1:
-        features = ['EdgePerNodeRatio','estimated_mean_z']
+        features = ['white_gazing','edges']
     elif feature == 2:
-        features = ['EdgePerNodeRatio','max_density_z_coord']
+        features = ['white_gazing','complexity']
     elif feature == 3:
-        features = ['EdgePerNodeRatio','z_descriptor']
+        features = ['white_gazing','z_descriptor']
     elif feature == 4:
-        features = ['trajectory','white_gazing']
+        features = ['white_gazing','z_peaks_avg']
 
 
     fitness = get_user_input("Enter fitness number: 1- Official_Fitness || 2-Brightness :  ", 1, int)
@@ -69,7 +67,7 @@ def main():
     numb_levels = get_user_input("Enter number of levels:   ", 1, int)
     init_level = get_user_input("Enter initial level:   ", 0, int)
     robot_type = get_user_input("Enter Robot type: 0-Default or 1-Gecko:   ", 0, int) 
-    grid_size = get_user_input("Enter Grid size:   ", 20, int) 
+    grid_size = get_user_input("Enter Grid size:   ", 16, int) 
     make_final_videos=get_user_input("Make videos: 0-No : 1-Yes:   ", 0, bool) 
     run_experiment(result_folder_name, batch_size, budget_size, features, fitness,numb_levels, init_level, robot_type, grid_size, make_final_videos, init_mut, threads)
 

@@ -229,30 +229,37 @@ class Evaluator:
             
             '''ANN Descriptors'''
             if Evaluator.features[i] =="EdgePerNodeRatio":
-                e_n_ratio, axon = Evaluator.ann_descriptor()
+                e_n_ratio, _, _, _ = Evaluator.ann_descriptor()
                 descriptors["EdgePerNodeRatio"] = e_n_ratio
 
             elif Evaluator.features[i] =="TotalEdgeSize":
-                e_n_ratio, axon = Evaluator.ann_descriptor()
+                _, axon, _ , _= Evaluator.ann_descriptor()
                 descriptors["TotalEdgeSize"] = axon
 
-            elif Evaluator.features[i] =="AnnComplexity":
-                e_n_ratio, axon = Evaluator.ann_descriptor()
-                descriptors["AnnComplexity"] = axon * e_n_ratio
+            elif Evaluator.features[i] =="complexity":
+                _, _, complexity,_ = Evaluator.ann_descriptor()
+                descriptors["complexity"] = complexity
 
-            
+            elif Evaluator.features[i] =="edges":
+                _, _, _,edges = Evaluator.ann_descriptor()
+                descriptors["edges"] = edges
+
                 '''Z coordinate Descriptors'''
             elif Evaluator.features[i] =="estimated_mean_z":
-                kde_center, z_coords_with_max_density = Evaluator.get_Z_descriptors()
+                kde_center, _, _ = Evaluator.get_Z_descriptors()
                 descriptors["estimated_mean_z"] = kde_center
 
             elif Evaluator.features[i] =="max_density_z_coord":
-                kde_center, z_coords_with_max_density = Evaluator.get_Z_descriptors()
+                _, z_coords_with_max_density, _ = Evaluator.get_Z_descriptors()
                 descriptors["max_density_z_coord"] = z_coords_with_max_density
             
             elif Evaluator.features[i] =="z_descriptor":
-                kde_center, z_coords_with_max_density = Evaluator.get_Z_descriptors()
+                kde_center, z_coords_with_max_density, _ = Evaluator.get_Z_descriptors()
                 descriptors["z_descriptor"] = (kde_center + z_coords_with_max_density)/2.0
+
+            elif Evaluator.features[i] =="z_peaks_avg":
+                _, _, z_peaks_avg = Evaluator.get_Z_descriptors()
+                descriptors["z_peaks_avg"] = z_peaks_avg
 
             elif Evaluator.features[i] =="z_oscilation_f":
                 descriptors["z_oscilation_f"] = Evaluator.calculate_z_oscilation_f()
@@ -280,17 +287,24 @@ class Evaluator:
 
             if cls.features[i] == "EdgePerNodeRatio":
                 #minimum 4 edges, condidering 32 nodes for gecko
-                bounds.append([0.1, 10])        
-            elif cls.features[i] == "estimated_mean_z":
-                bounds.append([0.03, 0.1])
-            elif cls.features[i] == "max_density_z_coord":
-                bounds.append([0.03, 0.1])
-            elif cls.features[i] == "z_descriptor":
-                bounds.append([0.025, 0.1])
-                
+                bounds.append([0.15, 8.5]) 
+            elif cls.features[i] == "complexity":
+                bounds.append([4.0, 100.0]) 
+            elif cls.features[i] == "edges":
+                bounds.append([4.0, 100.0])          
 
+
+
+            elif cls.features[i] == "estimated_mean_z":
+                bounds.append([0.04, 0.16])
+            elif cls.features[i] == "max_density_z_coord":
+                bounds.append([0.04, 0.16])
+            elif cls.features[i] == "z_descriptor":
+                bounds.append([0.04, 0.19])
             elif cls.features[i] == "z_oscilation_f":
                 bounds.append([0.01,10])
+            elif cls.features[i] == "z_peaks_avg":
+                bounds.append([0.05, 0.17])
 
             elif cls.features[i] =="avg_speed":
                 bounds.append([0.05, 0.6])
@@ -321,13 +335,24 @@ class Evaluator:
         for n in ann.neurons():
             neurons+=1
         if stats.edges != 0 and neurons!=0 :
-            ratio = stats.edges/neurons
-        else : ratio=0
-        #print("Edge to node Ratio", ratio)
+            ENratio = stats.edges/neurons
+        else : ENratio=0
+
+
+        
         #print("axons size ",stats.axons)
+        #print("stats ",stats.dict())
 
         axon_node_ratio = stats.axons/neurons
-        return ratio , stats.axons
+        #print("Edge to node Ratio", ENratio)
+
+        hidden_score = (stats.hidden*100)/20
+        edge_score = (stats.edges*100)/200
+        complexity= (hidden_score + edge_score)/2
+
+        #print("complexity ",complexity)
+        edges=(stats.edges*100)/300
+        return ENratio , stats.axons, complexity, edges
         
 
     @staticmethod
@@ -358,18 +383,25 @@ class Evaluator:
         from scipy.stats import gaussian_kde
         positions = [state.position for state in Evaluator.actor_states]
         # Get the z coordinates from the positions list
-        z_coords = [pos[2] for pos in positions]        
-        '''plt.figure(figsize=(15, 5))
-        plt.plot(z_coords)
-        plt.xlabel('Time (s)')
-        plt.ylabel('Z coordinate')
-        plt.legend(['Original', 'Smoothed'])
-        plt.show()'''
+        z_coords = np.array([pos[2] for pos in positions])
+
+        peaks, _ = find_peaks(z_coords, height=float(np.mean(z_coords)))
+        #+np.std(z_coords)))
+        peak_heights = z_coords[peaks]
+
+        #print('Number of peaks: ', len(peak_heights))
+        if 20<len(peak_heights)<130:
+            avg_peak_height = np.mean(peak_heights)
+        else: 
+            avg_peak_height = 0.0
+        
+
+        
         # Perform kernel density estimation
         kde = gaussian_kde(z_coords)
         # Evaluate the KDE on a grid of values
-        grid = np.linspace(min(z_coords), max(z_coords), 1000)
-        density_values = kde(grid)
+        grid = np.linspace(min(z_coords), max(z_coords), len(z_coords))
+        density_values = kde(z_coords)
         kde_center = np.sum(grid * density_values) / np.sum(density_values)
         # Find the z-coordinates with the maximum density
         z_coords_with_max_density = grid[np.argmax(density_values)]
@@ -377,10 +409,22 @@ class Evaluator:
         
         
         #print("kde_center", kde_center)
+        #print("Peak Avg", avg_peak_height)
+
+        #print("Max", max(z_coords))
+        
         #print("Mean" ,np.mean(z_coords))
+        #print("Std" ,np.std(z_coords))
         #print("Median", np.median(z_coords))
 
-        '''# Create a kernel density estimate (KDE) plot
+        '''plt.figure(figsize=(15, 5))
+        plt.plot(z_coords)
+        plt.xlabel('Time (s)')
+        plt.ylabel('Z coordinate')
+        plt.legend(['Original', 'Smoothed'])
+        plt.show()'''
+
+        '''Create a kernel density estimate (KDE) plot
         plt.figure(figsize=(10, 6))
         plt.hist(z_coords, bins=50, density=True, alpha=0.3, color='blue')
         plt.plot(np.linspace(min(z_coords), max(z_coords), 100), 
@@ -391,10 +435,9 @@ class Evaluator:
         plt.xlim(0,0.3)
         plt.ylabel('Density')
         plt.grid(True)
-        plt.show()'''
-
-
-        return kde_center, z_coords_with_max_density
+        plt.show()
+        '''
+        return kde_center, z_coords_with_max_density, avg_peak_height
 
         
 

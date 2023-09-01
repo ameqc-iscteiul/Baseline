@@ -1,0 +1,157 @@
+[2023-08-22 18:50:27,246]|[INFO]|[evolution] Muting <Logger matplotlib (WARNING)>
+[2023-08-22 18:50:27,247]|[INFO]|[evolution] Muting <Logger OpenGL.arrays.arraydatatype (WARNING)>
+[2023-08-22 18:50:27,248]|[INFO]|[evolution] Muting <Logger OpenGL.acceleratesupport (WARNING)>
+[2023-08-22 18:50:27,249]|[INFO]|[evolution] Grid size: (16, 16)
+[2023-08-22 18:50:27,249]|[INFO]|[evolution]    bounds: [[0.15, 8.5], [0.04, 0.16]]
+[2023-08-22 18:50:27,249]|[INFO]|[evolution]      bins: [0.521875, 0.0075]
+[2023-08-22 18:50:27,249]|[INFO]|[my_map_elite] Generated run id: 8221850
+[2023-08-22 18:50:27,249]|[INFO]|[my_map_elite] Run folder: baseline\results\Default\run8221850
+[2023-08-22 18:50:27,249]|[INFO]|[my_map_elite] Parallel: 4
+[2023-08-22 18:50:27,250]|[INFO]|[my_map_elite] Post-processed command line arguments:
+{'base_folder': 'baseline/results/Default',
+ 'batch_size': 10,
+ 'budget': 100,
+ 'descriptor_names': ['EdgePerNodeRatio', 'estimated_mean_z'],
+ 'fitness_name': 'new',
+ 'grid_size': 16,
+ 'id': 8221850,
+ 'initial_mutations': 2,
+ 'level': 0,
+ 'make_final_videos': 0,
+ 'numb_levels': 1,
+ 'overwrite': False,
+ 'robot_type': 0,
+ 'run_folder': 'baseline\\results\\Default\\run8221850',
+ 'seed': 100,
+ 'snapshots': 10,
+ 'threads': 4,
+ 'tournament': 3,
+ 'verbosity': 1,
+ 'vision_h': 4,
+ 'vision_w': 4}
+[2023-08-22 18:50:27,253]|[INFO]|[evolution] Stored configuration in C:\Users\anton\Desktop\Thesis_Project\Baseline\baseline\results\Default\run8221850\config.json
+[2023-08-22 18:50:27,254]|[INFO]|[evolution] Starting illumination!
+[2023-08-22 18:50:27,254]|[INFO]|[evolution] Level : 0
+[2023-08-22 18:50:29,472]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.03010320326598294 not in [0.04,0.16]
+[2023-08-22 18:50:31,085]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.03154009638632458 not in [0.04,0.16]
+[2023-08-22 18:50:32,881]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:50:32,881]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:50:34,793]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:50:36,534]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.0301112645782289 not in [0.04,0.16]
+[2023-08-22 18:50:40,000]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:50:40,000]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:50:41,868]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:50:41,869]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:50:43,368]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030097355920972454 not in [0.04,0.16]
+[2023-08-22 18:50:45,174]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:50:45,175]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+alg_name  iteration cont_size evals     nb_updated     avg       std       min       max       ft_min              ft_max              qd_score  elapsed
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+8221850   0         5/256     10        6              [18.0747] [0.9921]  [16.1479] [18.7255] [0.1500,0.0400]     [3.3333,0.0720]     0.90      17.94  
+[2023-08-22 18:50:48,482]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:50:48,482]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:50:50,286]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:50:52,168]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:50:55,305]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.03208450633957361 not in [0.04,0.16]
+[2023-08-22 18:50:56,778]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.03154009638632458 not in [0.04,0.16]
+[2023-08-22 18:50:59,946]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:51:01,748]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:51:01,748]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+8221850   1         6/256     10        2              [17.9645] [0.8645]  [16.7741] [18.7255] [0.1500,0.0400]     [3.3333,0.0755]     1.08      16.57  
+[2023-08-22 18:51:13,414]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030097355920972454 not in [0.04,0.16]
+[2023-08-22 18:51:14,998]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030097355920972454 not in [0.04,0.16]
+8221850   2         7/256     10        2              [18.0701] [0.9275]  [16.5282] [18.9493] [0.1500,0.0400]     [3.3333,0.0713]     1.26      14.66  
+[2023-08-22 18:51:25,393]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+[2023-08-22 18:51:28,309]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.03192283241212433 not in [0.04,0.16]
+8221850   3         9/256     10        5              [18.1722] [0.6406]  [17.0355] [18.9493] [0.1500,0.0400]     [3.3333,0.1043]     1.64      14.73  
+[2023-08-22 18:51:34,598]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:51:34,614]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+8221850   4         9/256     10        2              [18.2879] [0.5814]  [17.0355] [18.9493] [0.1500,0.0400]     [3.3333,0.1043]     1.65      15.16  
+[2023-08-22 18:51:58,622]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030097355920972454 not in [0.04,0.16]
+8221850   5         10/256    10        3              [18.3967] [0.5764]  [17.0355] [18.9493] [0.1500,0.0400]     [3.3333,0.1043]     1.84      15.34  
+[2023-08-22 18:52:12,198]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.031555819590587876 not in [0.04,0.16]
+8221850   6         11/256    10        1              [18.3788] [0.5525]  [17.0355] [18.9493] [0.1500,0.0400]     [3.3333,0.1043]     2.02      14.82  
+8221850   7         12/256    10        2              [18.3238] [0.6592]  [17.0355] [19.1507] [0.1500,0.0400]     [3.3333,0.1043]     2.20      14.74  
+[2023-08-22 18:52:33,161]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:52:33,161]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+8221850   8         13/256    10        3              [18.2862] [0.7698]  [17.0355] [19.5392] [0.1500,0.0400]     [3.3333,0.1043]     2.38      15.15  
+[2023-08-22 18:52:47,963]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030097355920972454 not in [0.04,0.16]
+[2023-08-22 18:52:54,144]|[WARNING]|[evaluator] Out-of-bounds value features,EdgePerNodeRatio: 0 not in [0.15,8.5]
+[2023-08-22 18:52:54,145]|[WARNING]|[evaluator] Out-of-bounds value features,estimated_mean_z: 0.030101961197765585 not in [0.04,0.16]
+8221850   9         13/256    10        1              [18.3146] [0.8]     [17.0355] [19.5392] [0.1500,0.0400]     [3.3333,0.1043]     2.38      14.98  
+Finished optimisation using algorithm '8221850'. Total elapsed: 154.133808100014.
+[2023-08-22 18:53:01,386]|[INFO]|[evolution] Level 0 finished. Saving Final Grid & Plots ...
+EVALS     alg_name  iteration  cont_size       max0   elapsed
+0    8221850          0          1  18.696078  2.222040
+1    8221850          0          2  18.725490  1.617497
+2    8221850          0          2  18.725490  1.793087
+3    8221850          0          3  18.725490  1.906984
+4    8221850          0          3  18.725490  1.739985
+..       ...        ...        ...        ...       ...
+95   8221850          9         13  19.539216  1.527935
+96   8221850          9         13  19.539216  1.435818
+97   8221850          9         13  19.539216  1.397395
+98   8221850          9         13  19.539216  1.406529
+99   8221850          9         13  19.539216  1.452593
+
+[100 rows x 5 columns]
+[2023-08-22 18:53:01,918]|[INFO]|[my_map_elite] Generated baseline\results\Default\run8221850\0\grid_fitness.png
+[2023-08-22 18:53:02,064]|[INFO]|[evolution] Summary Algorithm:
+  batch_size: 10
+  budget: 100
+  container:  Summary Grid:
+    activity_per_bin: [[2. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 4. 6. 2. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.  ...
+    best: {id=89, fitness=(19.53921568627451,), features={'EdgePerNodeRatio': 2.0, 'estimated_mean_z': 0.08408346415008655}}
+    best_features: [2.0, 0.08408346415008655]
+    best_fitness: (19.53921568627451,)
+    best_index: (3, 5)
+    capacity: 256
+    curiosity: [[-2.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.    0.   0. ]  [-1.5  0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.    0.   0. ]  [-2.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.    0.  ...
+    depot: None
+    discard_random_on_bin_overload: False
+    features: {(0, 0): [Features([0.15, 0.04])], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], (0, 15): [], (1, 0): [Features([0.923 ...
+    features_domain: [[0.15, 8.5], [0.04, 0.16]]
+    features_extrema: ((0.15, 3.3333333333333335), (0.04, 0.1043333777618171))
+    filled_bins: 13
+    fitness: {(0, 0): [Fitness([18.700980392156865])], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], (0, 15): [], (1, 0): [Fitness( ...
+    fitness_domain: [(0, 100)]
+    fitness_extrema: ((17.035539215686274, 19.53921568627451),)
+    free: 243
+    history_recentness_per_bin: {(0, 0): [1, 3], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], (0, 15): [], (1, 0): [4], (1, 1): [], (1, 2): [], (1, 3 ...
+    items: [{id=1, fitness=(18.725490196078432,), features={'EdgePerNodeRatio': 3.3333333333333335, 'estimated_mean_z': 0.04}}, {id=2, fitness=(18.700980392156865,), features={'EdgePerNodeRatio': 0.15, 'estimated_mean_z': 0.04}}, {id=3, fitness=(18.7009803 ...
+    max_items_per_bin: 1
+    name: Grid-1344736043952
+    nb_added: 27
+    nb_discarded: 14
+    nb_items_per_bin: [[1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 1. 1. 1. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0.]  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.  ...
+    nb_operations: 41
+    nb_rejected: 0
+    quality: {(0, 0): Fitness([18.700980392156865]), (0, 1): None, (0, 2): None, (0, 3): None, (0, 4): None, (0, 5): None, (0, 6): None, (0, 7): None, (0, 8): None, (0, 9): None, (0, 10): None, (0, 11): None, (0, 12): None, (0, 13): None, (0, 14): None, (0,  ...
+    quality_array: [[[18.70098039]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [        nan]   [   ...
+    recentness: [1, 2, 3, 5, 12, 14, 19, 20, 21, 22, 24, 25, 26]
+    recentness_per_bin: {(0, 0): [3], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [], (0, 12): [], (0, 13): [], (0, 14): [], (0, 15): [], (1, 0): [4], (1, 1): [], (1, 2): [], (1, 3):  ...
+    shape: (16, 16)
+    size: 13
+    solutions: {(0, 0): [{id=2, fitness=(18.700980392156865,), features={'EdgePerNodeRatio': 0.15, 'estimated_mean_z': 0.04}}], (0, 1): [], (0, 2): [], (0, 3): [], (0, 4): [], (0, 5): [], (0, 6): [], (0, 7): [], (0, 8): [], (0, 9): [], (0, 10): [], (0, 11): [] ...
+  current_iter: 10
+  deepcopy_on_selection: True
+  dimension: None
+  genealogical_info: [(10, 5), (11, 2), (12, 3), (13, 3), (14, 5), (15, 1), (16, 1), (17, 5), (18, 3), (19, 2), (20, 10), (21, 17), (22, 10), (23, 10), (24, 10), (25, 10), (26, 10), (27, 8), (28, 8), (29, 10), (30, 17), (31, 17), (32, 17), (33, 17), (34, 21), (35, 1 ...
+  id_manager: <abrain.core.genome.GIDManager object at 0x000001397E67C070>
+  labels: ['new', 'EdgePerNodeRatio', 'estimated_mean_z']
+  name: 8221850
+  nb_evaluations: 100
+  nb_evaluations_in_iteration: 0
+  nb_max_iter: 10
+  nb_suggestions: 100
+  nb_suggestions_in_iteration: 0
+  nb_updated: 27
+  nb_updated_in_iteration: 0
+  optimisation_task: maximisation
+  rng: <random.Random object at 0x0000013904E1E140>
+  stats:                     Avg                     Std                   Max     QDs 0   [18.69607843137255]                   [0.0]   [18.69607843137255]   18.70 1   [18.71078431372549]  [0.014705882352942012]  [18.725490196078432]   37.42 2   [18.713 ...
+[2023-08-22 18:53:02,069]|[INFO]|[evolution] All results are available under baseline\results\Default\run8221850
+[2023-08-22 18:53:02,070]|[INFO]|[evolution] Unified storage file is baseline\results\Default\run8221850/iteration-final.p
+[2023-08-22 18:53:02,070]|[INFO]|[evolution] Completed evolution in 2 minutes and 34.82 seconds
+[2023-08-22 18:53:02,070]|[INFO]|[evolution] Generating Videos...
+[2023-08-22 18:53:02,070]|[INFO]|[evolution] DONE !
